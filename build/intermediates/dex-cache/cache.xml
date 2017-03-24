@@ -3,21 +3,39 @@
 
     <item
         is-multidex="true"
-        jar="/Users/artem/driveceos/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="/Users/yuriy/AndroidStudioProjects/Driveceos/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="22edfee1ba4cd196569bb0dd726487bc4a40929e">
-        <dex dex="/Users/artem/driveceos/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_364bb2cefa91099b0915f1448bc5b157bfcb86a2/classes.dex" />
+        sha1="d21c4d1b464ba4f5f43a9f2375a1bd81b9cc9985">
+        <dex dex="/Users/yuriy/AndroidStudioProjects/Driveceos/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_334a0270bfc60f39e1294fc23b1842e7894cb2a2/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/artem/driveceos/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/Users/yuriy/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/logging-interceptor/3.3.1/99ce730034c6f5aaed710d1e0e9df95e8714ed5f/logging-interceptor-3.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="99ce730034c6f5aaed710d1e0e9df95e8714ed5f">
+        <dex dex="/Users/yuriy/AndroidStudioProjects/Driveceos/app/build/intermediates/transforms/dex/debug/folders/1000/10/logging-interceptor-3.3.1_c8594520fb7acc3a430dcab5a7f11bde45aa6b84/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yuriy/AndroidStudioProjects/Driveceos/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
-        <dex dex="/Users/artem/driveceos/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4be7ea7639db465951994bd798ad6a6a2e43fd2c/classes.dex" />
+        <dex dex="/Users/yuriy/AndroidStudioProjects/Driveceos/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_e8ee44c0389373a78b55faf619b3fb31b0f204b0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yuriy/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.3.1/19047bdb6a4fc00a44124f64ca98e88fc204e7e3/okhttp-3.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="19047bdb6a4fc00a44124f64ca98e88fc204e7e3">
+        <dex dex="/Users/yuriy/AndroidStudioProjects/Driveceos/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.3.1_51f8578153def55ffe3eb126927068cb21dfcd81/classes.dex" />
     </item>
 
 </items>
