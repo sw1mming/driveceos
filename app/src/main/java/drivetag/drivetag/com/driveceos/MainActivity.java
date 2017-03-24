@@ -34,17 +34,5 @@ public class MainActivity extends Activity {
                 System.out.println();
             }
         });
-//                nHandler() {
-//            @Override
-//            public void completionHandler(List<Object> objects, ServerRequest request) {
-//                System.out.println();
-//            }
-//
-//            @Override
-//            public void completionHandlerWithError(String error) {
-//                System.out.println();
-//            }
-//        });
-
     }
 }

@@ -37,10 +37,6 @@ public class SignInRequest extends ServerRequest {
     public void resumeWithCompletionHandler(ServerCompletionHandler handler) {
         final ServerCompletionHandler completionHandler = handler;
 
-//        Retrofit retrofit = getRetrofit();
-//
-//        SignInApi service = retrofit.create(SignInApi.class);
-
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("email", email);
         parameters.put("password", password);
@@ -77,9 +73,6 @@ public class SignInRequest extends ServerRequest {
         Retrofit retrofit = getRetrofit();
         service = retrofit.create(SignInApi.class);
     }
-
-    //overide method returns service
-        // init service
 
     private SignInRequest getSignInRequest() {
         return this;
