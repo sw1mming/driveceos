@@ -69,9 +69,25 @@ public abstract class ServerRequest<T> {
         return false;
     }
 
+
+    public String errorFromResponse(JsonObject responseObject) {
+        String message = null;
+
+        if (JsonObjectHelper.hasValueFromKey("message", responseObject)) {
+           message = responseObject.get("message").getAsString();
+        }
+
+        if (message == null) {
+            message = ("Undefined error");
+        }
+
+        return  message;
+    }
+
     /**
      *  Completion handler interface for request.
      */
+
     public interface ServerCompletionHandler {
         void completionHandler(ServerRequest request);
         void completionHandlerWithError(String error);

@@ -15,6 +15,8 @@ import retrofit2.http.POST;
 /**
  * Created by yuriy on 3/22/17.
  */
+
+
 public class SignInRequest extends ServerRequest {
 
     private String accessToken;
@@ -49,19 +51,25 @@ public class SignInRequest extends ServerRequest {
                 if (!isSucceedResponse(jsonObject)) {
                     isFailure = true;
 
-                    JsonArray errors = jsonObject.getAsJsonArray("fields_errors1");
+                    if (!JsonObjectHelper.hasValueFromKey("fields_errors", jsonObject)) {
+                        JsonArray errors = jsonObject.getAsJsonArray("fields_errors");
 
-                    if (errors != null && errors.size() > 0) {
-                        JsonElement errorInfos = errors.get(0);
+                        if (errors.size() > 0) {
+                            JsonElement errorInfos = errors.get(0);
 
-                        if (errorInfos != null && errorInfos.isJsonArray()) {
-                            JsonArray errorInfo = errorInfos.getAsJsonArray();
+                            if (errorInfos.isJsonArray()) {
+                                JsonArray errorInfo = errorInfos.getAsJsonArray();
 
-                            if (errorInfo != null && errorInfo.size() > 1) {
-                                error = errorInfo.get(1).getAsString();
+                                if (errorInfo.size() > 1) {
+                                    error = errorInfo.get(1).getAsString();
+                                }
                             }
                         }
                     }
+
+
+
+
                 } else {
                     if (JsonObjectHelper.hasValueFromKey("dt_access_token", jsonObject)) {
                         accessToken = jsonObject.get("dt_access_token").getAsString();
