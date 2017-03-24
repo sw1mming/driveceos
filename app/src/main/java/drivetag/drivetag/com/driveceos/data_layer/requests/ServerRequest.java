@@ -1,9 +1,8 @@
 package drivetag.drivetag.com.driveceos.data_layer.requests;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-
+import com.google.gson.JsonObject;
+import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -14,29 +13,21 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 
 public abstract class ServerRequest<T> {
-
-
-    public ServerRequest() {
-        setupService();
-    }
-
-    /**
-     * 1. create constructor
-     * 2. create method setupService
-     * 3. call setupService in constr
-     * 4. in SignInRequest overide setupService
-     *
-     * */
-
-//    public List<T> objects = new ArrayList<>();
-    public T response;
-
     public static final String HOST = "https://dev.drivetagdev.com/";
     private static final int CONNECT_TIMEOUT = 35;
     private static final int WRITE_TIMEOUT = 35;
     private static final int READ_TIMEOUT = 80;
-    protected static final int LOGIN_TIMEOUT = 10;
 
+    boolean isFailure;
+    public T response;
+    String error;
+
+
+    /** Interface. */
+
+    ServerRequest() {
+        setupService();
+    }
 
     protected Retrofit getRetrofit() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -55,15 +46,33 @@ public abstract class ServerRequest<T> {
     }
 
     public void setupService() {
+    }
 
+    public boolean isSucceedResponse(JsonObject responseObject) {
+
+        if (JsonObjectHelper.hasValueFromKey("success", responseObject)) {
+            if (responseObject.get("success").getAsBoolean()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("message", responseObject)) {
+            String message = responseObject.get("message").getAsString();
+
+            if (message.toLowerCase().equals("success")) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
      *  Completion handler interface for request.
      */
-
-    public interface ServerCompletionHandler<T> {
-//        void completionHandler(T response, ServerRequest request);
+    public interface ServerCompletionHandler {
         void completionHandler(ServerRequest request);
         void completionHandlerWithError(String error);
     }

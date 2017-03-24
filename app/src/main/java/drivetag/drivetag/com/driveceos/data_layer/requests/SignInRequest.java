@@ -1,9 +1,9 @@
 package drivetag.drivetag.com.driveceos.data_layer.requests;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.HashMap;
-
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,8 +15,6 @@ import retrofit2.http.POST;
 /**
  * Created by yuriy on 3/22/17.
  */
-
-
 public class SignInRequest extends ServerRequest {
 
     private String accessToken;
@@ -46,16 +44,33 @@ public class SignInRequest extends ServerRequest {
         call.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                //jsonObject
-
                 final JsonObject jsonObject = response.body().getAsJsonObject();
 
-                if (JsonObjectHelper.hasValueFromKey("dt_access_token", jsonObject)) {
-                    accessToken = jsonObject.get("dt_access_token").getAsString();
-                }
+                if (!isSucceedResponse(jsonObject)) {
+                    isFailure = true;
 
-                if (JsonObjectHelper.hasValueFromKey("user_uid", jsonObject)) {
-                    driveID = jsonObject.get("user_uid").getAsString();
+                    JsonArray errors = jsonObject.getAsJsonArray("fields_errors1");
+
+                    if (errors != null && errors.size() > 0) {
+                        JsonElement errorInfos = errors.get(0);
+
+                        if (errorInfos != null && errorInfos.isJsonArray()) {
+                            JsonArray errorInfo = errorInfos.getAsJsonArray();
+
+                            if (errorInfo != null && errorInfo.size() > 1) {
+                                error = errorInfo.get(1).getAsString();
+                            }
+                        }
+                    }
+                } else {
+                    if (JsonObjectHelper.hasValueFromKey("dt_access_token", jsonObject)) {
+                        accessToken = jsonObject.get("dt_access_token").getAsString();
+                    }
+
+                    if (JsonObjectHelper.hasValueFromKey("user_uid", jsonObject)) {
+                        driveID = jsonObject.get("user_uid").getAsString();
+                    }
+
                 }
 
                 completionHandler.completionHandler(getSignInRequest());

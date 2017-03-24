@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         SignInRequest signInRequest = new SignInRequest("rayban@mailinator.com", "qwe123456");
-        signInRequest.resumeWithCompletionHandler(new SignInRequest.ServerCompletionHandler<JsonElement>() {
+        signInRequest.resumeWithCompletionHandler(new SignInRequest.ServerCompletionHandler() {
             @Override
             public void completionHandler(ServerRequest request) {
                 System.out.println();
