@@ -1,9 +1,11 @@
-package drivetag.drivetag.com.driveceos.data_layer.requests;
+package drivetag.drivetag.com.driveceos.data_layer.requests.on_boarding;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.HashMap;
+
+import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 import retrofit2.Call;
 import retrofit2.Callback;

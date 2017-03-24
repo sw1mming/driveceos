@@ -4,12 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.google.gson.JsonElement;
-
-import java.util.List;
-
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.SignInRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.on_boarding.SignInRequest;
 
 /**
  * Created by yuriy on 3/22/17.

@@ -18,14 +18,14 @@ public abstract class ServerRequest<T> {
     private static final int WRITE_TIMEOUT = 35;
     private static final int READ_TIMEOUT = 80;
 
-    boolean isFailure;
+    public boolean isFailure;
     public T response;
-    String error;
+    public String error;
 
 
     /** Interface. */
 
-    ServerRequest() {
+    public ServerRequest() {
         setupService();
     }
 

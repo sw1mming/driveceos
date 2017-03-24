@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="47dp"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
+        android:gravity="center_vertical"/>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textSize="@dimen/action_bar_text_size"
+        android:background="@color/gray_background_color"
+        android:textColor="@color/action_bar_text_color" />
+
+</RelativeLayout>
