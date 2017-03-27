@@ -13,13 +13,20 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 
 public abstract class ServerRequest<T> {
+    
+    public ServerRequest() {
+        setupService();
+    }
+
+    public T serverResponse;
+
     public static final String HOST = "https://dev.drivetagdev.com/";
     private static final int CONNECT_TIMEOUT = 35;
     private static final int WRITE_TIMEOUT = 35;
     private static final int READ_TIMEOUT = 80;
 
     public boolean isFailure;
-    public T response;
+
     public String error;
 
 
@@ -32,17 +39,21 @@ public abstract class ServerRequest<T> {
     protected Retrofit getRetrofit() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
                 .build();
-        return new Retrofit.Builder()
+
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(HOST)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
+        return retrofit;
     }
 
     public void setupService() {
