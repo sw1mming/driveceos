@@ -13,10 +13,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 
 public abstract class ServerRequest<T> {
-    
-    public ServerRequest() {
-        setupService();
-    }
 
     public T serverResponse;
 
