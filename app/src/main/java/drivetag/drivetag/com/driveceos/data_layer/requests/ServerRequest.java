@@ -1,9 +1,13 @@
 package drivetag.drivetag.com.driveceos.data_layer.requests;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 import okhttp3.OkHttpClient;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -82,6 +86,28 @@ public abstract class ServerRequest<T> {
         }
 
         return  message;
+    }
+
+    public JsonObject handleSuccessResponse(Response<JsonElement> response) {
+        if (response.isSuccessful()) {
+            final JsonObject jsonObject = response.body().getAsJsonObject();
+
+            if (!isSucceedResponse(jsonObject)) {
+                error = errorFromResponse(jsonObject);
+            }
+
+            return jsonObject;
+        } else {
+            isFailure = true;
+
+            try {
+                error = response.errorBody().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
     }
 
     /**

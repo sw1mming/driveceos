@@ -46,9 +46,9 @@ public class UpdateCoverPhotoRequest extends ServerRequest {
             call.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                    handleSuccessResponse(response);
 
-                    handleSuccessResponse(response, handler);
-
+                    handler.completionHandler(getUpdateCoverPhotoRequest());
                 }
 
                 @Override
@@ -63,9 +63,9 @@ public class UpdateCoverPhotoRequest extends ServerRequest {
             call.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                    handleSuccessResponse(response);
 
-                    handleSuccessResponse(response, handler);
-
+                    handler.completionHandler(getUpdateCoverPhotoRequest());
                 }
 
                 @Override
@@ -89,25 +89,25 @@ public class UpdateCoverPhotoRequest extends ServerRequest {
         return this;
     }
 
-    private void handleSuccessResponse(Response<JsonElement> response, final ServerCompletionHandler handler) {
-        if (response.isSuccessful()) {
-            final JsonObject jsonObject = response.body().getAsJsonObject();
-
-            if (!isSucceedResponse(jsonObject)) {
-                error = errorFromResponse(jsonObject);
-            }
-        } else {
-            isFailure = true;
-
-            try {
-                error = response.errorBody().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        handler.completionHandler(getUpdateCoverPhotoRequest());
-    }
+//    private void handleSuccessResponse(Response<JsonElement> response, final ServerCompletionHandler handler) {
+//        if (response.isSuccessful()) {
+//            final JsonObject jsonObject = response.body().getAsJsonObject();
+//
+//            if (!isSucceedResponse(jsonObject)) {
+//                error = errorFromResponse(jsonObject);
+//            }
+//        } else {
+//            isFailure = true;
+//
+//            try {
+//                error = response.errorBody().string();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        handler.completionHandler(getUpdateCoverPhotoRequest());
+//    }
 
     /** UpdateCoverPhotoApi interface. */
 
