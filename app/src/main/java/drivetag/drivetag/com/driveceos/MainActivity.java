@@ -16,6 +16,14 @@ import drivetag.drivetag.com.driveceos.data_layer.requests.SuggestedIdentifierRe
 import drivetag.drivetag.com.driveceos.data_layer.requests.on_boarding.SignInRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.UpdateCoverPhotoRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.UpdateMyPageRequest;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
+import java.util.List;
+import drivetag.drivetag.com.driveceos.data_layer.models.User;
+import drivetag.drivetag.com.driveceos.data_layer.requests.MyTeamupRequest;
+import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.UserProfileActivity;
 
 /**
  * Created by yuriy on 3/22/17.
@@ -68,7 +76,9 @@ public class MainActivity extends Activity {
 
 //        log.debug( String.format("%s is %d years old, er, young", "Al", 45) );
 
-        /**  SignInRequest  */
+//        Intent intent = new Intent(this, UserProfileActivity.class);
+//        startActivity(intent);
+
 //        SignInRequest signInRequest = new SignInRequest("rayban@mailinator.com", "qwe123456");
 //        signInRequest.resumeWithCompletionHandler(new SignInRequest.ServerCompletionHandler() {
 //            @Override
@@ -108,6 +118,12 @@ public class MainActivity extends Activity {
 //          updateMyPageRequest.resumeWithCompletionHandler(new UpdateMyPageRequest.ServerCompletionHandler() {
 //            @Override
 //            public void completionHandler(ServerRequest request) {
+
+//        MyTeamupRequest request = new MyTeamupRequest();
+//        request.resumeWithCompletionHandler(new MyTeamupRequest.MyTeamupCompletionHandler<List<User>, List<User>>() {
+//
+//            @Override
+//            public void completionHandler(List<User> historyUsers, List<User> incomingUsers, ServerRequest request) {
 //                System.out.println();
 //            }
 //
@@ -116,7 +132,5 @@ public class MainActivity extends Activity {
 //                System.out.println();
 //            }
 //        });
-        
-
     }
 }
