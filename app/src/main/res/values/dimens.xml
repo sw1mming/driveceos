@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="action_bar_text_size">17dp</dimen>
+    <dimen name="cover_photo_item_height">66dp</dimen>
+    <dimen name="user_profile_item_height">67dp</dimen>
+    <dimen name="extended_edit_item_height">76dp</dimen>
+    <dimen name="action_bar_height">44dp</dimen>
+    <dimen name="action_bar_button_width">50dp</dimen>
+
+    <dimen name="size_5">50dp</dimen>
+
+    <dimen name="inset_1">8dp</dimen>
 </resources>
