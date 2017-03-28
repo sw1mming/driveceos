@@ -14,6 +14,7 @@ import drivetag.drivetag.com.driveceos.data_layer.requests.CheckEmailTypeRequest
 import drivetag.drivetag.com.driveceos.data_layer.requests.ImageUploadRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.SuggestedIdentifierRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.VerifyRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.on_boarding.SignInRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.UpdateCoverPhotoRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.UpdateMyPageRequest;
@@ -36,6 +37,22 @@ public class MainActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        /**  VerifyRequest  */
+//        VerifyRequest verifyRequest = new VerifyRequest("safcvafceqwcwcqqewc@gmail.com");
+//        verifyRequest.resumeWithCompletionHandler(new VerifyRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
+
 
         /**  CheckEmailTypeRequest  */
 //        CheckEmailTypeRequest checkEmailTypeRequest = new CheckEmailTypeRequest("safcvafceqwcwcqqewc@gmail.com");
