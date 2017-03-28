@@ -10,6 +10,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import drivetag.drivetag.com.driveceos.data_layer.requests.CheckEmailTypeRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ImageUploadRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.SuggestedIdentifierRequest;
@@ -35,6 +36,20 @@ public class MainActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /**  CheckEmailTypeRequest  */
+//        CheckEmailTypeRequest checkEmailTypeRequest = new CheckEmailTypeRequest("safcvafceqwcwcqqewc@gmail.com");
+//        checkEmailTypeRequest.resumeWithCompletionHandler(new CheckEmailTypeRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
 
 
         /**  SuggestedIdentifierRequest  */
