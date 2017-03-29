@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.Collection;
 import java.util.List;
 
 import drivetag.drivetag.com.driveceos.BaseActivity;
@@ -43,16 +44,16 @@ public class SuggestionsActivity extends BaseActivity {
 
     private void loadSuggestions() {
         suggestionsListRequest = new LoadSuggestionsListRequest();
-        suggestionsListRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+        suggestionsListRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler<List<String>>() {
             @Override
-            public void completionHandler(ServerRequest request) {
-                adapter.suggestionsArray = (List<String>) request.serverResponse;
+            public void completionHandler(ServerRequest<List<String>> request) {
+                adapter.setSuggestionsArray(request.serverResponse);
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void completionHandlerWithError(String error) {
-                System.out.println();
+
             }
         });
     }

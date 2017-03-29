@@ -65,11 +65,27 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case 0:
                 CoverPhotoViewHolder coverPhotoViewHolder = (CoverPhotoViewHolder)holder;
                 coverPhotoViewHolder.titleTextView.setText("up cover");
+                coverPhotoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (handler != null) {
+                            handler.didSelectCoverPhotoCompletionHandler(getUserProfileAdapter());
+                        }
+                    }
+                });
                 break;
 
             case 1:
                 UserProfileViewHolder userProfileViewHolder = (UserProfileViewHolder)holder;
                 userProfileViewHolder.titleTextView.setText("user profile");
+                userProfileViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (handler != null) {
+                            handler.didSelectProfilePhotoCompletionHandler(getUserProfileAdapter());
+                        }
+                    }
+                });
                 break;
             case 2:
                 ExtendedEditViewHolder extendedViewHolder = (ExtendedEditViewHolder)holder;
@@ -89,6 +105,15 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case 3:
                 CoverPhotoViewHolder myPagePhotoViewHolder = (CoverPhotoViewHolder)holder;
                 myPagePhotoViewHolder.titleTextView.setText("bottom cover");
+                myPagePhotoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println();
+                        if (handler != null) {
+                            handler.didSelectMyPageCompletionHandler(getUserProfileAdapter());
+                        }
+                    }
+                });
                 break;
         }
     }

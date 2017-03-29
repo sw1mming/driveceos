@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import drivetag.drivetag.com.driveceos.R;
@@ -39,6 +40,10 @@ public class SuggectionsAdapter extends RecyclerView.Adapter<SuggectionsAdapter.
         } else {
             return 0;
         }
+    }
+
+    public void setSuggestionsArray(List<String> suggestionsArray) {
+        this.suggestionsArray = new ArrayList<>(suggestionsArray);
     }
 
     /**

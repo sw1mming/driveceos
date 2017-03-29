@@ -4,20 +4,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.List;
 
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.UpdateCoverPhotoRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
-import retrofit2.http.POST;
 
 /**
  * Created by sergeymelnik on 2017-03-28.

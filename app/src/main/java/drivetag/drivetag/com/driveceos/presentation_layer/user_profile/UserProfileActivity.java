@@ -12,6 +12,7 @@ import org.w3c.dom.Text;
 import drivetag.drivetag.com.driveceos.BaseActivity;
 import drivetag.drivetag.com.driveceos.R;
 import drivetag.drivetag.com.driveceos.presentation_layer.adapters.UserProfileAdapter;
+import drivetag.drivetag.com.driveceos.presentation_layer.alert_dialog.AlertDialogFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.suggestions.SuggestionsActivity;
 
 /**
@@ -44,7 +45,7 @@ public class UserProfileActivity extends BaseActivity {
         adapter.handler = new UserProfileAdapter.UserProfileAdapterHandler() {
             @Override
             public void didSelectCoverPhotoCompletionHandler(UserProfileAdapter adapter) {
-
+                showAlertDialog();
             }
 
             @Override
@@ -55,13 +56,13 @@ public class UserProfileActivity extends BaseActivity {
             @Override
             public void didSelectWhatDrivesYouCompletionHandler(UserProfileAdapter adapter) {
                 // handle new screen
-//                Intent intent = new Intent(getApplicationContext(), SuggestionsActivity.class);
-//                getApplicationContext().startActivity(intent);
+                Intent intent = new Intent(UserProfileActivity.this, SuggestionsActivity.class);
+                startActivity(intent);
             }
 
             @Override
             public void didSelectMyPageCompletionHandler(UserProfileAdapter adapter) {
-
+                showAlertDialog();
             }
         };
 
@@ -70,6 +71,29 @@ public class UserProfileActivity extends BaseActivity {
 
     private UserProfileActivity getUserProfileActivity() {
         return this;
+    }
+
+    private void showAlertDialog() {
+        AlertDialogFragment alertDialogFragment = new AlertDialogFragment();
+        alertDialogFragment.handler = new AlertDialogFragment.AlertDialogFragmentHandler() {
+            @Override
+            public void didSelectCameraButton() {
+                System.out.println();
+            }
+
+            @Override
+            public void didSelectSavedPhotoButton() {
+                System.out.println();
+            }
+
+            @Override
+            public void didSelectDeletePhotoButton() {
+                System.out.println();
+            }
+        };
+
+        alertDialogFragment.show(UserProfileActivity.this.getFragmentManager(), "");
+
     }
 
     private void setupActionBar() {

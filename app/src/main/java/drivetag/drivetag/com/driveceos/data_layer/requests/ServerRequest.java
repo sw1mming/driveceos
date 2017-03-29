@@ -121,8 +121,8 @@ public abstract class ServerRequest<T> {
      *  Completion handler interface for request.
      */
 
-    public interface ServerCompletionHandler {
-        void completionHandler(ServerRequest request);
+    public interface ServerCompletionHandler<T> {
+        void completionHandler(ServerRequest<T> request);
         void completionHandlerWithError(String error);
     }
 }
