@@ -1,5 +1,6 @@
 package drivetag.drivetag.com.driveceos.presentation_layer.user_profile.suggestions;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,8 @@ import drivetag.drivetag.com.driveceos.presentation_layer.adapters.SuggectionsAd
 
 public class SuggestionsActivity extends BaseActivity {
 
+    public final static String SUGGESTION_SELECTED_KEY = "SUGGESTION_SELECTED_KEY";
+
     private LoadSuggestionsListRequest suggestionsListRequest;
 
     private SuggectionsAdapter adapter;
@@ -35,11 +38,25 @@ public class SuggestionsActivity extends BaseActivity {
 
     private void setupRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.suggestion_recycler_view);
-        adapter = new SuggectionsAdapter();
+        setupAdapter();
 
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void setupAdapter() {
+        adapter = new SuggectionsAdapter();
+
+        adapter.handler = new SuggectionsAdapter.SuggestionsAdapterHandler() {
+            @Override
+            public void didSelectSuggestion(String suggestion) {
+                Intent intent = new Intent();
+                intent.putExtra(SUGGESTION_SELECTED_KEY, suggestion);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        };
     }
 
     private void loadSuggestions() {
@@ -47,8 +64,10 @@ public class SuggestionsActivity extends BaseActivity {
         suggestionsListRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler<List<String>>() {
             @Override
             public void completionHandler(ServerRequest<List<String>> request) {
-                adapter.setSuggestionsArray(request.serverResponse);
-                adapter.notifyDataSetChanged();
+                if (request.serverResponse != null) {
+                    adapter.setSuggestionsArray(request.serverResponse);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override

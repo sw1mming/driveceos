@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import drivetag.drivetag.com.driveceos.R;
@@ -22,6 +23,8 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public Bitmap myPagePhotoBitmap;
 
     public Bitmap userProfileBitmap;
+
+    public String suggestionText;
 
     @Override
     public int getItemViewType(int position) {
@@ -107,10 +110,16 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         }
                     }
                 });
+
                 break;
+
             case 2:
                 ExtendedEditViewHolder extendedViewHolder = (ExtendedEditViewHolder)holder;
                 extendedViewHolder.titleTextView.setText("extended");
+
+                if (suggestionText != null) {
+                    extendedViewHolder.editText.setText(suggestionText);
+                }
 
                 extendedViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -203,7 +212,7 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
      */
     public static class ExtendedEditViewHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
-//        private ImageView backgroundImageView;
+        private EditText editText;
 
         public ExtendedEditViewHolder(View itemView) {
             super(itemView);
@@ -211,6 +220,7 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 ////            Typeface titleFont = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/SF_UI_Text_Light.otf");
 //
             titleTextView = (TextView) itemView.findViewById(R.id.title_text_view);
+            editText = (EditText) itemView.findViewById(R.id.suggestion_edit_text);
             System.out.println();
 //            backgroundImageView = (ImageView) itemView.findViewById(R.id.background_image_view);
 //                categoryImageView = (ImageView) itemView.findViewById(R.id.category_image_view);

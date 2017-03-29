@@ -30,8 +30,12 @@ public class LoadSuggestionsListRequest extends ServerRequest<List<String>> {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                 JsonElement jsonElement = handleSuccessResponse(response);
-                JsonObject jsonObject = jsonElement.getAsJsonObject();
-                serverResponse = objectsFromResponse(jsonObject);
+
+                if (jsonElement != null) {
+                    JsonObject jsonObject = jsonElement.getAsJsonObject();
+                    serverResponse = objectsFromResponse(jsonObject);
+                }
+
                 handler.completionHandler(getLoadSuggestionsListRequest());
             }
 

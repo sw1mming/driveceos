@@ -19,6 +19,8 @@ public class SuggectionsAdapter extends RecyclerView.Adapter<SuggectionsAdapter.
 
     public List<String> suggestionsArray;
 
+    public SuggestionsAdapterHandler handler;
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.suggestion_item, parent, false);
@@ -28,9 +30,18 @@ public class SuggectionsAdapter extends RecyclerView.Adapter<SuggectionsAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        String suggestion = suggestionsArray.get(position);
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        final String suggestion = suggestionsArray.get(position);
         holder.titleTextView.setText(suggestion);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (handler != null) {
+                    handler.didSelectSuggestion(suggestion);
+                }
+            }
+        });
     }
 
     @Override
@@ -59,4 +70,7 @@ public class SuggectionsAdapter extends RecyclerView.Adapter<SuggectionsAdapter.
         }
     }
 
+    public interface SuggestionsAdapterHandler {
+        void didSelectSuggestion(String suggestion);
+    }
 }
