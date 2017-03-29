@@ -1,20 +1,20 @@
 package drivetag.drivetag.com.driveceos.presentation_layer.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import drivetag.drivetag.com.driveceos.R;
 
 /**
  * Created by sergeymelnik on 2017-03-27.
  */
 
-public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
+public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    public UserProfileAdapterHandler handler;
 
     @Override
     public int getItemViewType(int position) {
@@ -65,20 +65,55 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case 0:
                 CoverPhotoViewHolder coverPhotoViewHolder = (CoverPhotoViewHolder)holder;
                 coverPhotoViewHolder.titleTextView.setText("up cover");
+                coverPhotoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (handler != null) {
+                            handler.didSelectCoverPhotoCompletionHandler(getUserProfileAdapter());
+                        }
+                    }
+                });
                 break;
 
             case 1:
                 UserProfileViewHolder userProfileViewHolder = (UserProfileViewHolder)holder;
                 userProfileViewHolder.titleTextView.setText("user profile");
+                userProfileViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (handler != null) {
+                            handler.didSelectProfilePhotoCompletionHandler(getUserProfileAdapter());
+                        }
+                    }
+                });
                 break;
             case 2:
                 ExtendedEditViewHolder extendedViewHolder = (ExtendedEditViewHolder)holder;
                 extendedViewHolder.titleTextView.setText("extended");
+                extendedViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println();
+                        if (handler != null) {
+                            handler.didSelectWhatDrivesYouCompletionHandler(getUserProfileAdapter());
+                        }
+                    }
+                });
+
                 break;
 
             case 3:
                 CoverPhotoViewHolder myPagePhotoViewHolder = (CoverPhotoViewHolder)holder;
                 myPagePhotoViewHolder.titleTextView.setText("bottom cover");
+                myPagePhotoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println();
+                        if (handler != null) {
+                            handler.didSelectMyPageCompletionHandler(getUserProfileAdapter());
+                        }
+                    }
+                });
                 break;
         }
     }
@@ -157,4 +192,14 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
+    private UserProfileAdapter getUserProfileAdapter() {
+        return this;
+    }
+
+    public interface UserProfileAdapterHandler {
+        void didSelectCoverPhotoCompletionHandler(UserProfileAdapter adapter);
+        void didSelectProfilePhotoCompletionHandler(UserProfileAdapter adapter);
+        void didSelectWhatDrivesYouCompletionHandler(UserProfileAdapter adapter);
+        void didSelectMyPageCompletionHandler(UserProfileAdapter adapter);
+    }
 }
