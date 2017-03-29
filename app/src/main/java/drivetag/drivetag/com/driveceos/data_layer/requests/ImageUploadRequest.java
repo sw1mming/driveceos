@@ -82,8 +82,6 @@ public class ImageUploadRequest extends ServerRequest {
     public void setupService() {
         Retrofit retrofit = getRetrofit();
         registerFileService = retrofit.create(ImageUploadRequest.RegisterFileApi.class);
-
-
     }
 
 

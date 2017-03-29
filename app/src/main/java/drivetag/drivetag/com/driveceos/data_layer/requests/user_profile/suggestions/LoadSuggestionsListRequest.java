@@ -29,7 +29,8 @@ public class LoadSuggestionsListRequest extends ServerRequest<List<String>> {
         call.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                JsonObject jsonObject = handleSuccessResponse(response);
+                JsonElement jsonElement = handleSuccessResponse(response);
+                JsonObject jsonObject = jsonElement.getAsJsonObject();
                 serverResponse = objectsFromResponse(jsonObject);
                 handler.completionHandler(getLoadSuggestionsListRequest());
             }

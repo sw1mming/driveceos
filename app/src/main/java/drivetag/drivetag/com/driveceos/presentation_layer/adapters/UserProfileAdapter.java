@@ -1,5 +1,6 @@
 package drivetag.drivetag.com.driveceos.presentation_layer.adapters;
 
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,12 @@ import drivetag.drivetag.com.driveceos.R;
 public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public UserProfileAdapterHandler handler;
+
+    public Bitmap coverPhotoBitmap;
+
+    public Bitmap myPagePhotoBitmap;
+
+    public Bitmap userProfileBitmap;
 
     @Override
     public int getItemViewType(int position) {
@@ -65,6 +72,13 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case 0:
                 CoverPhotoViewHolder coverPhotoViewHolder = (CoverPhotoViewHolder)holder;
                 coverPhotoViewHolder.titleTextView.setText("up cover");
+
+                if (coverPhotoBitmap != null) {
+                    coverPhotoViewHolder.backgroundImageView.setImageBitmap(coverPhotoBitmap);
+                } else {
+                    coverPhotoViewHolder.backgroundImageView.setImageBitmap(null);
+                }
+
                 coverPhotoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -78,6 +92,13 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case 1:
                 UserProfileViewHolder userProfileViewHolder = (UserProfileViewHolder)holder;
                 userProfileViewHolder.titleTextView.setText("user profile");
+
+                if (userProfileBitmap != null) {
+                    userProfileViewHolder.userProfileImageView.setImageBitmap(userProfileBitmap);
+                } else {
+                    userProfileViewHolder.userProfileImageView.setImageBitmap(null);
+                }
+
                 userProfileViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -90,6 +111,7 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case 2:
                 ExtendedEditViewHolder extendedViewHolder = (ExtendedEditViewHolder)holder;
                 extendedViewHolder.titleTextView.setText("extended");
+
                 extendedViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -105,6 +127,13 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case 3:
                 CoverPhotoViewHolder myPagePhotoViewHolder = (CoverPhotoViewHolder)holder;
                 myPagePhotoViewHolder.titleTextView.setText("bottom cover");
+
+                if (myPagePhotoBitmap != null) {
+                    myPagePhotoViewHolder.backgroundImageView.setImageBitmap(myPagePhotoBitmap);
+                } else {
+                    myPagePhotoViewHolder.backgroundImageView.setImageBitmap(null);
+                }
+
                 myPagePhotoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -151,7 +180,7 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
      */
     public static class UserProfileViewHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
-        private ImageView backgroundImageView;
+        private ImageView userProfileImageView;
 
         public UserProfileViewHolder(View itemView) {
             super(itemView);
@@ -159,8 +188,8 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 ////            Typeface titleFont = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/SF_UI_Text_Light.otf");
 //
             titleTextView = (TextView) itemView.findViewById(R.id.title_text_view);
-//            backgroundImageView = (ImageView) itemView.findViewById(R.id.background_image_view);
-            System.out.println();
+            userProfileImageView = (ImageView) itemView.findViewById(R.id.user_image_view);
+
 //                categoryImageView = (ImageView) itemView.findViewById(R.id.category_image_view);
 //            titleTextView.setTypeface(titleFont);
 

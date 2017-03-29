@@ -1,13 +1,22 @@
 package drivetag.drivetag.com.driveceos.presentation_layer.user_profile;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.io.FileDescriptor;
+import java.io.IOException;
+import java.net.URI;
 
 import drivetag.drivetag.com.driveceos.BaseActivity;
 import drivetag.drivetag.com.driveceos.R;
@@ -20,6 +29,17 @@ import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.suggestio
  */
 
 public class UserProfileActivity extends BaseActivity {
+
+    private final static int COVER_PHOTO_INDEX = 0;
+
+    private final static int PROFILE_PHOTO_INDEX = 1;
+
+    private final static int MY_PAGE_PHOTO_INDEX = 3;
+
+    private AlertDialogFragment alertDialogFragment;
+
+    private UserProfileAdapter adapter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,60 +60,128 @@ public class UserProfileActivity extends BaseActivity {
     }
 
     private UserProfileAdapter setupUserProfileAdapter() {
-        UserProfileAdapter adapter = new UserProfileAdapter();
+        adapter = new UserProfileAdapter();
 
         adapter.handler = new UserProfileAdapter.UserProfileAdapterHandler() {
             @Override
             public void didSelectCoverPhotoCompletionHandler(UserProfileAdapter adapter) {
-                showAlertDialog();
+                showAlertDialogForIndex(COVER_PHOTO_INDEX);
             }
 
             @Override
             public void didSelectProfilePhotoCompletionHandler(UserProfileAdapter adapter) {
-
+                showAlertDialogForIndex(PROFILE_PHOTO_INDEX);
             }
 
             @Override
             public void didSelectWhatDrivesYouCompletionHandler(UserProfileAdapter adapter) {
-                // handle new screen
                 Intent intent = new Intent(UserProfileActivity.this, SuggestionsActivity.class);
                 startActivity(intent);
             }
 
             @Override
             public void didSelectMyPageCompletionHandler(UserProfileAdapter adapter) {
-                showAlertDialog();
+                showAlertDialogForIndex(MY_PAGE_PHOTO_INDEX);
             }
         };
 
         return adapter;
     }
 
-    private UserProfileActivity getUserProfileActivity() {
-        return this;
-    }
+    private void showAlertDialogForIndex(int index) {
+        alertDialogFragment = new AlertDialogFragment();
 
-    private void showAlertDialog() {
-        AlertDialogFragment alertDialogFragment = new AlertDialogFragment();
+        alertDialogFragment.currentAlertDialogIndex = index;
+
         alertDialogFragment.handler = new AlertDialogFragment.AlertDialogFragmentHandler() {
             @Override
             public void didSelectCameraButton() {
-                System.out.println();
+                showCamera();
             }
 
             @Override
             public void didSelectSavedPhotoButton() {
-                System.out.println();
+                showGallery();
             }
 
             @Override
             public void didSelectDeletePhotoButton() {
-                System.out.println();
+                deletePhoto();
             }
         };
 
         alertDialogFragment.show(UserProfileActivity.this.getFragmentManager(), "");
+    }
 
+    final int REQUEST_CAMERA = 1;
+
+    final int REQUEST_IMAGE_GALLERY = 0;
+
+    private void showCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_CAMERA);
+        }
+    }
+
+
+    private void showGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_IMAGE_GALLERY);
+        }
+    }
+
+    private void deletePhoto() {
+        deleteRowImage();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap bitmap = (Bitmap) extras.get("data");
+            updateRowWithImageBitmap(bitmap);
+        } else if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+
+            try {
+                Bitmap bitmap = getBitmapFromUri(uri);
+                updateRowWithImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void deleteRowImage() {
+        updateRowWithImageBitmap(null);
+    }
+
+    private void updateRowWithImageBitmap(Bitmap imageBitmap) {
+        if (alertDialogFragment.currentAlertDialogIndex == COVER_PHOTO_INDEX) {
+            adapter.coverPhotoBitmap = imageBitmap;
+        } else if (alertDialogFragment.currentAlertDialogIndex == PROFILE_PHOTO_INDEX) {
+            adapter.userProfileBitmap = imageBitmap;
+        } else if (alertDialogFragment.currentAlertDialogIndex == MY_PAGE_PHOTO_INDEX) {
+            adapter.myPagePhotoBitmap = imageBitmap;
+        }
+
+        adapter.notifyDataSetChanged();
+        alertDialogFragment = null;
+    }
+
+    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
+        ParcelFileDescriptor parcelFileDescriptor =
+                getContentResolver().openFileDescriptor(uri, "r");
+        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+        parcelFileDescriptor.close();
+        return image;
     }
 
     private void setupActionBar() {

@@ -4,10 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-
-import drivetag.drivetag.com.driveceos.R;
 
 /**
  * Created by sergeymelnik on 2017-03-29.
@@ -15,13 +12,15 @@ import drivetag.drivetag.com.driveceos.R;
 
 public class AlertDialogFragment extends android.app.DialogFragment implements DialogInterface.OnClickListener {
 
-    final int DeletePhotoButtonIndex = -3;
-
-    final int SavedPhotoButtonIndex = -2;
-
-    final int CameraButtonIndex = -1;
+    public int currentAlertDialogIndex;
 
     public AlertDialogFragmentHandler handler;
+
+    private final int DeletePhotoButtonIndex = -3;
+
+    private final int SavedPhotoButtonIndex = -2;
+
+    private final int CameraButtonIndex = -1;
 
     @NonNull
     @Override
