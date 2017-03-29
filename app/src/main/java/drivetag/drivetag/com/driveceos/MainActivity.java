@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import drivetag.drivetag.com.driveceos.data_layer.requests.CheckEmailTypeRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.EmployeeTitlesRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ImageUploadRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.SuggestedIdentifierRequest;
@@ -38,6 +39,20 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        /**  EmployeeTitlesRequest  */
+//        EmployeeTitlesRequest request = new EmployeeTitlesRequest("rayban@mailinator.com");
+//        request.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
 
         /**  VerifyRequest  */
 //        VerifyRequest verifyRequest = new VerifyRequest("safcvafceqwcwcqqewc@gmail.com");

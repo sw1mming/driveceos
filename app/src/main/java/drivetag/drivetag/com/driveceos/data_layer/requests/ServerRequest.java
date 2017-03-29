@@ -3,6 +3,7 @@ package drivetag.drivetag.com.driveceos.data_layer.requests;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
@@ -95,15 +96,23 @@ public abstract class ServerRequest<T> {
         return  message;
     }
 
-    public JsonObject handleSuccessResponse(Response<JsonElement> response) {
+    public JsonElement handleSuccessResponse(Response<JsonElement> response) {
         if (response.isSuccessful()) {
-            final JsonObject jsonObject = response.body().getAsJsonObject();
 
-            if (!isSucceedResponse(jsonObject)) {
-                error = errorFromResponse(jsonObject);
+            JsonElement jsonElement = response.body();
+
+            if (jsonElement.isJsonObject()) {
+                final JsonObject jsonObject = jsonElement.getAsJsonObject();
+
+                if (!isSucceedResponse(jsonObject)) {
+                    error = errorFromResponse(jsonObject);
+                }
+
+                return jsonObject;
+            } else {
+                JsonArray jsonArray = jsonElement.getAsJsonArray();
+                return jsonArray;
             }
-
-            return jsonObject;
         } else {
             isFailure = true;
 

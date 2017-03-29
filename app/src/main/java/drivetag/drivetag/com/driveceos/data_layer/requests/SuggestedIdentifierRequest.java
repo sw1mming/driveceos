@@ -47,8 +47,11 @@ public class SuggestedIdentifierRequest extends ServerRequest<List<String>> {
         call.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                JsonObject aResponse = handleSuccessResponse(response);
-                serverResponse = parseResponse(aResponse);
+                JsonElement jsonElement = handleSuccessResponse(response);
+
+                if (jsonElement.isJsonObject()) {
+                    serverResponse = parseResponse(jsonElement.getAsJsonObject());
+                }
 
                 completionHandler.completionHandler(getSuggestedIdentifierRequest());
             }
