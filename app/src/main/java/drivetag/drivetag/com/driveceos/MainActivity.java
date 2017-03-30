@@ -16,6 +16,7 @@ import drivetag.drivetag.com.driveceos.data_layer.requests.FacebookLoginRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ImageUploadRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.LoadCurrentUserRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.SuggestedIdentifierRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.VerifyRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.on_boarding.SignInRequest;
@@ -31,6 +32,10 @@ import drivetag.drivetag.com.driveceos.data_layer.requests.MyTeamupRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.suggestions.LoadSuggestionsListRequest;
 import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.UserProfileActivity;
 
+import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkFacebook;
+import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkLinkedIn;
+import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkTwitter;
+
 /**
  * Created by yuriy on 3/22/17.
  */
@@ -41,6 +46,22 @@ public class MainActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /**  SocialNetworkEnableRequest  */
+//        SocialNetworkEnableRequest socialNetworkEnableRequest = new SocialNetworkEnableRequest(SocialNetworkFacebook);
+//        socialNetworkEnableRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
+
+
 
         /**  LoadCurrentUserRequest  */
 //        FacebookLoginRequest facebookLoginRequest = new FacebookLoginRequest("EAAUmQyOW8JMBAHi13J33hOqZBkUpPtHBHXVgb0TgNqGBFGZByRDzuiqpvJiZAez2Q0ZBtgXgx8v52vlwtDTyj377ZC7iTxZAQXOq2XtHazpGf8QJMsgCP7uB9qZBDFJSMZAbvZCoGkloZAr6RK7yxxqT4wpdOHijQRsWhxAxshICk54mxCBQiIoYFhyEH70sfKS2iv7HmpjICl2Km7OPRYaZAIeyfmGAHJr0vMZD", "869147083162811");
