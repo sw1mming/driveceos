@@ -12,6 +12,7 @@ import java.util.List;
 
 import drivetag.drivetag.com.driveceos.data_layer.requests.CheckEmailTypeRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.EmployeeTitlesRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.FacebookLoginRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ImageUploadRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.LoadCurrentUserRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
@@ -40,6 +41,20 @@ public class MainActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /**  LoadCurrentUserRequest  */
+//        FacebookLoginRequest facebookLoginRequest = new FacebookLoginRequest("EAAUmQyOW8JMBAHi13J33hOqZBkUpPtHBHXVgb0TgNqGBFGZByRDzuiqpvJiZAez2Q0ZBtgXgx8v52vlwtDTyj377ZC7iTxZAQXOq2XtHazpGf8QJMsgCP7uB9qZBDFJSMZAbvZCoGkloZAr6RK7yxxqT4wpdOHijQRsWhxAxshICk54mxCBQiIoYFhyEH70sfKS2iv7HmpjICl2Km7OPRYaZAIeyfmGAHJr0vMZD", "869147083162811");
+//        facebookLoginRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
 
 
         /**  LoadCurrentUserRequest  */
