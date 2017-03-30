@@ -13,6 +13,7 @@ import java.util.List;
 import drivetag.drivetag.com.driveceos.data_layer.requests.CheckEmailTypeRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.EmployeeTitlesRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ImageUploadRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.LoadCurrentUserRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.SuggestedIdentifierRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.VerifyRequest;
@@ -26,6 +27,7 @@ import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import java.util.List;
 import drivetag.drivetag.com.driveceos.data_layer.models.User;
 import drivetag.drivetag.com.driveceos.data_layer.requests.MyTeamupRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.suggestions.LoadSuggestionsListRequest;
 import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.UserProfileActivity;
 
 /**
@@ -38,6 +40,21 @@ public class MainActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        /**  LoadCurrentUserRequest  */
+//        LoadCurrentUserRequest loadCurrentUserRequest = new LoadCurrentUserRequest();
+//        loadCurrentUserRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
 
 
         /**  EmployeeTitlesRequest  */

@@ -1,10 +1,12 @@
 package drivetag.drivetag.com.driveceos.data_layer.models;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Dictionary;
+
+
+import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 
 /**
  * Created by yuriy on 3/23/17.
@@ -46,13 +48,13 @@ public class User {
 
     public String teammateStatus;
 
-    public Number claimAccount;
+    public Boolean claimAccount;
 
-    public Number precreated;
+    public Boolean precreated;
 
     public Integer activeSocialsCount;
 
-    public Dictionary settings;
+    public JsonObject settings;
 
     public String emailType;
 
@@ -66,64 +68,153 @@ public class User {
 
     public Boolean driveTagOn;
 
+    public Boolean facebookOn;
+
+    public Boolean twitterOn;
+
+    public Boolean linkedInOn;
+
+    public Boolean blockFlag;
+
+    public Boolean isLive;
+
+    public Boolean isEmployee;
 
 
+    public User(JsonObject jsonObject) {
 
+        JsonObject userTagDictionary = null;
+        if (JsonObjectHelper.hasValueFromKey("user_tag", jsonObject)) {
+            userTagDictionary = jsonObject.getAsJsonObject("user_tag");
+        }
 
+        JsonObject userDictionary = null;
+        if (userTagDictionary != null && JsonObjectHelper.hasValueFromKey("user", userTagDictionary)) {
+            userDictionary = userTagDictionary.getAsJsonObject("user");
+        }
 
+        JsonObject prefsDictionary = null;
+        if (userDictionary != null && JsonObjectHelper.hasValueFromKey("prefs", userDictionary)) {
+            prefsDictionary = userDictionary.getAsJsonObject("prefs");
+        }
 
+        JsonObject socialDictionary = null;
+        if (userDictionary != null && JsonObjectHelper.hasValueFromKey("social", userDictionary)) {
+            socialDictionary = userDictionary.getAsJsonObject("social");
+        }
 
-//    public User(JsonObject jsonObject) {
-//        if (JsonObjectHelper.hasValueFromKey("first_name", jsonObject)) {
-//            name = jsonObject.get("first_name").getAsString();
-//        }
-//
-//        if (JsonObjectHelper.hasValueFromKey("image", jsonObject)) {
-//            String urlString = jsonObject.get("image").getAsString();
-//            try {
-//                userImageUrl = new URL(urlString);
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        if (JsonObjectHelper.hasValueFromKey("fb_auth_key", jsonObject)) {
-//            fbToken = jsonObject.get("fb_auth_key").getAsString();
-//        }
-//
-//        if (JsonObjectHelper.hasValueFromKey("last_name", jsonObject)) {
-//            surname = jsonObject.get("last_name").getAsString();
-//        }
-//
-//        if (JsonObjectHelper.hasValueFromKey("email", jsonObject)) {
-//            email = jsonObject.get("email").getAsString();
-//        }
-//
-//        if (JsonObjectHelper.hasValueFromKey("id", jsonObject)) {
-//            userId = jsonObject.get("id").getAsString();
-//        }
-//
-//        if (JsonObjectHelper.hasValueFromKey("city_location", jsonObject)) {
-//            userCity = jsonObject.get("city_location").getAsString();
-//        }
-//
-//        if (JsonObjectHelper.hasValueFromKey("facebookId", jsonObject)) {
-//            facebookId = jsonObject.get("facebookId").getAsString();
-//        }
-//
-//    }
-//
-//    public String fullName() {
-//        String result = null;
-//
-//        if (name != null && !name.isEmpty()) {
-//            result = name;
-//        }
-//
-//        if (surname != null && !surname.isEmpty()) {
-//            result = result + "" + surname;
-//        }
-//
-//        return result;
-//    }
+        if (socialDictionary != null && JsonObjectHelper.hasValueFromKey("tw", socialDictionary)) {
+            JsonObject twitterDictionary = socialDictionary.getAsJsonObject("tw");
+
+            if (JsonObjectHelper.hasValueFromKey("uid", twitterDictionary)) {
+                twitterID = twitterDictionary.get("uid").getAsString();
+            }
+        }
+
+        if (socialDictionary != null && JsonObjectHelper.hasValueFromKey("fb", socialDictionary)) {
+            JsonObject facebookDictionary = socialDictionary.getAsJsonObject("fb");
+
+            if (JsonObjectHelper.hasValueFromKey("uid", facebookDictionary)) {
+                facebookID = facebookDictionary.get("uid").getAsString();
+            }
+        }
+
+        if (socialDictionary != null && JsonObjectHelper.hasValueFromKey("li", socialDictionary)) {
+            JsonObject linkedInDictionary = socialDictionary.getAsJsonObject("li");
+
+            if (JsonObjectHelper.hasValueFromKey("uid", linkedInDictionary)) {
+                linkedInID = linkedInDictionary.get("uid").getAsString();
+            }
+        }
+
+        JsonObject userTag = null;
+        if (JsonObjectHelper.hasValueFromKey("user_tag", jsonObject)) {
+            userTag = jsonObject.getAsJsonObject("user_tag");
+        }
+
+        JsonObject userInfo = null;
+        if (userTag != null && JsonObjectHelper.hasValueFromKey("user", userTag)) {
+            userInfo = userTag.getAsJsonObject("user");
+        }
+
+        if (userInfo != null && JsonObjectHelper.hasValueFromKey("my_page", userInfo)) {
+            JsonArray myPageUrls = userInfo.get("my_page").getAsJsonArray();
+
+            if (myPageUrls.size() > 0) {
+                try {
+                    myPagePhotoUrl = new URL(myPageUrls.get(0).getAsString());
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("cover", jsonObject)) {
+            try {
+                coverUrl = new URL(jsonObject.getAsJsonObject("cover").getAsString());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("writer_name", userDictionary)) {
+            driveTag = userDictionary.get("writer_name").getAsString();
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("claimed", userDictionary)) {
+            claimAccount = userDictionary.get("claimed").getAsBoolean();
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("precreated", userDictionary)) {
+            precreated = userDictionary.get("precreated").getAsBoolean();
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("teammate_status", prefsDictionary)) {
+            teammateStatus = prefsDictionary.get("teammate_status").getAsString();
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("block_flag", prefsDictionary)) {
+            blockFlag = prefsDictionary.get("block_flag").getAsBoolean();
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("uid", userDictionary)) {
+            driveID = userDictionary.get("uid").getAsNumber();
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("drive_email", jsonObject)) {
+            driveEmail = jsonObject.get("drive_email").getAsString();
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("settings", jsonObject)) {
+            settings = jsonObject.getAsJsonObject("settings");
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("color_theme", settings)) {
+            colorTheme = settings.get("color_theme").getAsString();
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("avatar", userDictionary)) {
+            try {
+                avatarUrl = new URL(userDictionary.get("avatar").getAsString());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("tag", userTagDictionary)) {
+            driveTag = userTagDictionary.get("tag").getAsString();
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("driven_message", userDictionary)) {
+            drivenMessage = userDictionary.get("driven_message").getAsString();
+        }
+
+        if (JsonObjectHelper.hasValueFromKey("is_employee", userDictionary)) {
+            isEmployee = userDictionary.get("is_employee").getAsBoolean();
+
+            if (JsonObjectHelper.hasValueFromKey("employee_title", userDictionary)) {
+                title = userDictionary.get("employee_title").getAsString();
+            }
+        }
+    }
 }

@@ -63,7 +63,7 @@ public class MyTeamupRequest extends ServerRequest {
         List<User> result = new ArrayList<>();
 
         for (JsonElement element: tagsArray) {
-            User user = new User();
+            User user = new User(null);
             JsonObject object = element.getAsJsonObject();
 
             if (JsonObjectHelper.hasValueFromKey("uid", object)) {

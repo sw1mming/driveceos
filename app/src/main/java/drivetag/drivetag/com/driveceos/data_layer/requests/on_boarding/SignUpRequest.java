@@ -70,7 +70,7 @@ public class SignUpRequest extends ServerRequest {
                     }
                 } else {
                     accessToket = jsonObject.get("dt_access_token").getAsString();
-                    User loginUser = new User();
+                    User loginUser = new User(null);
                     /** TODO: User's init. */
                     user = loginUser;
                 }
