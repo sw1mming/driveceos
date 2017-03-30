@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Driveceos</string>
+
+    <string name="camera">Camera</string>
+    <string name="saved_photos">Saved photos</string>
+    <string name="delete_photo">Delete photo</string>
+
 </resources>

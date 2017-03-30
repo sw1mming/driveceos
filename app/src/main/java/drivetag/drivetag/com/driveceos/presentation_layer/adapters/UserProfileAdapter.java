@@ -77,8 +77,10 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 coverPhotoViewHolder.titleTextView.setText("up cover");
 
                 if (coverPhotoBitmap != null) {
+                    coverPhotoViewHolder.titleTextView.setVisibility(TextView.INVISIBLE);
                     coverPhotoViewHolder.backgroundImageView.setImageBitmap(coverPhotoBitmap);
                 } else {
+                    coverPhotoViewHolder.titleTextView.setVisibility(TextView.VISIBLE);
                     coverPhotoViewHolder.backgroundImageView.setImageBitmap(null);
                 }
 
@@ -138,8 +140,10 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 myPagePhotoViewHolder.titleTextView.setText("bottom cover");
 
                 if (myPagePhotoBitmap != null) {
+                    myPagePhotoViewHolder.titleTextView.setVisibility(TextView.INVISIBLE);
                     myPagePhotoViewHolder.backgroundImageView.setImageBitmap(myPagePhotoBitmap);
                 } else {
+                    myPagePhotoViewHolder.titleTextView.setVisibility(TextView.VISIBLE);
                     myPagePhotoViewHolder.backgroundImageView.setImageBitmap(null);
                 }
 
