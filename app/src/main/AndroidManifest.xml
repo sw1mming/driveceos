@@ -13,15 +13,20 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".presentation_layer.on_boarding.SignInActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".presentation_layer.on_boarding.SignInActivity"
-            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".presentation_layer.user_profile.UserProfileActivity"

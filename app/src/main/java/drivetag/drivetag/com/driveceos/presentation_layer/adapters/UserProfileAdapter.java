@@ -47,23 +47,19 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         switch (viewType) {
             case 0:
                 View coverPhotoView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cover_photo_item, parent, false);
-                CoverPhotoViewHolder coverPhotoViewHolder = new CoverPhotoViewHolder(coverPhotoView);
-                return coverPhotoViewHolder;
+                return new CoverPhotoViewHolder(coverPhotoView);
 
             case 1:
                 View userProfileView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_profile_item, parent, false);
-                UserProfileViewHolder userProfileViewHolder = new UserProfileViewHolder(userProfileView);
-                return userProfileViewHolder;
+                return new UserProfileViewHolder(userProfileView);
 
             case 2:
                 View extendedView = LayoutInflater.from(parent.getContext()).inflate(R.layout.extended_edit_item, parent, false);
-                ExtendedEditViewHolder extendedViewHolder = new ExtendedEditViewHolder(extendedView);
-                return extendedViewHolder;
+                return new ExtendedEditViewHolder(extendedView);
 
             case 3:
                 View myPagePhotoView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cover_photo_item, parent, false);
-                CoverPhotoViewHolder myPagePhotoViewHolder = new CoverPhotoViewHolder(myPagePhotoView);
-                return myPagePhotoViewHolder;
+                return new CoverPhotoViewHolder(myPagePhotoView);
         }
 
         return null;
@@ -168,11 +164,11 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     /**
      * ViewHolder class for "cover_photo_item" layout.
      */
-    public static class CoverPhotoViewHolder extends RecyclerView.ViewHolder {
+    private static class CoverPhotoViewHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
         private ImageView backgroundImageView;
 
-        public CoverPhotoViewHolder(View itemView) {
+        CoverPhotoViewHolder(View itemView) {
             super(itemView);
 //
 ////            Typeface titleFont = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/SF_UI_Text_Light.otf");

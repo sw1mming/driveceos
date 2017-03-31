@@ -4,14 +4,13 @@ import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.on_boarding.SignInRequest;
 
 /**
- * Created by artem on 3/27/17.
+ * Created by artem .
  */
 
 public class SignInFlow {
 
-    String email;
-
-    String password;
+    private String email;
+    private String password;
 
     public SignInFlow(String email, String password) {
         this.email = email;

@@ -12,21 +12,19 @@ import java.util.List;
 import drivetag.drivetag.com.driveceos.R;
 
 /**
- * Created by sergeymelnik on 2017-03-28.
+ * Created by sergeymelnik .
  */
 
 public class SuggectionsAdapter extends RecyclerView.Adapter<SuggectionsAdapter.ViewHolder> {
 
-    public List<String> suggestionsArray;
+    private List<String> suggestionsArray;
 
     public SuggestionsAdapterHandler handler;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.suggestion_item, parent, false);
-        SuggectionsAdapter.ViewHolder viewHolder = new SuggectionsAdapter.ViewHolder(view);
-
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -60,10 +58,10 @@ public class SuggectionsAdapter extends RecyclerView.Adapter<SuggectionsAdapter.
     /**
      * ViewHolder class for "suggestion_item" layout.
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
 
             titleTextView = (TextView) itemView.findViewById(R.id.suggestion_title_text_view);

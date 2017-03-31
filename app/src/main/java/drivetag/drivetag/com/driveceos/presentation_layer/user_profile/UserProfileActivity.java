@@ -12,15 +12,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.io.FileDescriptor;
 import java.io.IOException;
-import java.net.URI;
 
 import drivetag.drivetag.com.driveceos.BaseActivity;
 import drivetag.drivetag.com.driveceos.R;
-import drivetag.drivetag.com.driveceos.presentation_layer.adapters.SuggectionsAdapter;
 import drivetag.drivetag.com.driveceos.presentation_layer.adapters.UserProfileAdapter;
 import drivetag.drivetag.com.driveceos.presentation_layer.alert_dialog.AlertDialogFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.suggestions.SuggestionsActivity;
@@ -182,6 +178,8 @@ public class UserProfileActivity extends BaseActivity {
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
         ParcelFileDescriptor parcelFileDescriptor =
                 getContentResolver().openFileDescriptor(uri, "r");
+        if(parcelFileDescriptor == null)
+            return null;
         FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
         Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
         parcelFileDescriptor.close();

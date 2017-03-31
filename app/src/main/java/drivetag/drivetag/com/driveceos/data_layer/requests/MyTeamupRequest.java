@@ -10,8 +10,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import drivetag.drivetag.com.driveceos.data_layer.models.Teamup;
 import drivetag.drivetag.com.driveceos.data_layer.models.User;
@@ -20,13 +20,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
-import retrofit2.http.POST;
 
 /**
- * Created by sergeymelnik on 2017-03-24.
+ * Created by sergeymelnik
  */
 
 public class MyTeamupRequest extends ServerRequest {
@@ -139,7 +137,7 @@ public class MyTeamupRequest extends ServerRequest {
                             if (JsonObjectHelper.hasValueFromKey("time", jsonObject)) {
                                 long timeInMiliseconds = jsonObject.get("time").getAsLong();
 
-                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
                                 Calendar calendar = Calendar.getInstance();
                                 calendar.setTimeInMillis(timeInMiliseconds);
