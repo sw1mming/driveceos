@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.io.FileDescriptor;
 import java.io.IOException;
 
-import drivetag.drivetag.com.driveceos.BaseActivity;
+import drivetag.drivetag.com.driveceos.presentation_layer.BaseActivity;
 import drivetag.drivetag.com.driveceos.R;
 import drivetag.drivetag.com.driveceos.presentation_layer.adapters.UserProfileAdapter;
 import drivetag.drivetag.com.driveceos.presentation_layer.alert_dialog.AlertDialogFragment;

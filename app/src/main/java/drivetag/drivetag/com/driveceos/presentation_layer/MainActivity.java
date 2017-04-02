@@ -1,40 +1,10 @@
-package drivetag.drivetag.com.driveceos;
+package drivetag.drivetag.com.driveceos.presentation_layer;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
-import drivetag.drivetag.com.driveceos.data_layer.requests.CheckEmailTypeRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.EmployeeTitlesRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.FacebookLoginRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.ImageUploadRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.LoadCurrentUserRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.SuggestedIdentifierRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.VerifyRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.on_boarding.SignInRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.UpdateCoverPhotoRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.UpdateMyPageRequest;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
-import java.util.List;
-import drivetag.drivetag.com.driveceos.data_layer.models.User;
-import drivetag.drivetag.com.driveceos.data_layer.requests.MyTeamupRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.suggestions.LoadSuggestionsListRequest;
-import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.UserProfileActivity;
-
-import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkFacebook;
-import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkLinkedIn;
-import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkTwitter;
+import drivetag.drivetag.com.driveceos.R;
 
 /**
  * Created by yuriy on 3/22/17.

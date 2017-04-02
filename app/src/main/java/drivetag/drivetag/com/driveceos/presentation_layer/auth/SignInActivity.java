@@ -1,5 +1,6 @@
-package drivetag.drivetag.com.driveceos.presentation_layer.on_boarding;
+package drivetag.drivetag.com.driveceos.presentation_layer.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -7,11 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import drivetag.drivetag.com.driveceos.BaseActivity;
 import drivetag.drivetag.com.driveceos.R;
 import drivetag.drivetag.com.driveceos.business_layer.SignInFlow;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
+import drivetag.drivetag.com.driveceos.presentation_layer.BaseActivity;
+import drivetag.drivetag.com.driveceos.presentation_layer.MainActivity;
 
 
 /**
@@ -70,12 +73,12 @@ public class SignInActivity extends BaseActivity {
                 signInFlow.resumeWithComletionBlock(new SignInFlow.CompletionHandler() {
                     @Override
                     public void completionHandler(ServerRequest request) {
-                        System.out.println();
+                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
                     }
 
                     @Override
                     public void completionHandlerWithError(String error) {
-                        System.out.println();
+                        Toast.makeText(SignInActivity.this, error, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -84,8 +87,7 @@ public class SignInActivity extends BaseActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: show Sign Up screen;
-                System.out.println();
+                startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
             }
         });
 
@@ -94,8 +96,7 @@ public class SignInActivity extends BaseActivity {
         forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: show WebView;
-                System.out.println();
+                startActivity(new Intent(SignInActivity.this, ForgotPasswordActivity.class));
             }
         });
     }
@@ -104,24 +105,21 @@ public class SignInActivity extends BaseActivity {
         facebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: call Facebook flow;
-                System.out.println();
+                Toast.makeText(SignInActivity.this, "facebook api", Toast.LENGTH_SHORT).show();
             }
         });
 
         twitterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: call Twitter flow;
-                System.out.println();
+                Toast.makeText(SignInActivity.this, "twitter api", Toast.LENGTH_SHORT).show();
             }
         });
 
         linkedInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: call LinkedIn flow;
-                System.out.println();
+                Toast.makeText(SignInActivity.this, "linkedin api", Toast.LENGTH_SHORT).show();
             }
         });
     }
