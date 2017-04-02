@@ -10,5 +10,9 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

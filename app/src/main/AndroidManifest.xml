@@ -10,10 +10,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation_layer.MainActivity">
+        <activity
+            android:name=".presentation_layer.MainActivity"
+            android:label="@string/title_activity_main">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN"/> -->
@@ -22,11 +24,10 @@
         </activity>
         <activity
             android:name=".presentation_layer.auth.SignInActivity"
-            android:noHistory="true"
-            />
+            android:noHistory="true" />
         <activity
             android:name=".presentation_layer.auth.SignUpActivity"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".presentation_layer.user_profile.UserProfileActivity"
             android:screenOrientation="portrait" />
@@ -50,7 +51,7 @@
         </activity>
         <activity
             android:name=".presentation_layer.auth.ForgotPasswordActivity"
-            android:theme="@style/FullscreenTheme"/>
+            android:theme="@style/FullscreenTheme" />
     </application>
 
 </manifest>
