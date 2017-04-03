@@ -5,4 +5,12 @@
     <string name="saved_photos">Saved photos</string>
     <string name="delete_photo">Delete photo</string>
 
+    <string name="first_name">First Name</string>
+    <string name="mid_name">Mid Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="your_email">Your email</string>
+    <string name="password">password(combine 6 letters or numbers)</string>
+    <string name="first_mid_last_company">>FirstMidLast@company</string>
+    <string name="title">Title</string>
+
 </resources>

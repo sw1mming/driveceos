@@ -7,7 +7,9 @@
     <dimen name="action_bar_height">44dp</dimen>
     <dimen name="action_bar_button_width">50dp</dimen>
 
+    <dimen name="size_4">44dp</dimen>
     <dimen name="size_5">50dp</dimen>
+    <dimen name="size_10">140dp</dimen>
 
     <dimen name="inset_1">8dp</dimen>
     <dimen name="inset_2">15dp</dimen>
