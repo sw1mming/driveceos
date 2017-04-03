@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import drivetag.drivetag.com.driveceos.data_layer.requests.MdtRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.PublicPostToMeRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.SocialAutomaticTeammatesRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.TeamupRequestsToMeRequest;
 
-import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkFacebook;
+import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialAutomaticTeammatesRequest.SocialOption.SocialOptionLinkedIn;
 
 /**
  * Created by yuriy on 3/22/17.
@@ -20,6 +21,50 @@ public class MainActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        /**  SocialAutomaticTeammatesRequest  */
+//        SocialAutomaticTeammatesRequest socialAutomaticTeammatesRequest = new SocialAutomaticTeammatesRequest(SocialOptionLinkedIn,true);
+//        socialAutomaticTeammatesRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
+
+        /**  TeamupRequestsToMeRequest  */
+//        TeamupRequestsToMeRequest teamupRequestsToMeRequest = new TeamupRequestsToMeRequest(true);
+//        teamupRequestsToMeRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
+
+
+        /**  PublicPostToMeRequest  */
+//        PublicPostToMeRequest publicPostToMeRequest = new PublicPostToMeRequest(true);
+//        publicPostToMeRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
 
 
         /**  MdtRequest  */
