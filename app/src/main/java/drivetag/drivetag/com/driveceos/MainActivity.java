@@ -1,40 +1,14 @@
 package drivetag.drivetag.com.driveceos;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
-import drivetag.drivetag.com.driveceos.data_layer.requests.CheckEmailTypeRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.EmployeeTitlesRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.FacebookLoginRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.ImageUploadRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.LoadCurrentUserRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.MdtRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.SuggestedIdentifierRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.VerifyRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.on_boarding.SignInRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.UpdateCoverPhotoRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.UpdateMyPageRequest;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
-import java.util.List;
-import drivetag.drivetag.com.driveceos.data_layer.models.User;
-import drivetag.drivetag.com.driveceos.data_layer.requests.MyTeamupRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.suggestions.LoadSuggestionsListRequest;
-import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.UserProfileActivity;
 
 import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkFacebook;
-import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkLinkedIn;
-import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkTwitter;
 
 /**
  * Created by yuriy on 3/22/17.
@@ -46,6 +20,53 @@ public class MainActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        /**  MdtRequest  */
+//        MdtRequest mdtRequest = new MdtRequest("driven_leaders", "all", 0);
+//        mdtRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
+
+
+
+        /**  TwitterLoginRequest  */
+//        TwitterLoginRequest twitterLoginRequest = new TwitterLoginRequest("EAAUmQyOW8JMBAHi13J33hOqZBkUpPtHBHXVgb0TgNqGBFGZByRDzuiqpvJiZAez2Q0ZBtgXgx8v52vlwtDTyj377ZC7iTxZAQXOq2XtHazpGf8QJMsgCP7uB9qZBDFJSMZAbvZCoGkloZAr6RK7yxxqT4wpdOHijQRsWhxAxshICk54mxCBQiIoYFhyEH70sfKS2iv7HmpjICl2Km7OPRYaZAIeyfmGAHJr0vMZD", "869147083162811", "dsvwv");
+//        twitterLoginRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
+
+
+        /**  MergeAccountsRequest  */
+//        MergeAccountsRequest mergeAccountsRequest = new MergeAccountsRequest();
+//        mergeAccountsRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//                System.out.println();
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//                System.out.println();
+//            }
+//        });
+
 
         /**  SocialNetworkEnableRequest  */
 //        SocialNetworkEnableRequest socialNetworkEnableRequest = new SocialNetworkEnableRequest(SocialNetworkFacebook);
@@ -63,7 +84,7 @@ public class MainActivity extends Activity {
 
 
 
-        /**  LoadCurrentUserRequest  */
+        /**  FacebookLoginRequest  */
 //        FacebookLoginRequest facebookLoginRequest = new FacebookLoginRequest("EAAUmQyOW8JMBAHi13J33hOqZBkUpPtHBHXVgb0TgNqGBFGZByRDzuiqpvJiZAez2Q0ZBtgXgx8v52vlwtDTyj377ZC7iTxZAQXOq2XtHazpGf8QJMsgCP7uB9qZBDFJSMZAbvZCoGkloZAr6RK7yxxqT4wpdOHijQRsWhxAxshICk54mxCBQiIoYFhyEH70sfKS2iv7HmpjICl2Km7OPRYaZAIeyfmGAHJr0vMZD", "869147083162811");
 //        facebookLoginRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
 //            @Override
