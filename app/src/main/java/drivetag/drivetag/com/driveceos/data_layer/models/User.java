@@ -13,7 +13,7 @@ import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
  */
 
 public class User {
-
+    public static final String EmailTypePersonal = "personal";
     public String tagId;
 
     public Number driveID;
@@ -151,7 +151,7 @@ public class User {
 
         if (JsonObjectHelper.hasValueFromKey("cover", jsonObject)) {
             try {
-                coverUrl = new URL(jsonObject.getAsJsonObject("cover").getAsString());
+                coverUrl = new URL(jsonObject.get("cover").getAsString());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }

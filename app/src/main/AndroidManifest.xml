@@ -29,6 +29,10 @@
             android:name=".presentation_layer.auth.SignUpActivity"
             android:noHistory="true" />
         <activity
+            android:name=".presentation_layer.on_boarding.SignUpActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".presentation_layer.user_profile.UserProfileActivity"
             android:screenOrientation="portrait" />
         <activity
