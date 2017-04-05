@@ -16,13 +16,13 @@ import retrofit2.http.POST;
  * Created by yuriy on 3/30/17.
  */
 
-public class MergeAccountsRequest extends ServerRequest {
+public class MergeAccountsRequest extends ServerRequest<User> {
 
-    private String dtToken;
-    private String userId;
-    private String accessToken;
-    private String provider;
-    private String twitterSecret;
+    public String dtToken;
+    public String userId;
+    public String accessToken;
+    public String provider;
+    public String twitterSecret;
     private MergeAccountsRequestApi service;
 
     /**

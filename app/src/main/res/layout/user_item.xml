@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/user_avatar_image_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/drive_enabled_icon"/>
+
+        <TextView
+            android:id="@+id/user_name_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/user_avatar_image_view"
+            android:layout_toLeftOf="@+id/user_avatar_image_view"
+            android:layout_toRightOf="@+id/user_avatar_image_view"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Some text"/>
+
+        <TextView
+            android:id="@+id/position_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/user_avatar_image_view"
+            android:layout_toLeftOf="@+id/user_avatar_image_view"
+            android:layout_toRightOf="@+id/user_avatar_image_view"
+            android:layout_alignTop="@+id/user_name_text_view"
+            android:layout_marginTop="28dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Some position text"
+            />
+        
+        <ImageView
+            android:id="@+id/drive_icon_image_view"
+            android:layout_width="15dp"
+            android:layout_height="17dp"
+            android:src="@drawable/drive_enabled_icon"
+            android:layout_toEndOf="@id/user_name_text_view"
+            android:layout_toLeftOf="@+id/user_name_text_view"
+            android:layout_toRightOf="@+id/user_name_text_view"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="22dp"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/separator_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/action_bar_text_color" />
+</LinearLayout>

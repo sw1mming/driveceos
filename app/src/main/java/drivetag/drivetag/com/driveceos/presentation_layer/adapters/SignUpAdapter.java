@@ -19,13 +19,13 @@ public class SignUpAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-        System.out.println();
         return position;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return rows.get(viewType).onCreateViewHolder(parent, viewType);
+        TableRow row = rows.get(viewType);
+        return row.onCreateViewHolder(parent, viewType);
     }
 
     @Override

@@ -9,12 +9,15 @@ import android.view.ViewGroup;
 
 public class TableRow {
 
+    public SelectionHandler selectionHandler;
+
     public String title;
 
     public String placeholder;
 
     public Boolean textFieldEnabled;
 
+    public String socialImageName;
 
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return null;
@@ -24,7 +27,7 @@ public class TableRow {
 
     }
 
-    public interface TableRowHandler {
+    public interface SelectionHandler {
         void didSelectRow();
     }
 }

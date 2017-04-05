@@ -1,61 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
     package="drivetag.drivetag.com.driveceos">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".business_layer.AppScope"
         android:allowBackup="true"
-        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".presentation_layer.MainActivity"
-            android:label="@string/app_name">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
+
         <activity
-            android:name=".presentation_layer.auth.SignInActivity"
-            android:noHistory="true" />
-        <activity
-            android:name=".presentation_layer.auth.SignUpActivity"
-            android:noHistory="true" />
+            android:name=".presentation_layer.on_boarding.SignInActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".presentation_layer.on_boarding.SignUpActivity"
             android:screenOrientation="portrait"/>
 
         <activity
             android:name=".presentation_layer.user_profile.UserProfileActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".presentation_layer.user_profile.suggestions.SuggestionsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".presentation_layer.SplashActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:noHistory="true"
-            android:theme="@style/FullscreenTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="drivetag.drivetag.com.driveceos.presentation_layer.BaseActivity" />
+            android:screenOrientation="portrait"/>
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
-            android:name=".presentation_layer.auth.ForgotPasswordActivity"
-            android:theme="@style/FullscreenTheme" />
+            android:name=".presentation_layer.more.MoreActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/check_mark_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+
+        <TextView
+            android:id="@+id/title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:text="Allow public"/>
+
+        <ImageView
+            android:id="@+id/check_mark_image_view"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:visibility="invisible"
+            android:src="@drawable/checkmark"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/separator_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/action_bar_text_color" />
+
+</LinearLayout>

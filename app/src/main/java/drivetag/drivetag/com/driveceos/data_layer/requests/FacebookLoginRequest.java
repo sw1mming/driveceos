@@ -19,9 +19,9 @@ import retrofit2.http.POST;
 
 public class FacebookLoginRequest extends ServerRequest {
 
-    private String facebookAccessToken;
-    private String accessToken;
-    private String facebookID;
+    public String facebookAccessToken;
+    public String accessToken;
+    public String facebookID;
     private FacebookLoginApi service;
 
     /**
