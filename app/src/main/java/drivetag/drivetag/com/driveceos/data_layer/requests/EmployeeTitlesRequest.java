@@ -20,7 +20,7 @@ import retrofit2.http.QueryMap;
  * Created by yuriy on 3/28/17.
  */
 
-public class EmployeeTitlesRequest extends ServerRequest {
+public class EmployeeTitlesRequest extends ServerRequest<List<String>> {
 
     private String email;
     private EmployeeTitlesApi service;
@@ -53,7 +53,7 @@ public class EmployeeTitlesRequest extends ServerRequest {
 
                 JsonElement jsonElement = handleSuccessResponse(response);
 
-                if (jsonElement.isJsonArray()) {
+                if (jsonElement != null && jsonElement.isJsonArray()) {
                     serverResponse = parseResponse(jsonElement.getAsJsonArray());
                 }
 

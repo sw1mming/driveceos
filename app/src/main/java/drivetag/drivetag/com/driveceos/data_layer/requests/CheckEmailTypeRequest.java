@@ -2,10 +2,8 @@ package drivetag.drivetag.com.driveceos.data_layer.requests;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,8 +18,10 @@ import retrofit2.http.QueryMap;
 
 public class CheckEmailTypeRequest extends ServerRequest {
 
+    public String emailType;
+
     private String email;
-    private String emailType;
+
     private CheckEmailTypeApi service;
 
     /**

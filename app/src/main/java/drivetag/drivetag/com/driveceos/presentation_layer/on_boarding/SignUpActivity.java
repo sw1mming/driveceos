@@ -10,23 +10,32 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileDescriptor;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import drivetag.drivetag.com.driveceos.BaseActivity;
 import drivetag.drivetag.com.driveceos.R;
+import drivetag.drivetag.com.driveceos.business_layer.LoginFlow;
+import drivetag.drivetag.com.driveceos.business_layer.SignUpFlow;
+import drivetag.drivetag.com.driveceos.data_layer.models.User;
 import drivetag.drivetag.com.driveceos.presentation_layer.adapters.SignUpAdapter;
-import drivetag.drivetag.com.driveceos.presentation_layer.adapters.UserProfileAdapter;
 import drivetag.drivetag.com.driveceos.presentation_layer.alert_dialog.AlertDialogFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.EditTextRow;
+import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.PickerRow;
 import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.SignUpFooterRow;
 import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.SignUpHeaderRow;
 import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.TableRow;
-import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.UserProfileActivity;
-import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.suggestions.SuggestionsActivity;
+import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.VerificationRow;
+import drivetag.drivetag.com.driveceos.presentation_layer.picker_fragment.PickerFragment;
 
 /**
  * Created by artem on 3/24/17.
@@ -36,13 +45,39 @@ public class SignUpActivity extends BaseActivity {
 
     private List<TableRow> rows;
 
-    private final int REQUEST_IMAGE_GALLERY = 0;
+    private static final int REQUEST_IMAGE_GALLERY = 0;
 
-    private final int REQUEST_CAMERA = 1;
+    private static final int REQUEST_CAMERA = 1;
 
-    SignUpHeaderRow headerRow;
+    private static final int TITLES_ROW_INDEX = 7;
 
-    SignUpAdapter adapter;
+    private static final int VERIFICATION_CODE_ROW_INDEX = 5;
+
+    private SignUpHeaderRow headerRow;
+
+    private PickerRow driveTagRow;
+
+    private EditTextRow emailRow;
+
+    private PickerRow titlesRow;
+
+    private EditTextRow passwordRow;
+
+    private VerificationRow verificationRow;
+
+    private SignUpAdapter adapter;
+
+    private SignUpFlow signUpFlow;
+
+    private User user;
+
+    private LinearLayout pickerContainer;
+
+    private PickerFragment pickerFragment;
+
+//    private List<String> freeDriveTags;
+
+//    private List<String> titles;
 
 
     @Override
@@ -50,8 +85,12 @@ public class SignUpActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        signUpFlow = new SignUpFlow(new User());
+        user = signUpFlow.user;
+
         setupRows();
         setupRecyclerView();
+        setupPickerFragmentContainer();
     }
 
     private void setupRecyclerView() {
@@ -67,18 +106,21 @@ public class SignUpActivity extends BaseActivity {
     private void setupRows() {
         rows = new ArrayList<>();
 
+        driveTagRow = setupDriveTagRow(null);
+        verificationRow = setupVerificationRow();
+        titlesRow = setupEmployeeTitlesRow();
+
         rows.add(setupHeaderRow());
         rows.add(setupFirstNameRow());
         rows.add(setupMidNameRow());
         rows.add(setupLastNameRow());
         rows.add(setupEmailRow());
-        rows.add(setupDriveTagRow());
+        rows.add(driveTagRow);
         rows.add(setupPasswordRow());
         rows.add(setupSignUpFooterRow());
     }
 
     private SignUpHeaderRow setupHeaderRow() {
-
         headerRow = new SignUpHeaderRow();
         headerRow.title = "Upload/Take Profile pic";
         headerRow.handler = new TableRow.TableRowHandler() {
@@ -95,10 +137,11 @@ public class SignUpActivity extends BaseActivity {
         EditTextRow row = new EditTextRow();
         row.placeholder = "First Name";
 
-        row.handler = new EditTextRow.EditTextRowHandler() {
+        row.didEnterTextHandler = new EditTextRow.EditTextRowHandler() {
             @Override
             public void didEnterText(String text) {
-                System.out.println();
+                user.firstName = text;
+                loadAvailableDriveTags();
             }
         };
 
@@ -109,10 +152,10 @@ public class SignUpActivity extends BaseActivity {
         EditTextRow row = new EditTextRow();
         row.placeholder = "Mid Name";
 
-        row.handler = new EditTextRow.EditTextRowHandler() {
+        row.didEnterTextHandler = new EditTextRow.EditTextRowHandler() {
             @Override
             public void didEnterText(String text) {
-                System.out.println();
+                user.middleName = text;
             }
         };
 
@@ -123,9 +166,11 @@ public class SignUpActivity extends BaseActivity {
         EditTextRow row = new EditTextRow();
         row.placeholder = "Last Name";
 
-        row.handler = new EditTextRow.EditTextRowHandler() {
+        row.didEnterTextHandler = new EditTextRow.EditTextRowHandler() {
             @Override
             public void didEnterText(String text) {
+                user.lastName = text;
+                loadAvailableDriveTags();
                 System.out.println();
             }
         };
@@ -133,28 +178,52 @@ public class SignUpActivity extends BaseActivity {
         return row;
     }
 
-    private EditTextRow setupDriveTagRow() {
-        EditTextRow row = new EditTextRow();
+    private PickerRow setupDriveTagRow(final List<String> freeDriveTags) {
+        PickerRow row = new PickerRow();
         row.placeholder = ">FirstMidLast@company";
 
-        row.handler = new EditTextRow.EditTextRowHandler() {
+        if (freeDriveTags != null) {
+            row.textFieldEnabled = freeDriveTags.size() > 0;
+        } else {
+            row.textFieldEnabled = false;
+        }
+
+        row.didEnterTextHandler = new EditTextRow.EditTextRowHandler() {
             @Override
             public void didEnterText(String text) {
-                System.out.println();
+                user.driveTag = text;
+            }
+        };
+
+        row.didSelectRowHandler = new TableRow.TableRowHandler() {
+            @Override
+            public void didSelectRow() {
+                if (freeDriveTags != null && freeDriveTags.size() > 0) {
+                    showPickerWithContentArray(freeDriveTags);
+                }
             }
         };
 
         return row;
     }
 
-    private EditTextRow setupEmployeeTitlesRow() {
-        EditTextRow row = new EditTextRow();
+    private PickerRow setupEmployeeTitlesRow() {
+        PickerRow row = new PickerRow();
         row.placeholder = "Title";
 
-        row.handler = new EditTextRow.EditTextRowHandler() {
+        row.didEnterTextHandler = new EditTextRow.EditTextRowHandler() {
             @Override
             public void didEnterText(String text) {
                 System.out.println();
+            }
+        };
+
+        row.didSelectRowHandler = new TableRow.TableRowHandler() {
+            @Override
+            public void didSelectRow() {
+                if (titlesRow.pickerTitles != null && titlesRow.pickerTitles.size() > 0) {
+                    showPickerWithContentArray(titlesRow.pickerTitles);
+                }
             }
         };
 
@@ -165,9 +234,10 @@ public class SignUpActivity extends BaseActivity {
         EditTextRow row = new EditTextRow();
         row.placeholder = "password(combine 6 letters or numbers)";
 
-        row.handler = new EditTextRow.EditTextRowHandler() {
+        row.didEnterTextHandler = new EditTextRow.EditTextRowHandler() {
             @Override
             public void didEnterText(String text) {
+                user.password = text;
                 System.out.println();
             }
         };
@@ -175,14 +245,21 @@ public class SignUpActivity extends BaseActivity {
         return row;
     }
 
-    private EditTextRow setupVerificationRow() {
-        EditTextRow row = new EditTextRow();
+    private VerificationRow setupVerificationRow() {
+        VerificationRow row = new VerificationRow();
         row.placeholder = "enter verification code";
 
-        row.handler = new EditTextRow.EditTextRowHandler() {
+        row.didEnterTextHandler = new EditTextRow.EditTextRowHandler() {
             @Override
             public void didEnterText(String text) {
-                System.out.println();
+                user.verification = text;
+            }
+        };
+
+        row.verificationResendButtonHandler = new VerificationRow.VerificationResendButtonHandler() {
+            @Override
+            public void didSelectResendButton() {
+                sendVerifyCodeToEmail(user.email);
             }
         };
 
@@ -193,14 +270,94 @@ public class SignUpActivity extends BaseActivity {
         EditTextRow row = new EditTextRow();
         row.placeholder = "Your email";
 
-        row.handler = new EditTextRow.EditTextRowHandler() {
+        row.didEnterTextHandler = new EditTextRow.EditTextRowHandler() {
             @Override
             public void didEnterText(String text) {
+                user.email = text;
+                loadAvailableDriveTags();
                 System.out.println();
             }
         };
 
+        row.didEndChangingHandler = new EditTextRow.EditTextRowDidEndChangingHandler() {
+            @Override
+            public void didEndChangingTextView() {
+                if (signUpFlow.isEmailValidationSentAutomaticaly == null || !signUpFlow.isEmailValidationSentAutomaticaly) {
+                    sendVerifyCodeToEmail(user.email);
+                }
+            }
+        };
+
         return row;
+    }
+
+    private void sendVerifyCodeToEmail(final String email) {
+        if (Email_Validate(email)) {
+            signUpFlow.isEmailValidationSentAutomaticaly = true;
+
+            // show activity indicator
+            signUpFlow.verifyEmail(email, new SignUpFlow.CompletionErrorHandler() {
+                @Override
+                public void completionHandlerWithError(final String error) {
+                    if (!rows.contains(verificationRow)) {
+                        rows.add(VERIFICATION_CODE_ROW_INDEX, verificationRow);
+                        adapter.notifyItemInserted(VERIFICATION_CODE_ROW_INDEX);
+                    }
+
+                    loadTitlesForEmail(email, new EmptyCompletionHandler() {
+                        @Override
+                        public void completionHandler() {
+                            // hide activity indicator
+                            if (error != null) {
+                                //showDefaultAlertWithViewController
+                            }
+                        }
+                    });
+                }
+            });
+        } else {
+            //        [UIAlertController showAlertWithMessage: NSLocalizedString(@"Email is not valid", nil) viewController: self];
+        }
+    }
+
+
+    private void loadTitlesForEmail(final String email, final EmptyCompletionHandler handler) {
+        signUpFlow.isPersonalEmail(email, new LoginFlow.CompletionHandler<Boolean>() {
+            @Override
+            public void completionHandler(Boolean completionObject, String error) {
+                Boolean isPersonal = completionObject;
+
+                if (isPersonal) {
+                    if (rows.contains(titlesRow)) {
+                        rows.remove(titlesRow);
+                        adapter.notifyItemRemoved(TITLES_ROW_INDEX);
+                    }
+
+                    if (handler != null) {
+                        handler.completionHandler();
+                    }
+                } else {
+                    signUpFlow.employeeTitlesForEmail(email, new LoginFlow.CompletionHandler<List<String>>() {
+                        @Override
+                        public void completionHandler(List<String> completionObject, String error) {
+                            if (!rows.contains(titlesRow)) {
+                                rows.add(TITLES_ROW_INDEX, titlesRow);
+                                adapter.notifyItemInserted(TITLES_ROW_INDEX);
+                            }
+
+                            if (completionObject != null) {
+                                titlesRow.pickerTitles = completionObject;
+                                titlesRow.textFieldEnabled = completionObject.size() > 0;
+                            }
+                        }
+                    });
+
+                    if (handler != null) {
+                        handler.completionHandler();
+                    }
+                }
+            }
+        });
     }
 
     private SignUpFooterRow setupSignUpFooterRow() {
@@ -210,6 +367,29 @@ public class SignUpActivity extends BaseActivity {
             @Override
             public void didSelectSignUpButton() {
 
+                if (user.firstName == null ||
+                    user.lastName == null ||
+                    user.email == null ||
+                    user.driveTag == null ||
+                    user.password == null ||
+                    user.verification == null) {
+
+                    //show alert with error
+                    return;
+                }
+
+                signUpFlow.resumeWithCompletionHandler(new LoginFlow.CompletionHandler<User>() {
+                    @Override
+                    public void completionHandler(User completionObject, String error) {
+                        User signedUpUser = completionObject;
+
+                        if (signedUpUser == null || error != null) {
+                            //show alert with error
+                        } else {
+                            // show alert with text "You successfully climed account."
+                        }
+                    }
+                });
             }
 
             @Override
@@ -219,6 +399,28 @@ public class SignUpActivity extends BaseActivity {
         };
 
         return row;
+    }
+
+    private void setupPickerFragmentContainer() {
+        pickerContainer = (LinearLayout) findViewById(R.id.picker_container);
+    }
+
+    private void showPickerWithContentArray(final List<String> contentArray) {
+        pickerFragment = (PickerFragment) getFragmentManager().findFragmentById(R.id.picker_fragment);
+        pickerFragment.handler = new PickerFragment.PickerFragmentHandler() {
+            @Override
+            public void didSelectItemString(String itemString) {
+                driveTagRow.title = itemString;
+                adapter.notifyDataSetChanged();
+            }
+        };
+
+        pickerContainer.setVisibility(View.VISIBLE);
+        pickerFragment.setContentArray(contentArray);
+    }
+
+    private void hidePicker() {
+        pickerContainer.setVisibility(View.INVISIBLE);
     }
 
     private void showAlertDialog() {
@@ -245,6 +447,37 @@ public class SignUpActivity extends BaseActivity {
         alertDialogFragment.show(SignUpActivity.this.getFragmentManager(), "");
     }
 
+    private void loadAvailableDriveTags() {
+        if (user.firstName == null || user.lastName == null || user.email == null) {
+            return;
+        }
+
+        if (user.firstName.length() < 1 ||
+            user.lastName.length() < 1 ||
+            !Email_Validate(user.email)) {
+            System.out.println();
+            return;
+        }
+
+        signUpFlow.freeDriveTagsForEmail(user.email, user.firstName, user.lastName, new LoginFlow.CompletionHandler<List<String>>() {
+            @Override
+            public void completionHandler(List<String> completionObject, String error) {
+//                if (error == null) { есть текст undefine error/
+                if (completionObject.size() > 0) {
+                    driveTagRow.pickerTitles = completionObject;
+                    driveTagRow.textFieldEnabled = true;
+                    adapter.notifyDataSetChanged();
+                }
+//                }
+            }
+        });
+    }
+
+    private boolean Email_Validate(String email)
+    {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -252,6 +485,18 @@ public class SignUpActivity extends BaseActivity {
         if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
+//            persistImage(bitmap, "123");
+
+            try {
+                File file = new File("path");
+                OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
+                os.close();
+                System.out.println();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             headerRow.userImageBitmap = bitmap;
             adapter.notifyDataSetChanged();
         } else if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK) {
@@ -259,6 +504,17 @@ public class SignUpActivity extends BaseActivity {
 
             try {
                 Bitmap bitmap = getBitmapFromUri(uri);
+//                File f = bitmap.compress(Bitmap.CompressFormat.PNG, 100, null);
+
+
+                File file = new File("path");
+                OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
+                os.close();
+                System.out.println();
+
+
+
                 headerRow.userImageBitmap = bitmap;
                 adapter.notifyDataSetChanged();
             } catch (IOException e) {
@@ -296,5 +552,9 @@ public class SignUpActivity extends BaseActivity {
     private void deletePhoto() {
         headerRow.userImageBitmap = null;
         adapter.notifyDataSetChanged();
+    }
+
+    private interface EmptyCompletionHandler {
+        void completionHandler();
     }
 }

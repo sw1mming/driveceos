@@ -18,7 +18,12 @@ public class EditTextRow extends TableRow {
 
     public String enteredText;
 
-    public EditTextRowHandler handler;
+    public EditTextRowHandler didEnterTextHandler;
+
+    public EditTextRowDidEndChangingHandler didEndChangingHandler;
+
+    public TableRowHandler didSelectRowHandler;
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,32 +37,66 @@ public class EditTextRow extends TableRow {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         EditTextViewHolder editTextViewHolder = (EditTextViewHolder)holder;
 
+        if (textFieldEnabled != null) {
+            editTextViewHolder.editText.setFocusable(false);
+        }
+
         editTextViewHolder.editText.setHint(placeholder);
+
+        if (title != null) {
+            editTextViewHolder.editText.setText(title);
+        }
+
+        editTextViewHolder.editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println();
+            }
+        });
+
+        editTextViewHolder.editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus) {
+                    if (didEndChangingHandler != null) {
+                        didEndChangingHandler.didEndChangingTextView();
+                    }
+                }
+            }
+        });
 
         editTextViewHolder.editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                System.out.println();
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 enteredText = s.toString();
 
-                if (handler != null) {
-                    handler.didEnterText(enteredText);
+                if (didEnterTextHandler != null) {
+                    didEnterTextHandler.didEnterText(enteredText);
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                System.out.println();
+            }
+        });
 
+        editTextViewHolder.editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (didSelectRowHandler != null) {
+                    didSelectRowHandler.didSelectRow();
+                }
             }
         });
     }
 
     /**
-     * ViewHolder class for "cover_photo_item" layout.
+     * ViewHolder class for "edit_text_item" layout.
      */
     private static class EditTextViewHolder extends RecyclerView.ViewHolder {
         private EditText editText;
@@ -71,5 +110,9 @@ public class EditTextRow extends TableRow {
 
     public interface EditTextRowHandler {
         void didEnterText(String text);
+    }
+
+    public interface EditTextRowDidEndChangingHandler {
+        void didEndChangingTextView();
     }
 }

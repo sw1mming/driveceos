@@ -14,6 +14,9 @@ import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 
 public class User {
     public static final String EmailTypePersonal = "personal";
+
+    public static final String EmailTypeWork = "work";
+
     public String tagId;
 
     public Number driveID;
@@ -80,6 +83,9 @@ public class User {
 
     public Boolean isEmployee;
 
+    public User() {
+
+    }
 
     public User(JsonObject jsonObject) {
 

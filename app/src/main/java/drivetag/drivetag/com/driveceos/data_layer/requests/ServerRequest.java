@@ -1,21 +1,16 @@
 package drivetag.drivetag.com.driveceos.data_layer.requests;
 
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
-import java.io.IOException;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
-import java.util.concurrent.TimeUnit;
-
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 import okhttp3.OkHttpClient;
-import okhttp3.internal.JavaNetCookieJar;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * Created by yuriy on 3/22/17.
@@ -44,22 +39,21 @@ public abstract class ServerRequest<T> {
     protected Retrofit getRetrofit() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        CookieManager cookieManager = new CookieManager();
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                .cookieJar(new JavaNetCookieJar(cookieManager))
                 .addInterceptor(interceptor)
                 .build();
 
-
-        return new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(HOST)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
+        return retrofit;
     }
 
     public void setupService() {
