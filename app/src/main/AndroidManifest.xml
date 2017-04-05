@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".business_layer.AppScope"
+        android:name=".DTApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".presentation_layer.MainActivity"/>
+
+        <activity
+            android:name=".presentation_layer.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -21,11 +25,15 @@
         </activity>
 
         <activity
+            android:name=".presentation_layer.on_boarding.SignUpActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".presentation_layer.on_boarding.SignInActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".presentation_layer.on_boarding.SignUpActivity"
+            android:name=".presentation_layer.on_boarding.ForgotPasswordActivity"
             android:screenOrientation="portrait"/>
 
         <activity

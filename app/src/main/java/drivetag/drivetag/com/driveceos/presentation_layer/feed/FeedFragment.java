@@ -34,5 +34,6 @@ public class FeedFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final String userId = getArguments().getString("userId");
         Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
+
     }
 }

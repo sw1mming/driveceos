@@ -1,10 +1,6 @@
 package drivetag.drivetag.com.driveceos.business_layer;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-
-import drivetag.drivetag.com.driveceos.data_layer.UserStorage;
+import drivetag.drivetag.com.driveceos.DTApplication;
 import drivetag.drivetag.com.driveceos.data_layer.models.User;
 import drivetag.drivetag.com.driveceos.data_layer.requests.FacebookLoginRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.MergeAccountsRequest;
@@ -30,8 +26,8 @@ public class FacebookSignInFlow extends LoginFlow {
 
     /** Interface. */
 
-    public FacebookSignInFlow(Context context, UserStorage userStorage) {
-        super(userStorage, context);
+    public FacebookSignInFlow(DTApplication context) {
+        super(context);
     }
 
     public void resumeWithCompletionHandler(final FacebookSignInFlow.FlowCompletionHandler handler) {
@@ -131,22 +127,22 @@ public class FacebookSignInFlow extends LoginFlow {
             return;
         }
 
-        socialNetworkEnableRequestWithCompletionHandler(user, new CompletionHandler() {
-            @Override
-            public void completionHandler(User user, String error) {
-                if (error != null) {
-                    finishFLowWithUser(user, error);
-                } else {
-                    loadUserWithCompletionHandler(new CompletionHandler() {
-                        @Override
-                        public void completionHandler(User user, String error) {
-                            saveUser(user);
-                            finishFLowWithUser(user, error);
-                        }
-                    });
-                }
-            }
-        });
+//        socialNetworkEnableRequestWithCompletionHandler(user, new CompletionHandler() {
+//            @Override
+//            public void completionHandler(User user, String error) {
+//                if (error != null) {
+//                    finishFLowWithUser(user, error);
+//                } else {
+//                    loadUserWithCompletionHandler(new CompletionHandler() {
+//                        @Override
+//                        public void completionHandler(User user, String error) {
+//                            saveUser(user);
+//                            finishFLowWithUser(user, error);
+//                        }
+//                    });
+//                }
+//            }
+//        });
 
     }
 

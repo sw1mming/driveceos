@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 public class TableRow {
 
-    public SelectionHandler selectionHandler;
+    public TableRowHandler selectionHandler;
 
     public String title;
 
@@ -27,7 +27,7 @@ public class TableRow {
 
     }
 
-    public interface SelectionHandler {
+    public interface TableRowHandler {
         void didSelectRow();
     }
 }

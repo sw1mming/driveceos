@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import drivetag.drivetag.com.driveceos.R;
-import drivetag.drivetag.com.driveceos.presentation_layer.auth.SignInActivity;
+import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.SignInActivity;
 
 public class SplashActivity extends AppCompatActivity {
     @Override

@@ -2,6 +2,7 @@ package drivetag.drivetag.com.driveceos.business_layer;
 
 import android.content.Context;
 
+import drivetag.drivetag.com.driveceos.DTApplication;
 import drivetag.drivetag.com.driveceos.data_layer.UserStorage;
 import drivetag.drivetag.com.driveceos.data_layer.models.User;
 import drivetag.drivetag.com.driveceos.data_layer.requests.LoadCurrentUserRequest;
@@ -13,7 +14,7 @@ import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 
 public class LoginFlow {
 
-    public UserStorage userStorage;
+    UserStorage userStorage;
     public Context context;
 
     private LoadCurrentUserRequest loadCurrentUserRequest;
@@ -21,12 +22,12 @@ public class LoginFlow {
 
     /** Interface. */
 
-    public LoginFlow(UserStorage userStorage, Context context) {
+    LoginFlow(DTApplication dtApplication) {
         this.userStorage = userStorage;
         this.context = context;
     }
 
-    public void loadUserWithCompletionHandler(final CompletionHandler handler) {
+    void loadUserWithCompletionHandler(final CompletionHandler<User> handler) {
         loadCurrentUserRequest = new LoadCurrentUserRequest();
         loadCurrentUserRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler<User>() {
             @Override
@@ -50,8 +51,8 @@ public class LoginFlow {
         });
     }
 
-    public interface CompletionHandler {
-        void completionHandler(User user, String error);
+    public interface CompletionHandler<T> {
+        void completionHandler(T value, String error);
     }
 }
 

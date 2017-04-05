@@ -1,4 +1,4 @@
-package drivetag.drivetag.com.driveceos.business_layer;
+package drivetag.drivetag.com.driveceos;
 
 import android.app.Application;
 import drivetag.drivetag.com.driveceos.data_layer.UserStorage;
@@ -8,9 +8,9 @@ import drivetag.drivetag.com.driveceos.data_layer.UserStorage;
  * Created by yuriy on 4/4/17.
  */
 
-public class AppScope extends Application {
+public class DTApplication extends Application {
 
-    public UserStorage userStorage;
+    private UserStorage userStorage;
 
 //    private ColorManager colorManager;
 
@@ -18,7 +18,13 @@ public class AppScope extends Application {
     public void onCreate() {
         super.onCreate();
 
-        userStorage = new UserStorage(getApplicationContext());
 //        colorManager = new ColorManager(getApplicationContext());
+    }
+
+    public UserStorage getUserStorage() {
+        if(userStorage == null) {
+            userStorage = new UserStorage(this);
+        }
+        return userStorage;
     }
 }

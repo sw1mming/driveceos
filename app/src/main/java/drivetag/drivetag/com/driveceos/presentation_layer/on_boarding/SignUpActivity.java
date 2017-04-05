@@ -22,11 +22,12 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import drivetag.drivetag.com.driveceos.BaseActivity;
+import drivetag.drivetag.com.driveceos.DTApplication;
 import drivetag.drivetag.com.driveceos.R;
 import drivetag.drivetag.com.driveceos.business_layer.LoginFlow;
 import drivetag.drivetag.com.driveceos.business_layer.SignUpFlow;
 import drivetag.drivetag.com.driveceos.data_layer.models.User;
+import drivetag.drivetag.com.driveceos.presentation_layer.BaseActivity;
 import drivetag.drivetag.com.driveceos.presentation_layer.adapters.SignUpAdapter;
 import drivetag.drivetag.com.driveceos.presentation_layer.alert_dialog.AlertDialogFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.EditTextRow;
@@ -85,7 +86,7 @@ public class SignUpActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        signUpFlow = new SignUpFlow(new User());
+        signUpFlow = new SignUpFlow((DTApplication) getApplication());
         user = signUpFlow.user;
 
         setupRows();
@@ -123,12 +124,12 @@ public class SignUpActivity extends BaseActivity {
     private SignUpHeaderRow setupHeaderRow() {
         headerRow = new SignUpHeaderRow();
         headerRow.title = "Upload/Take Profile pic";
-        headerRow.selectionHandler = new TableRow.SelectionHandler() {
-            @Override
-            public void didSelectRow() {
-                showAlertDialog();
-            }
-        };
+//        headerRow.selectionHandler = new TableRow.SelectionHandler() {
+//            @Override
+//            public void didSelectRow() {
+//                showAlertDialog();
+//            }
+//        };
 
         return headerRow;
     }
@@ -485,6 +486,8 @@ public class SignUpActivity extends BaseActivity {
         if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
+            if(bitmap == null)
+                return;
 //            persistImage(bitmap, "123");
 
             try {

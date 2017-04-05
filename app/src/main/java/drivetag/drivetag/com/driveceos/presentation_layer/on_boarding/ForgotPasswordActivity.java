@@ -1,4 +1,4 @@
-package drivetag.drivetag.com.driveceos.presentation_layer.auth;
+package drivetag.drivetag.com.driveceos.presentation_layer.on_boarding;
 
 import android.app.Activity;
 import android.os.Bundle;

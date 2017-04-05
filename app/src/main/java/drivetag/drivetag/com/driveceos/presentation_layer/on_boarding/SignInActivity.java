@@ -1,4 +1,4 @@
-package drivetag.drivetag.com.driveceos.presentation_layer.auth;
+package drivetag.drivetag.com.driveceos.presentation_layer.on_boarding;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import drivetag.drivetag.com.driveceos.presentation_layer.MainActivity;
 
 
 /**
- * Created by artem on 3/24/17.
+ * Created by artem.
  */
 
 public class SignInActivity extends BaseActivity {

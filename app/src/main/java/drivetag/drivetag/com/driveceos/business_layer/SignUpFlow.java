@@ -1,9 +1,8 @@
 package drivetag.drivetag.com.driveceos.business_layer;
 
-import android.nfc.Tag;
-
 import java.util.List;
 
+import drivetag.drivetag.com.driveceos.DTApplication;
 import drivetag.drivetag.com.driveceos.data_layer.models.User;
 import drivetag.drivetag.com.driveceos.data_layer.requests.CheckEmailTypeRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.EmployeeTitlesRequest;
@@ -29,8 +28,9 @@ public class SignUpFlow extends LoginFlow {
     public String imagesUrlString;
 
 
-    public SignUpFlow(User user) {
-        this.user = user;
+    public SignUpFlow(DTApplication dtApplication) {
+        super(dtApplication);
+        this.user = dtApplication.getUserStorage().user();
     }
 
     public void isPersonalEmail(String email, final CompletionHandler<Boolean> handler) {
@@ -167,12 +167,12 @@ public class SignUpFlow extends LoginFlow {
                     user = ((SignUpRequest)request).user;
 //                    userStorage accessToken
 //
-                    loadUserWithConletionHandler(new CompletionHandler<User>() {
-                        @Override
-                        public void completionHandler(User completionObject, String error) {
-
-                        }
-                    });
+//                    loadUserWithConletionHandler(new CompletionHandler<User>() {
+//                        @Override
+//                        public void completionHandler(User completionObject, String error) {
+//
+//                        }
+//                    });
                 }
             }
 
