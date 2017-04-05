@@ -14,7 +14,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?android:actionBarSize">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -118,15 +120,11 @@
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content">
 
-                <ImageButton
+                <com.facebook.login.widget.LoginButton
                     android:id="@+id/facebook_image_button"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="30dp"
-                    android:scaleType="fitCenter"
-                    android:padding="0sp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/facebook_enabled_icon"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="0sp"/>
 
                 <ImageButton
                     android:id="@+id/twitter_image_button"

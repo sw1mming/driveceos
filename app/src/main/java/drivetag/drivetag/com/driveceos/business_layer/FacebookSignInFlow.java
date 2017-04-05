@@ -1,5 +1,8 @@
 package drivetag.drivetag.com.driveceos.business_layer;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+
 import drivetag.drivetag.com.driveceos.DTApplication;
 import drivetag.drivetag.com.driveceos.data_layer.models.User;
 import drivetag.drivetag.com.driveceos.data_layer.requests.FacebookLoginRequest;
@@ -10,7 +13,7 @@ import drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRe
 import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkFacebook;
 
 /**
- * Created by artem on 4/4/17.
+ * Created by artem.
  */
 
 public class FacebookSignInFlow extends LoginFlow {
@@ -32,13 +35,9 @@ public class FacebookSignInFlow extends LoginFlow {
 
     public void resumeWithCompletionHandler(final FacebookSignInFlow.FlowCompletionHandler handler) {
         if (userStorage.user != null && userStorage.user.facebookID != null) {
-            if (userStorage.user.facebookOn) {
-                userStorage.user.facebookOn = false;
-            } else {
-                userStorage.user.facebookOn = true;
-            }
+            userStorage.user.facebookOn = !userStorage.user.facebookOn;
 
-            handler.switchCompletionHandler(getFacebookSignInFlow(), userStorage.user);
+            handler.switchCompletionHandler(userStorage.user);
         } else {
             completionHandler = handler;
 
@@ -61,7 +60,7 @@ public class FacebookSignInFlow extends LoginFlow {
         mergeAccountsRequest.userId = ""; // todo: facebookUser.facebookID
         mergeAccountsRequest.accessToken = ""; // todo: [FacebookNetwork accessToken]
         mergeAccountsRequest.provider = "facebook";
-        mergeAccountsRequest.dtToken = ""; // todo: self.userStorage.accessToken
+        mergeAccountsRequest.dtToken = userStorage.accessToken;
 
         mergeAccountsRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler<User>() {
             @Override
@@ -123,8 +122,6 @@ public class FacebookSignInFlow extends LoginFlow {
     private void handleLoggedInUser(User user) {
         if (user == null) {
             finishFLowWithUser(null, "Something went wrong.");
-
-            return;
         }
 
 //        socialNetworkEnableRequestWithCompletionHandler(user, new CompletionHandler() {
@@ -146,7 +143,7 @@ public class FacebookSignInFlow extends LoginFlow {
 
     }
 
-    private void socialNetworkEnableRequestWithCompletionHandler (final User user, final CompletionHandler handler) {
+    private void socialNetworkEnableRequestWithCompletionHandler (final User user, final CompletionHandler<User> handler) {
         socialNetworkEnableRequest = new SocialNetworkEnableRequest(SocialNetworkFacebook);
         socialNetworkEnableRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
             @Override
@@ -182,35 +179,31 @@ public class FacebookSignInFlow extends LoginFlow {
             message = "You were successfully logged in to Facebook.";
         }
 
-//        new AlertDialog.Builder(context)
-//                .setTitle(title)
-//                .setMessage(message)
-//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        System.out.println();
-//                    }
-//                })
-//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // do nothing
-//                    }
-//                })
-//                .setIcon(android.R.drawable.ic_dialog_alert)
-//                .show();
+        new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        System.out.println();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
 
         if (completionHandler != null) {
-            completionHandler.completionHandler(getFacebookSignInFlow(), user, error);
+            completionHandler.completionHandler(user, error);
         }
     }
 
-    private FacebookSignInFlow getFacebookSignInFlow() {
-        return this;
-    }
-
-    public interface FlowCompletionHandler<T> {
-        void completionHandler(FacebookSignInFlow flow, User user, String error);
+    public interface FlowCompletionHandler {
+        void completionHandler(User user, String error);
         void completionHandlerWithError(String error);
-        void switchCompletionHandler(FacebookSignInFlow flow, User user);
+        void switchCompletionHandler(User user);
     }
 }
 
