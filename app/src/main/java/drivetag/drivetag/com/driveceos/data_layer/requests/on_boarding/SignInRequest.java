@@ -69,9 +69,6 @@ public class SignInRequest extends ServerRequest {
                         }
                     }
 
-
-
-
                 } else {
                     if (JsonObjectHelper.hasValueFromKey("dt_access_token", jsonObject)) {
                         accessToken = jsonObject.get("dt_access_token").getAsString();

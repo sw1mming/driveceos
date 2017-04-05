@@ -81,6 +81,9 @@ public class User {
     public Boolean isEmployee;
 
 
+    public User() {
+    }
+
     public User(JsonObject jsonObject) {
 
         JsonObject userTagDictionary = null;

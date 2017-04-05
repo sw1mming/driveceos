@@ -60,6 +60,7 @@ public class SuggectionsAdapter extends RecyclerView.Adapter<SuggectionsAdapter.
     /**
      * ViewHolder class for "suggestion_item" layout.
      */
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
 

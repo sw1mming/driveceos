@@ -2,7 +2,6 @@ package drivetag.drivetag.com.driveceos.data_layer.requests;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
