@@ -3,28 +3,22 @@ package drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 /**
- * Created by sergeymelnik on 2017-03-30.
+ * Created by sergeymelnik on 2017-04-05.
  */
 
-public class TableRow {
+public class PickerRow extends EditTextRow {
+    public List<String> pickerTitles;
 
-    public String title;
-
-    public String placeholder;
-
-    public Boolean textFieldEnabled;
-
-
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        return super.onCreateViewHolder(parent, viewType);
     }
 
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-    }
-
-    public interface TableRowHandler {
-        void didSelectRow();
+        super.onBindViewHolder(holder, position);
     }
 }

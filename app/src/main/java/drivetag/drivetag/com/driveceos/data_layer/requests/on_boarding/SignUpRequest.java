@@ -1,5 +1,7 @@
 package drivetag.drivetag.com.driveceos.data_layer.requests.on_boarding;
 
+import android.icu.text.SymbolTable;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -19,9 +21,11 @@ import retrofit2.http.POST;
 
 public class SignUpRequest extends ServerRequest {
 
-    User user;
+    public String imageUrlString;
 
-    String accessToket;
+    public User user;
+
+    private String accessToken;
 
     private SignUpApi service;
 
@@ -42,41 +46,46 @@ public class SignUpRequest extends ServerRequest {
         parameters.put("email", user.email);
         parameters.put("password", user.password);
         parameters.put("uniquifier", user.driveTag);
-        parameters.put("verification_code", user.verification);
-        parameters.put("avatar", user.avatarUrl.toString());
+//        parameters.put("verification_code", user.verification);
+//        parameters.put("avatar", user.avatarUrl.toString());
 
         Call<JsonElement> call = service.signUp(parameters);
 
         call.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                final JsonObject jsonObject = response.body().getAsJsonObject();
+                final JsonElement jsonElement = handleSuccessResponse(response);
 
-                if (!isSucceedResponse(jsonObject)) {
-                    isFailure = true;
+                if (jsonElement != null) {
+                    final JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-                    JsonArray errors = jsonObject.getAsJsonArray("fields_errors");
+                    if (jsonObject != null) {
+                        if (!isSucceedResponse(jsonObject)) {
+                            isFailure = true;
 
-                    if (errors != null && errors.size() > 0) {
-                        JsonElement errorInfos = errors.get(0);
+                            JsonArray errors = jsonObject.getAsJsonArray("fields_errors");
 
-                        if (errorInfos != null && errorInfos.isJsonArray()) {
-                            JsonArray errorInfo = errorInfos.getAsJsonArray();
+                            if (errors != null && errors.size() > 0) {
+                                JsonElement errorInfos = errors.get(0);
 
-                            if (errorInfo != null && errorInfo.size() > 1) {
-                                error = errorInfo.get(1).getAsString();
+                                if (errorInfos != null && errorInfos.isJsonArray()) {
+                                    JsonArray errorInfo = errorInfos.getAsJsonArray();
+
+                                    if (errorInfo != null && errorInfo.size() > 1) {
+                                        error = errorInfo.get(1).getAsString();
+                                    }
+                                }
                             }
+                        } else {
+                            accessToken = jsonObject.get("dt_access_token").getAsString();
+                            User loginUser = new User(null);
+                            /** TODO: User's init. */
+                            user = loginUser;
                         }
                     }
-                } else {
-                    accessToket = jsonObject.get("dt_access_token").getAsString();
-                    User loginUser = new User(null);
-                    /** TODO: User's init. */
-                    user = loginUser;
                 }
 
                 completionHandler.completionHandler(getSignUpRequest());
-
             }
 
             @Override

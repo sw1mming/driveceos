@@ -18,8 +18,10 @@ import retrofit2.http.QueryMap;
 
 public class CheckEmailTypeRequest extends ServerRequest {
 
+    public String emailType;
+
     private String email;
-    private String emailType;
+
     private CheckEmailTypeApi service;
 
     /**
