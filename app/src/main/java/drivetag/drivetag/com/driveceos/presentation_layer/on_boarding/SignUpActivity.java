@@ -91,14 +91,6 @@ public class SignUpActivity extends BaseActivity {
         setupRows();
         setupRecyclerView();
         setupPickerFragmentContainer();
-//        pickerContainer.setVisibility(View.VISIBLE);
-        List<String> dataArray = new ArrayList<>();
-        dataArray.add("1");
-        dataArray.add("2");
-        dataArray.add("3");
-//        dataArray.add("4");
-//        dataArray.add("5");
-//        showPickerWithContentArray(dataArray);
     }
 
     private void setupRecyclerView() {
@@ -355,7 +347,6 @@ public class SignUpActivity extends BaseActivity {
 
                             if (completionObject != null) {
                                 titlesRow.pickerTitles = completionObject;
-//                                pickerFragment.setContentArray(titlesRow.pickerTitles);
                                 titlesRow.textFieldEnabled = completionObject.size() > 0;
                             }
                         }
@@ -380,13 +371,10 @@ public class SignUpActivity extends BaseActivity {
                     user.lastName == null ||
                     user.email == null ||
                     user.driveTag == null ||
-                    user.password == null
-//                        ||
-//                    user.verification == null
-                        ) {
+                    user.password == null ||
+                    user.verification == null) {
 
                     //show alert with error
-                    System.out.println();
                     return;
                 }
 
@@ -428,14 +416,7 @@ public class SignUpActivity extends BaseActivity {
         };
 
         pickerContainer.setVisibility(View.VISIBLE);
-//        pickerFragment.setContentArray(contentArray);
-//        //TODO: Remove wait. onActivityCreated in Picker fragment does not trigger
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            public void run() {
         pickerFragment.setContentArray(contentArray);
-//            }
-//        }, 100);
     }
 
     private void hidePicker() {
@@ -490,49 +471,12 @@ public class SignUpActivity extends BaseActivity {
 //                }
             }
         });
-//            [self.signUpFlow freeDriveTagsforEmail: self.user.email
-//        firstName: self.user.firstName
-//        lastName: self.user.lastName
-//        completionBlock: ^(NSArray *freeDriveTags, NSError *error) {
-//
-//            if (!error) {
-//                SignUpViewController *strongSelf = weakSelf;
-//
-//                strongSelf.driveTagRow.pickerTitles = freeDriveTags;
-//                strongSelf.driveTagRow.textFieldEnabled = freeDriveTags.count > 0 ? YES : NO;
-//                                   [strongSelf.driveTagRow reloadPickerView];
-//            }
-//        }];
-
     }
 
     private boolean Email_Validate(String email)
     {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-//    - (void)loadAvailableDriveTags {
-//        __weak SignUpViewController *weakSelf = self;
-//
-//        if (self.user.firstName.length < 1 ||
-//                self.user.lastName.length < 1 ||
-//                ![Validator isValidEmail: self.user.email]) {
-//            return;
-//        }
-//
-//    [self.signUpFlow freeDriveTagsforEmail: self.user.email
-//        firstName: self.user.firstName
-//        lastName: self.user.lastName
-//        completionBlock: ^(NSArray *freeDriveTags, NSError *error) {
-//
-//            if (!error) {
-//                SignUpViewController *strongSelf = weakSelf;
-//
-//                strongSelf.driveTagRow.pickerTitles = freeDriveTags;
-//                strongSelf.driveTagRow.textFieldEnabled = freeDriveTags.count > 0 ? YES : NO;
-//                                   [strongSelf.driveTagRow reloadPickerView];
-//            }
-//        }];
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -578,23 +522,7 @@ public class SignUpActivity extends BaseActivity {
             }
         }
     }
-//    private void persistImage(Bitmap bitmap, String name) {
-//
-//        File filesDir = getApplicationContext().getFilesDir();
-//        File imageFile = new File(filesDir, name + ".jpg");
-//
-//        OutputStream os;
-//        try {
-//            os = new FileOutputStream(imageFile);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
-//            os.flush();
-//            os.close();
-//            System.out.println();
-//            signUpFlow.
-//        } catch (Exception e) {
-////            Log.e(get.getSimpleName(), "Error writing bitmap", e);
-//        }
-//    }
+
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
         ParcelFileDescriptor parcelFileDescriptor =
                 getContentResolver().openFileDescriptor(uri, "r");
