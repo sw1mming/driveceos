@@ -16,8 +16,6 @@ import drivetag.drivetag.com.driveceos.R;
 
 public class SignUpHeaderRow extends TableRow {
 
-    public TableRowHandler handler;
-
     public Bitmap userImageBitmap;
 
     @Override
@@ -45,8 +43,8 @@ public class SignUpHeaderRow extends TableRow {
         editTextViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (handler != null) {
-                    handler.didSelectRow();
+                if (selectionHandler != null) {
+                    selectionHandler.didSelectRow();
                 }
             }
         });

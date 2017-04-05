@@ -3,13 +3,14 @@ package drivetag.drivetag.com.driveceos.business_layer;
 import android.app.Application;
 import drivetag.drivetag.com.driveceos.data_layer.UserStorage;
 
+
 /**
  * Created by yuriy on 4/4/17.
  */
 
 public class AppScope extends Application {
 
-    private UserStorage userStorage;
+    public UserStorage userStorage;
 
 //    private ColorManager colorManager;
 

@@ -123,7 +123,7 @@ public class SignUpActivity extends BaseActivity {
     private SignUpHeaderRow setupHeaderRow() {
         headerRow = new SignUpHeaderRow();
         headerRow.title = "Upload/Take Profile pic";
-        headerRow.handler = new TableRow.TableRowHandler() {
+        headerRow.selectionHandler = new TableRow.SelectionHandler() {
             @Override
             public void didSelectRow() {
                 showAlertDialog();
