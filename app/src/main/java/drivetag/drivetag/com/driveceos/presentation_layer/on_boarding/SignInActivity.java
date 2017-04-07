@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import drivetag.drivetag.com.driveceos.R;
 import drivetag.drivetag.com.driveceos.business_layer.SignInFlow;
+import drivetag.drivetag.com.driveceos.data_layer.requests.PublicPostToMeRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.presentation_layer.BaseActivity;
 import drivetag.drivetag.com.driveceos.presentation_layer.MainActivity;
@@ -49,6 +50,19 @@ public class SignInActivity extends BaseActivity {
 
         setupViews();
         fillViews();
+
+//        PublicPostToMeRequest request = new PublicPostToMeRequest(true);
+//        request.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//
+//            }
+//        });
     }
 
 

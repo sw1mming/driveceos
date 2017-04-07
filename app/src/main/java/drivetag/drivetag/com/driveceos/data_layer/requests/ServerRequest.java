@@ -5,8 +5,11 @@ import java.util.concurrent.TimeUnit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -29,6 +32,7 @@ public abstract class ServerRequest<T> {
 
     public String error;
 
+    public String token;
 
     /** Interface. */
 
@@ -45,6 +49,22 @@ public abstract class ServerRequest<T> {
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        Request original = chain.request();
+
+                        // Request customization: add request headers
+                        Request.Builder requestBuilder = original.newBuilder();
+
+                        if (token != null) {
+                            requestBuilder.addHeader("Authorization: Basic", token);
+                        }
+
+                        Request request = requestBuilder.build();
+                        return chain.proceed(request);
+                    }})
+
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -52,7 +72,7 @@ public abstract class ServerRequest<T> {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
+        
         return retrofit;
     }
 
