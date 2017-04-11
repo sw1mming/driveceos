@@ -72,7 +72,7 @@ public abstract class ServerRequest<T> {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        
+
         return retrofit;
     }
 
