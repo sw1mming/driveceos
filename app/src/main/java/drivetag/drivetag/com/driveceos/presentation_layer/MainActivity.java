@@ -2,6 +2,7 @@ package drivetag.drivetag.com.driveceos.presentation_layer;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
@@ -10,6 +11,7 @@ import drivetag.drivetag.com.driveceos.R;
 import drivetag.drivetag.com.driveceos.data_layer.requests.PublicPostToMeRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.presentation_layer.feed.FeedFragment;
+import drivetag.drivetag.com.driveceos.presentation_layer.linked_in_login_fragment.LinkedInLoginFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.mdt.MDTFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.more.MoreFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.notices.NoticesFragment;
@@ -41,7 +43,6 @@ public class MainActivity extends BaseActivity {
             }
             return false;
         }
-
     };
 
     @Override
@@ -51,7 +52,15 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        replaceFragment(FeedFragment.newInstance("Navigate to Feed screen"));
+//        replaceFragment(FeedFragment.newInstance("Navigate to Feed screen"));
+
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        replaceFragment(LinkedInLoginFragment.newInstance("Navigate to Linked screen"));
     }
 
     protected void replaceFragment(Fragment fragment) {
