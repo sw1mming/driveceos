@@ -2,22 +2,49 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="/Users/yuriy/All/Projects/Android/driveceos/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\ryabu\.android\build-cache\07838599bcfc070f51bf333d48661f6b1fed3bf9\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="0f38bbfddcf2b3ea41a43af8fed07624403bdd59">
-        <dex dex="/Users/yuriy/All/Projects/Android/driveceos/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_a37196229d9a6a66a01c4a82ad5161556cabbc46/classes.dex" />
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="C:\Users\ryabu\AndroidStudioProjects\dt-droid\app\build\intermediates\pre-dexed\debug\classes_f203700ffc94b25f3825c1b0e1d29d7592272d8c.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/yuriy/All/Projects/Android/driveceos/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\ryabu\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-android\1.2.0\6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd\bolts-android-1.2.0.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
-        <dex dex="/Users/yuriy/All/Projects/Android/driveceos/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_cb0c216788a5d65baac8fd997265b0da6c6f7461/classes.dex" />
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="C:\Users\ryabu\AndroidStudioProjects\dt-droid\app\build\intermediates\pre-dexed\debug\bolts-android-1.2.0_8ce2793c870fc9681d5b111ae62f5c103ded8f8b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ryabu\.android\build-cache\5e52331056dd58ec59aa920d8a5da36cc158dcbb\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5bdb38b7e4b6094891648c1dc4dc08589b460f97">
+        <dex dex="C:\Users\ryabu\AndroidStudioProjects\dt-droid\app\build\intermediates\pre-dexed\debug\classes_97fe8799f042dd9a2e7b1b8a0e38ce1f026b6d0f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ryabu\.android\build-cache\176981633fbdb6e5c8e60dabaae6f6ca597cfbec\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="C:\Users\ryabu\AndroidStudioProjects\dt-droid\app\build\intermediates\pre-dexed\debug\classes_fee48ae9fb994715b7ca89cb896a033569245bc0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ryabu\.android\build-cache\a415ca2247964ac1ecdd06ca37edddca58274a04\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3a85a6705ada812166ea2daa377da566206c47a2">
+        <dex dex="C:\Users\ryabu\AndroidStudioProjects\dt-droid\app\build\intermediates\pre-dexed\debug\classes_f050d5dfc7ff8c796289558d4e3277acc6bf0b7f.jar" />
     </item>
 
 </items>

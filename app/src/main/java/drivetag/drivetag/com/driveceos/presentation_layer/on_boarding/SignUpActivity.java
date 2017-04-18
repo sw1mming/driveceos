@@ -283,7 +283,7 @@ public class SignUpActivity extends BaseActivity {
         row.didEndChangingHandler = new EditTextRow.EditTextRowDidEndChangingHandler() {
             @Override
             public void didEndChangingTextView() {
-                if (signUpFlow.isEmailValidationSentAutomaticaly == null || !signUpFlow.isEmailValidationSentAutomaticaly) {
+                if (signUpFlow.isEmailValidationSentAutomatically == null || !signUpFlow.isEmailValidationSentAutomatically) {
                     sendVerifyCodeToEmail(user.email);
                 }
             }
@@ -294,7 +294,7 @@ public class SignUpActivity extends BaseActivity {
 
     private void sendVerifyCodeToEmail(final String email) {
         if (Email_Validate(email)) {
-            signUpFlow.isEmailValidationSentAutomaticaly = true;
+            signUpFlow.isEmailValidationSentAutomatically = true;
 
             // show activity indicator
             signUpFlow.verifyEmail(email, new SignUpFlow.CompletionErrorHandler() {

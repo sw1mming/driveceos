@@ -65,7 +65,7 @@ public class UserStorage  {
 
     public Boolean facebookTeammateConnectionsEnabled;
 
-    public Boolean isLoggedIn;
+    public Boolean isLoggedIn = false;
 
     public Boolean allowPublicPostsToMe;
 

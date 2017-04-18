@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Driveceos</string>
+    <string name="facebook_app_id">1449444685312147</string>
+    <string name="twitter_customer_key">oLSyPYJvv2JyZ1GtlsM5fEULq</string>
+    <string name="twitter_customer_secret">69OyDQlunYfxJEGJ89ID6HiT5nyy9XlgYZVsK1A4ZiwaeIicTQ</string>
 
     <string name="camera">Camera</string>
     <string name="saved_photos">Saved photos</string>

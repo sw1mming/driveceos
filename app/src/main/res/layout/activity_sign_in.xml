@@ -14,7 +14,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?android:actionBarSize">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -125,6 +127,7 @@
                     android:layout_marginTop="30dp"
                     android:scaleType="fitCenter"
                     android:padding="0sp"
+                    android:onClick="facebookClick"
                     android:adjustViewBounds="true"
                     android:src="@drawable/facebook_enabled_icon"/>
 
@@ -184,7 +187,6 @@
                     android:descendantFocusability="blocksDescendants"
                     android:layout_marginEnd="1dp"
                     android:layout_marginRight="1dp"
-
                     android:text="(coming soon)"/>
 
             </RelativeLayout>

@@ -21,7 +21,7 @@ public class SignUpFlow extends LoginFlow {
 
     public Boolean isPersonalEmail;
 
-    public Boolean isEmailValidationSentAutomaticaly;
+    public Boolean isEmailValidationSentAutomatically;
 
     //userStorage
 
@@ -167,7 +167,7 @@ public class SignUpFlow extends LoginFlow {
                     user = ((SignUpRequest)request).user;
 //                    userStorage accessToken
 //
-//                    loadUserWithConletionHandler(new CompletionHandler<User>() {
+//                    loadUserWithCompletionHandler(new CompletionHandler<User>() {
 //                        @Override
 //                        public void completionHandler(User completionObject, String error) {
 //

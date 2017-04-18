@@ -1,5 +1,16 @@
 package drivetag.drivetag.com.driveceos.business_layer;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+
 import drivetag.drivetag.com.driveceos.DTApplication;
 import drivetag.drivetag.com.driveceos.data_layer.models.User;
 import drivetag.drivetag.com.driveceos.data_layer.requests.FacebookLoginRequest;
@@ -10,35 +21,62 @@ import drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRe
 import static drivetag.drivetag.com.driveceos.data_layer.requests.SocialNetworkEnableRequest.SocialNetwork.SocialNetworkFacebook;
 
 /**
- * Created by artem on 4/4/17.
+ * Created by artem.
  */
 
 public class FacebookSignInFlow extends LoginFlow {
 
-    private FacebookLoginRequest facebookLoginRequest;
-    private MergeAccountsRequest mergeAccountsRequest;
     private SocialNetworkEnableRequest socialNetworkEnableRequest;
 
     private Boolean shouldMerge = false;
 
     private FlowCompletionHandler completionHandler;
 
+    private CallbackManager callbackManager;
+
 
     /** Interface. */
 
-    public FacebookSignInFlow(DTApplication context) {
+    public FacebookSignInFlow(final DTApplication context) {
         super(context);
-    }
+        callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
-    public void resumeWithCompletionHandler(final FacebookSignInFlow.FlowCompletionHandler handler) {
-        if (userStorage.user != null && userStorage.user.facebookID != null) {
-            if (userStorage.user.facebookOn) {
-                userStorage.user.facebookOn = false;
-            } else {
-                userStorage.user.facebookOn = true;
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                resumeWithCompletionHandler(loginResult, new FlowCompletionHandler() {
+                    @Override
+                    public void completionHandler(User user, String error) {
+                    }
+
+                    @Override
+                    public void completionHandlerWithError(String error) {
+
+                    }
+
+                    @Override
+                    public void switchCompletionHandler(User user) {
+
+                    }
+                });
             }
 
-            handler.switchCompletionHandler(getFacebookSignInFlow(), userStorage.user);
+            @Override
+            public void onCancel() {
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                Toast.makeText(context, "error to Login Facebook", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void resumeWithCompletionHandler(LoginResult loginResult, final FacebookSignInFlow.FlowCompletionHandler handler) {
+        if (userStorage.user != null && userStorage.user.facebookID != null) {
+            userStorage.user.facebookOn = !userStorage.user.facebookOn;
+
+            handler.switchCompletionHandler(userStorage.user);
         } else {
             completionHandler = handler;
 
@@ -47,21 +85,19 @@ public class FacebookSignInFlow extends LoginFlow {
             }
 
             if (shouldMerge) {
-                mergeFacebookAccount();
+                mergeFacebookAccount(loginResult);
             } else {
-                loginViaFacebook();
+                loginViaFacebook(loginResult);
             }
         }
     }
 
-    private void mergeFacebookAccount() {
-        // todo: self.facebookNetwork loadUserWithCompletionBlock
-
-        mergeAccountsRequest = new MergeAccountsRequest();
-        mergeAccountsRequest.userId = ""; // todo: facebookUser.facebookID
-        mergeAccountsRequest.accessToken = ""; // todo: [FacebookNetwork accessToken]
+    private void mergeFacebookAccount(LoginResult loginResult) {
+        MergeAccountsRequest mergeAccountsRequest = new MergeAccountsRequest();
+        mergeAccountsRequest.userId = loginResult.getAccessToken().getUserId();
+        mergeAccountsRequest.accessToken = loginResult.getAccessToken().getToken();
         mergeAccountsRequest.provider = "facebook";
-        mergeAccountsRequest.dtToken = ""; // todo: self.userStorage.accessToken
+        mergeAccountsRequest.dtToken = userStorage.accessToken;
 
         mergeAccountsRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler<User>() {
             @Override
@@ -82,19 +118,8 @@ public class FacebookSignInFlow extends LoginFlow {
         });
     }
 
-    private void loginViaFacebook() {
-        // todo: self.facebookNetwork loadUserWithCompletionBlock
-
-//        [self.facebookNetwork loadUserWithCompletionBlock: ^(NSError *error, User *facebookUser) {
-//
-//            FacebookSignInFlow *strongSelf = weakSelf;
-//
-//            if (!facebookUser && strongSelf.completionBlock) {
-//            [strongSelf finishFlowWithUser: nil error: error];
-//                return;
-//            }
-
-        facebookLoginRequest = new FacebookLoginRequest("EAAUmQyOW8JMBAJxHRkX54ouzDhaNwAqqX83fAYBBj61GsMJXNteZCKTWZBZAp80FyBeT0CIv2ZAyIr71sIcExnKIZBoKkUZBl7RKcmDjPuYLgaRopqlBGOrU5YmZCIB9TnU0e9aM9NHpKONrvmL3zYveHJOQHQl2kZAfE65ZClN1gmT9Ksal2FtZCSgNbotMwT4ZAIZD", "906160376139339");
+    private void loginViaFacebook(LoginResult loginResult) {
+        FacebookLoginRequest facebookLoginRequest = new FacebookLoginRequest(loginResult.getAccessToken().getToken(), loginResult.getAccessToken().getUserId());
         facebookLoginRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler<User>() {
             @Override
             public void completionHandler(ServerRequest<User> request) {
@@ -120,33 +145,31 @@ public class FacebookSignInFlow extends LoginFlow {
 
     }
 
-    private void handleLoggedInUser(User user) {
+    private void handleLoggedInUser(final User user) {
         if (user == null) {
             finishFLowWithUser(null, "Something went wrong.");
-
-            return;
         }
 
-//        socialNetworkEnableRequestWithCompletionHandler(user, new CompletionHandler() {
-//            @Override
-//            public void completionHandler(User user, String error) {
-//                if (error != null) {
-//                    finishFLowWithUser(user, error);
-//                } else {
-//                    loadUserWithCompletionHandler(new CompletionHandler() {
-//                        @Override
-//                        public void completionHandler(User user, String error) {
-//                            saveUser(user);
-//                            finishFLowWithUser(user, error);
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        socialNetworkEnableRequestWithCompletionHandler(user, new CompletionHandler<User>() {
+            @Override
+            public void completionHandler(User value, String error) {
+                if (error != null) {
+                    finishFLowWithUser(user, error);
+                } else {
+                    loadUserWithCompletionHandler(new CompletionHandler<User>() {
+                        @Override
+                        public void completionHandler(User user, String error) {
+                            saveUser(user);
+                            finishFLowWithUser(user, error);
+                        }
+                    });
+                }
+            }
+        });
 
     }
 
-    private void socialNetworkEnableRequestWithCompletionHandler (final User user, final CompletionHandler handler) {
+    private void socialNetworkEnableRequestWithCompletionHandler (final User user, final CompletionHandler<User> handler) {
         socialNetworkEnableRequest = new SocialNetworkEnableRequest(SocialNetworkFacebook);
         socialNetworkEnableRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
             @Override
@@ -182,35 +205,35 @@ public class FacebookSignInFlow extends LoginFlow {
             message = "You were successfully logged in to Facebook.";
         }
 
-//        new AlertDialog.Builder(context)
-//                .setTitle(title)
-//                .setMessage(message)
-//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        System.out.println();
-//                    }
-//                })
-//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // do nothing
-//                    }
-//                })
-//                .setIcon(android.R.drawable.ic_dialog_alert)
-//                .show();
+        new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        System.out.println();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
 
         if (completionHandler != null) {
-            completionHandler.completionHandler(getFacebookSignInFlow(), user, error);
+            completionHandler.completionHandler(user, error);
         }
     }
 
-    private FacebookSignInFlow getFacebookSignInFlow() {
-        return this;
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode,resultCode, data );
     }
 
-    public interface FlowCompletionHandler<T> {
-        void completionHandler(FacebookSignInFlow flow, User user, String error);
+    public interface FlowCompletionHandler {
+        void completionHandler(User user, String error);
         void completionHandlerWithError(String error);
-        void switchCompletionHandler(FacebookSignInFlow flow, User user);
+        void switchCompletionHandler(User user);
     }
 }
 
