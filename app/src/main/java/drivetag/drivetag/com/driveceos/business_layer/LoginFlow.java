@@ -23,7 +23,7 @@ public class LoginFlow {
     /** Interface. */
 
     LoginFlow(DTApplication dtApplication) {
-        this.userStorage = userStorage;
+        this.userStorage = dtApplication.getUserStorage();
         this.context = context;
     }
 

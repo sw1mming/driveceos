@@ -120,11 +120,16 @@
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content">
 
-                <com.facebook.login.widget.LoginButton
+                <ImageButton
                     android:id="@+id/facebook_image_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="0sp"/>
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="30dp"
+                    android:scaleType="fitCenter"
+                    android:padding="0sp"
+                    android:onClick="facebookClick"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/facebook_enabled_icon"/>
 
                 <ImageButton
                     android:id="@+id/twitter_image_button"
@@ -182,7 +187,6 @@
                     android:descendantFocusability="blocksDescendants"
                     android:layout_marginEnd="1dp"
                     android:layout_marginRight="1dp"
-
                     android:text="(coming soon)"/>
 
             </RelativeLayout>
