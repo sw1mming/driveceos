@@ -8,8 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import drivetag.drivetag.com.driveceos.DTApplication;
 import drivetag.drivetag.com.driveceos.R;
 import drivetag.drivetag.com.driveceos.business_layer.FacebookSignInFlow;
+import drivetag.drivetag.com.driveceos.data_layer.UserStorage;
+import drivetag.drivetag.com.driveceos.data_layer.requests.PublicPostToMeRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.presentation_layer.BaseActivity;
 import drivetag.drivetag.com.driveceos.presentation_layer.adapters.SignUpAdapter;
 import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.TableRow;
@@ -49,6 +53,24 @@ public class MoreActivity extends BaseActivity {
 
         setupRows();
         setupRecyclerView();
+
+
+
+//        UserStorage userStorage = ((DTApplication)getApplicationContext()).getUserStorage();
+//        String token = userStorage.getAccessToken();
+//
+//        PublicPostToMeRequest request = new PublicPostToMeRequest(true, token);
+//        request.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//            @Override
+//            public void completionHandler(ServerRequest request) {
+//
+//            }
+//
+//            @Override
+//            public void completionHandlerWithError(String error) {
+//
+//            }
+//        });
     }
 
     private void setupRows() {

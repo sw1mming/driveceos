@@ -23,7 +23,8 @@ public class PublicPostToMeRequest extends ServerRequest {
      * Interface.
      */
 
-    public PublicPostToMeRequest (Boolean state) {
+    public PublicPostToMeRequest (Boolean state, String token) {
+        this.token = token;
         this.state = state;
     }
 
@@ -67,9 +68,9 @@ public class PublicPostToMeRequest extends ServerRequest {
 
     interface PublicPostToMeApi {
 
-        @Headers({
-                "Authorization: Basic MTQ3NTE2NzMyMDM5NS04OTQ4MDI4ODU5NDUxNDE3MDc3Og==",
-        })
+//        @Headers({
+//                "Authorization: Basic MTQ3NTE2NzMyMDM5NS04OTQ4MDI4ODU5NDUxNDE3MDc3Og==",
+//        })
 
         @PUT("/api/v2/users/current_user/settings")
         Call<JsonElement> publicPostToMe(@Body HashMap<String, Boolean> parameters);
