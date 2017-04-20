@@ -50,7 +50,8 @@ public class SignInActivity extends BaseActivity {
 
         setupViews();
         fillViews();
-
+        emailEditText.setText("rayban@mailinator.com");
+        passwordEditText.setText("qwe123546");
 //        PublicPostToMeRequest request = new PublicPostToMeRequest(true);
 //        request.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
 //            @Override
