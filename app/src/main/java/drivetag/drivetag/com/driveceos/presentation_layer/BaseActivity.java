@@ -21,6 +21,16 @@ public class BaseActivity extends FragmentActivity {
     }
 
     /**
+     * Put fragment into container. R.id.content
+     * By default: without fragment name and putting into back stack
+     *
+     * @param fragment    Fragment support v4
+     */
+    protected void replaceFragment(Fragment fragment) {
+        replaceFragment(fragment, R.id.content, false, null);
+    }
+
+    /**
      * Put fragment into container.
      * By default: without fragment name and putting into back stack
      *
