@@ -1,5 +1,7 @@
 package drivetag.drivetag.com.driveceos.data_layer.requests;
 
+import android.util.Base64;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import com.google.gson.JsonArray;
@@ -58,7 +60,8 @@ public abstract class ServerRequest<T> {
                         Request.Builder requestBuilder = original.newBuilder();
 
                         if (token != null) {
-                            requestBuilder.addHeader("Authorization: Basic", token);
+                            final String encodedToken = "Basic " + Base64.encodeToString(token.getBytes(), Base64.NO_WRAP);
+                            requestBuilder.addHeader("Authorization", encodedToken);
                         }
 
                         Request request = requestBuilder.build();

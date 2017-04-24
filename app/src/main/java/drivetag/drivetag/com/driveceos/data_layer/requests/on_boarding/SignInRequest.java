@@ -21,7 +21,7 @@ import retrofit2.http.POST;
 
 public class SignInRequest extends ServerRequest {
 
-    private String accessToken;
+    public String accessToken;
 
     private String driveID;
 
@@ -69,6 +69,8 @@ public class SignInRequest extends ServerRequest {
                         }
                     }
 
+                    completionHandler.completionHandlerWithError(error);
+
                 } else {
                     if (JsonObjectHelper.hasValueFromKey("dt_access_token", jsonObject)) {
                         accessToken = jsonObject.get("dt_access_token").getAsString();
@@ -78,9 +80,8 @@ public class SignInRequest extends ServerRequest {
                         driveID = jsonObject.get("user_uid").getAsString();
                     }
 
+                    completionHandler.completionHandler(getSignInRequest());
                 }
-
-                completionHandler.completionHandler(getSignInRequest());
             }
 
             @Override

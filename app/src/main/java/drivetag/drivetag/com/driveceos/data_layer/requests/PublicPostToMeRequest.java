@@ -19,6 +19,7 @@ public class PublicPostToMeRequest extends ServerRequest {
     private Boolean state;
     private PublicPostToMeApi service;
 
+
     /**
      * Interface.
      */

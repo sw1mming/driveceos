@@ -135,7 +135,9 @@ public class UserStorage  {
     }
 
     public String getAccessToken() {
-        return sharedPreferences().getString(ACCESS_TOKEN, null);
+        String accessToken = sharedPreferences().getString(ACCESS_TOKEN, null);
+
+        return accessToken;
     }
 
     public Boolean getShouldShowWelcomeMessage() {

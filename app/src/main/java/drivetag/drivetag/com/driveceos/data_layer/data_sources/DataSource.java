@@ -82,6 +82,10 @@ public class DataSource {
         }
     }
 
+    public void removeAllSections() {
+        sections.clear();
+    }
+
     public interface DataSourceListener {
         void notifyWillLoadItems();
         void notifyDidLoadItems(List<List> sections);

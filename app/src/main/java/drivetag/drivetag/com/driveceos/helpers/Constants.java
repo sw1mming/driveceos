@@ -8,5 +8,6 @@ public abstract class Constants {
 
     public static class KEY {
         public static final String KEY_DL_SHARED_PREFERENCE = "KEY_DL_SHARED_PREFERENCE";
+        public static final String THOUGHT_TYPE_NONE = "none";
     }
 }

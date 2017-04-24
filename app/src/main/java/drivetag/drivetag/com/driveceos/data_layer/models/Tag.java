@@ -150,7 +150,7 @@ public class Tag {
     public static Tag tagById (Number tagId, List<Tag> tags) {
 
         for (Tag tag : tags) {
-            if (tag.identifier.equals(tagId)) {
+            if (tag.identifier == tagId) {
                 return tag;
             }
         }
