@@ -200,7 +200,7 @@ public class LoadTagTeamRequest extends ServerRequest <List<Tag>> {
     /** LoadTagTeamApi class. */
 
     interface LoadTagTeamApi {
-        
+
         @GET("/api/v2/tags/tagchain/tagteam")
         Call<JsonElement> loadTagTeam(@QueryMap Map<String, String> parameters);
     }

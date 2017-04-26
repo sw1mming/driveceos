@@ -1,8 +1,5 @@
 package drivetag.drivetag.com.driveceos.data_layer.data_sources;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +8,6 @@ import drivetag.drivetag.com.driveceos.data_layer.models.Post;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.comment.LoadPostCommentsRequest;
 import drivetag.drivetag.com.driveceos.utils.ListUtils;
-import retrofit2.Retrofit;
 
 /**
  * Created by artem on 4/25/17.
