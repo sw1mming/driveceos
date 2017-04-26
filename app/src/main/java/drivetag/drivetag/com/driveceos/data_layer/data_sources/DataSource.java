@@ -12,6 +12,10 @@ import drivetag.drivetag.com.driveceos.data_layer.IndexPath;
 public class DataSource {
     public Boolean loading = false;
 
+    public Boolean lastPage = false;
+
+    public int page;
+
     public List<List> sections = new ArrayList<>();
 
     public String userFacebookToken;
@@ -47,6 +51,33 @@ public class DataSource {
         }
 
         return null;
+    }
+
+    public Boolean isInitialPage() {
+        if (page == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Boolean hasIdentifier(String identifier, IndexPath indexPath) {
+        if (identifier == null) {
+            return false;
+        }
+
+        if (sections.size() > 0) {
+            List<Object> section = sections.get(0);
+            Integer index = section.indexOf(identifier);
+
+            if (index == indexPath.item) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
 

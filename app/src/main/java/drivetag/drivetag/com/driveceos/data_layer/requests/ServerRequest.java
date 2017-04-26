@@ -60,6 +60,7 @@ public abstract class ServerRequest<T> {
                         Request.Builder requestBuilder = original.newBuilder();
 
                         if (token != null) {
+                            token = token + ":";
                             final String encodedToken = "Basic " + Base64.encodeToString(token.getBytes(), Base64.NO_WRAP);
                             requestBuilder.addHeader("Authorization", encodedToken);
                         }
@@ -147,6 +148,11 @@ public abstract class ServerRequest<T> {
             return null;
         }
     }
+
+    public String defaultErrorMessage () {
+        return "Something went wrong";
+    }
+
 
     /**
      *  Completion handler interface for request.

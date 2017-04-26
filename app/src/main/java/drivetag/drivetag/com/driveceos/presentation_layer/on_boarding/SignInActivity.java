@@ -95,7 +95,8 @@ public class SignInActivity extends BaseActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SignInFlow signInFlow = new SignInFlow(emailEditText.getText().toString(), passwordEditText.getText().toString());
+//                SignInFlow signInFlow = new SignInFlow(emailEditText.getText().toString(), passwordEditText.getText().toString());
+                SignInFlow signInFlow = new SignInFlow("rayban@mailinator.com", "qwe123456", (DTApplication) getApplication());
                 signInFlow.resumeWithComletionBlock(new SignInFlow.CompletionHandler() {
                     @Override
                     public void completionHandler(ServerRequest request) {

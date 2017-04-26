@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import drivetag.drivetag.com.driveceos.data_layer.data_sources.CommentsDataSource;
+import drivetag.drivetag.com.driveceos.data_layer.data_sources.PostDetailsDataSource;
 import drivetag.drivetag.com.driveceos.data_layer.models.Notice;
 import drivetag.drivetag.com.driveceos.data_layer.models.Post;
 import drivetag.drivetag.com.driveceos.data_layer.models.Tag;
@@ -99,11 +101,18 @@ public class NoticesRequest extends ServerRequest {
             }
         }
 
+
         List<Post> posts = new ArrayList<>();
         for (JsonArray responseDictionary: discusses) {
             JsonObject responseObject = responseDictionary.get(0).getAsJsonObject();
                 Post post = new Post(responseObject, tags);
                 posts.add(post);
+
+//            CommentsDataSource dataSource = new CommentsDataSource(post);
+//            dataSource.reloadData();
+
+            PostDetailsDataSource dataSource = new PostDetailsDataSource(post);
+            dataSource.refreshData();
         }
 
         for (JsonArray noticeInfoArray: noticesInfo) {
@@ -159,10 +168,6 @@ public class NoticesRequest extends ServerRequest {
     /** NoticeApi interface. */
 
     interface NoticeApi {
-
-        @Headers({
-                "Authorization: Basic MTQ3NTE2NzMyMDM5NS04OTQ4MDI4ODU5NDUxNDE3MDc3Og==",
-        })
 
         @GET("/api/v2/users/current_user/notices")
         Call<JsonElement> notice(@QueryMap Map<String, Object> parameters);

@@ -18,55 +18,55 @@ import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 
 public class Post {
 
-    PostPreferences postPreferences;
+    public PostPreferences postPreferences;
 
-    PostStats postStats;
+    public PostStats postStats;
 
-    String identifier;
+    public String identifier;
 
-    String type;
+    public String type;
 
-    String title;
+    public String title;
 
-    String postDescription;
+    public String postDescription;
 
-    String text;
+    public String text;
 
-    Date timestamp;
+    public Date timestamp;
 
-    String companyImageUrlString;
+    public String companyImageUrlString;
 
-    String postImageUrlString;
+    public String postImageUrlString;
 
-    String postTagName;
+    public String postTagName;
 
-    List<String> imagesURLs;
+    public List<String> imagesURLs;
 
-    List<String> videoURLs;
+    public List<String> videoURLs;
 
-    boolean sharedOnDriveTag;
+    public boolean sharedOnDriveTag;
 
-    boolean sharedOnFacebook;
+    public boolean sharedOnFacebook;
 
-    boolean sharedOnLinkedIn;
+    public boolean sharedOnLinkedIn;
 
-    boolean sharedOnTwitter;
+    public boolean sharedOnTwitter;
 
-    User user;
+    public User user;
 
-    Tag writerTag;
+    public Tag writerTag;
 
-    Tag coWriterTag;
+    public Tag coWriterTag;
 
-    Tag recipientTag;
+    public Tag recipientTag;
 
-    float webViewHeight;
+    public float webViewHeight;
 
-    IndexPath indexPath;
+    public IndexPath indexPath;
 
-    List<Comment> comments;
+    public List<Comment> comments;
 
-    String noticeStatus;
+    public String noticeStatus;
 
     public Post(JsonObject jsonObject, List<Tag> tags) {
 
