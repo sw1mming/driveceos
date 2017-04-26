@@ -17,6 +17,8 @@ public class User {
 
     public static final String EmailTypeWork = "work";
 
+    public static final String USER_TYPE = "user_profile";
+
     public String tagId;
 
     public Number driveID;
