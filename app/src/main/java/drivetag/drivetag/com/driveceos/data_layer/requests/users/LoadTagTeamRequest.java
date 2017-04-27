@@ -131,9 +131,9 @@ public class LoadTagTeamRequest extends ServerRequest <List<Tag>> {
                         callOutTagIds = jsonObject.get("tag_call_out_btn").getAsJsonArray();
                     }
 
-                    Number callOutTagId;
+                    Integer callOutTagId;
                     if (callOutTagIds.size() > 0) {
-                        callOutTagId = callOutTagIds.get(0).getAsNumber();
+                        callOutTagId = callOutTagIds.get(0).getAsInt();
 
                         callOutTag = Tag.tagById(callOutTagId, serverResponse);
                     }
@@ -184,7 +184,7 @@ public class LoadTagTeamRequest extends ServerRequest <List<Tag>> {
         }
 
         for (JsonElement tagIdElement : listArray) {
-            Number tagId = tagIdElement.getAsNumber();
+            Integer tagId = tagIdElement.getAsInt();
 
             Tag tag = Tag.tagById(tagId,tags);
 

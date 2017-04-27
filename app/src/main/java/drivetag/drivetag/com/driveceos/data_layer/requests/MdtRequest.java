@@ -21,12 +21,13 @@ import retrofit2.http.QueryMap;
  * Created by yuriy on 3/30/17.
  */
 
-public class MdtRequest extends  ServerRequest {
+public class MdtRequest extends ServerRequest<List<Tag>> {
 
-    private String thoughtType;
+    public String thoughtType;
+    public Integer nextIndex;
+    public Integer startIndex;
+
     private String dataType;
-    private Number startIndex;
-    private Number nextIndex;
     private Integer count;
     private MdtApi service;
 
@@ -49,7 +50,7 @@ public class MdtRequest extends  ServerRequest {
         return count;
     }
 
-    public MdtRequest(String thoughtType, String dataType, Number startIndex) {
+    public MdtRequest(String thoughtType, String dataType, Integer startIndex) {
 
         this.thoughtType = thoughtType;
         this.dataType = dataType;
@@ -75,19 +76,19 @@ public class MdtRequest extends  ServerRequest {
         call.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                final JsonObject jsonObject = response.body().getAsJsonObject();
+                if (response.body() != null) {
+                    final JsonObject jsonObject = response.body().getAsJsonObject();
 
-                JsonElement jsonElement = handleSuccessResponse(response);
+                    serverResponse = objectsFromResponse(jsonObject.getAsJsonObject());
 
-                if (jsonElement != null && jsonElement.isJsonObject()) {
-                    serverResponse = objectsFromResponse(jsonElement.getAsJsonObject());
+                    if (JsonObjectHelper.hasValueFromKey("next_index", jsonObject)) {
+                        nextIndex = jsonObject.get("next_index").getAsInt();
+                    }
+
+                    completionHandler.completionHandler(getMDTRequest());
+                } else {
+                    completionHandler.completionHandlerWithError(defaultErrorMessage());
                 }
-
-                if (JsonObjectHelper.hasValueFromKey("next_index", jsonObject)) {
-                    nextIndex = jsonObject.get("next_index").getAsNumber();
-                }
-
-                completionHandler.completionHandler(getMDTRequest());
             }
 
             @Override
@@ -137,7 +138,7 @@ public class MdtRequest extends  ServerRequest {
 
         if (listObjects != null) {
             for (JsonElement tagIdElement : listObjects) {
-                Number tagId = tagIdElement.getAsNumber();
+                Integer tagId = tagIdElement.getAsInt();
 
                 Tag tag = Tag.tagById(tagId,tags);
 

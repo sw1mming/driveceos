@@ -13,7 +13,7 @@ public class ListUtils {
 
     public static void addObjects(List sourceList, List destinationList) {
 
-        for (int i = 0; i > sourceList.size(); i++) {
+        for (int i = 0; i < sourceList.size(); i++) {
             Object object = sourceList.get(i);
             destinationList.add(object);
         }

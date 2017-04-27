@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
+import drivetag.drivetag.com.driveceos.data_layer.IndexPath;
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 
 /**
@@ -14,19 +15,19 @@ import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 
 public class Tag {
 
-    public String CompanyType = "url_company";
-    public String DriveTagType = "driveleader";
-    public String DriveTagName = "driveleader";
-    public String DriveTagId = "100";
+    public String COMPANY_TYPE = "url_company";
+    public String DRIVE_TAG_TYPE = "driveleader";
+    public String DRIVE_TAG_NAME = "driveleader";
+    public String DRIVE_TAG_ID = "100";
 
     public User user;
     public String name;
     public Boolean blacklisted;
     public String type;
-    public Number identifier;
+    public Integer identifier;
     public String leaderTagName;
-    public Number parentTagId;
-    public Number leaderId;
+    public Integer parentTagId;
+    public Integer leaderId;
     public Number leaderUserId;
     public Integer drivesCount;
     public Integer teammatesCount;
@@ -52,7 +53,7 @@ public class Tag {
         }
 
         if (JsonObjectHelper.hasValueFromKey("leader_uid", jsonObject)) {
-            leaderId = jsonObject.get("leader_uid").getAsNumber();
+            leaderId = jsonObject.get("leader_uid").getAsInt();
         }
 
         if (JsonObjectHelper.hasValueFromKey("leader_user_uid", jsonObject)) {
@@ -64,7 +65,7 @@ public class Tag {
         }
 
         if (JsonObjectHelper.hasValueFromKey("parent_uid", jsonObject)) {
-            parentTagId = jsonObject.get("parent_uid").getAsNumber();
+            parentTagId = jsonObject.get("parent_uid").getAsInt();
         }
 
 
@@ -116,7 +117,7 @@ public class Tag {
         }
 
         if (JsonObjectHelper.hasValueFromKey("uid", jsonObject)) {
-            identifier = jsonObject.get("uid").getAsNumber();
+            identifier = jsonObject.get("uid").getAsInt();
         }
 
         if (JsonObjectHelper.hasValueFromKey("icon", jsonObject)) {
@@ -138,16 +139,16 @@ public class Tag {
 
     public void configureSubTagsFromTags(List<Tag> tags) {
 
-        if (leaderId != null && leaderId.intValue() > 0) {
+        if (leaderId != null && leaderId > 0) {
             ceoTag = Tag.tagById(leaderId,tags);
         }
 
-        if (parentTagId != null && parentTagId.intValue() > 0) {
+        if (parentTagId != null && parentTagId > 0) {
             parentTag = Tag.tagById(parentTagId,tags);
         }
     }
 
-    public static Tag tagById (Number tagId, List<Tag> tags) {
+    public static Tag tagById (Integer tagId, List<Tag> tags) {
 
         for (Tag tag : tags) {
             if (tag.identifier.equals(tagId)) {
@@ -156,5 +157,17 @@ public class Tag {
         }
 
         return null;
+    }
+
+    public String currentType() {
+        if (type.equals(COMPANY_TYPE)) {
+            return COMPANY_TYPE;
+        } else if (type.equals(User.USER_TYPE)) {
+            return User.USER_TYPE;
+        } else if (type.equals(DRIVE_TAG_TYPE)) {
+            return DRIVE_TAG_TYPE;
+        } else {
+            return null;
+        }
     }
 }

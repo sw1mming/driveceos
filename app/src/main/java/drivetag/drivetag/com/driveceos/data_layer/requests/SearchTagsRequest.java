@@ -92,7 +92,7 @@ public class SearchTagsRequest extends ServerRequest {
             JsonArray jsonArray = tagArray.getAsJsonArray();
             if (jsonArray.size() > 0) {
 
-                Number tagId = jsonArray.get(0).getAsNumber();
+                Integer tagId = jsonArray.get(0).getAsInt();
 
                 Tag tag = Tag.tagById(tagId, tags);
 
