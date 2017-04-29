@@ -1,8 +1,6 @@
 package drivetag.drivetag.com.driveceos.business_layer;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -191,35 +189,17 @@ public class FacebookSignInFlow extends LoginFlow {
     }
 
     private void finishFLowWithUser(User user, String error) {
-        String title;
         String message = "Something went wrong";
 
         if (error != null || user == null) {
-            title = "Error";
-
             if (error != null) {
                 message = error;
             }
         } else {
-            title = "Success";
             message = "You were successfully logged in to Facebook.";
         }
 
-        new AlertDialog.Builder(context)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        System.out.println();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
         if (completionHandler != null) {
             completionHandler.completionHandler(user, error);

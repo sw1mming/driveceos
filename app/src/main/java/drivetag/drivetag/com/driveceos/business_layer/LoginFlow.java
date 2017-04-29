@@ -24,7 +24,7 @@ public class LoginFlow {
 
     LoginFlow(DTApplication dtApplication) {
         this.userStorage = dtApplication.getUserStorage();
-        this.context = context;
+        this.context = dtApplication;
     }
 
     void loadUserWithCompletionHandler(final CompletionHandler<User> handler) {

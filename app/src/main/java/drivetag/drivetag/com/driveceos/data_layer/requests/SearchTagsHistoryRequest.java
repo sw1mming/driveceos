@@ -90,7 +90,7 @@ public class SearchTagsHistoryRequest extends SearchTagsRequest {
         }
 
         for (JsonElement tagIdElement : listObjects) {
-            Number tagId = tagIdElement.getAsNumber();
+            Integer tagId = tagIdElement.getAsInt();
 
             Tag tag = Tag.tagById(tagId,tags);
 
