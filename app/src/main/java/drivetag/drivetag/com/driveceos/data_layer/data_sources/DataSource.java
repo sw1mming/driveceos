@@ -65,7 +65,6 @@ public class DataSource {
         if (sections.size() > 0) {
             List<Object> section = sections.get(0);
             Integer index = section.indexOf(identifier);
-
             return index == indexPath.item;
         } else {
             return false;

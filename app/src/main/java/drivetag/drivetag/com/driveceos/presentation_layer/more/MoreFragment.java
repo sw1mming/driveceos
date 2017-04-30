@@ -18,6 +18,7 @@ import drivetag.drivetag.com.driveceos.business_layer.FacebookSignInFlow;
 import drivetag.drivetag.com.driveceos.presentation_layer.adapters.SignUpAdapter;
 import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.TableRow;
 import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.UserRow;
+import drivetag.drivetag.com.driveceos.presentation_layer.picker_fragment.ColorDialogFragment;
 
 public class MoreFragment extends Fragment {
 
@@ -194,12 +195,18 @@ public class MoreFragment extends Fragment {
 
     private ColorRow setupColorRow() {
         colorRow = new ColorRow();
-//        colorRow.selectionHandler = new TableRow.SelectionHandler() {
-//            @Override
-//            public void didSelectRow() {
-//                // TODO: show "Color" activity.
-//            }
-//        };
+        colorRow.selectionHandler = new TableRow.TableRowHandler() {
+            @Override
+            public void didSelectRow() {
+                ArrayList<String> colors = new ArrayList<>();
+                colors.add("#B0171F");
+                colors.add("#FF34B3");
+                colors.add("#9400D3");
+                colors.add("#0000FF");
+                colors.add("#00CDCD");
+                ColorDialogFragment.getInstance(colors).show(getFragmentManager(),"colors");
+            }
+        };
 
         return colorRow;
     }
