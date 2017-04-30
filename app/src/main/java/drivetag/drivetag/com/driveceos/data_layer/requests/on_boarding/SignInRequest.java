@@ -1,9 +1,11 @@
-package drivetag.drivetag.com.driveceos.data_layer.requests;
+package drivetag.drivetag.com.driveceos.data_layer.requests.on_boarding;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.HashMap;
 
+import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,7 +21,7 @@ import retrofit2.http.POST;
 
 public class SignInRequest extends ServerRequest {
 
-    private String accessToken;
+    public String accessToken;
 
     private String driveID;
 
@@ -37,10 +39,6 @@ public class SignInRequest extends ServerRequest {
     public void resumeWithCompletionHandler(ServerCompletionHandler handler) {
         final ServerCompletionHandler completionHandler = handler;
 
-//        Retrofit retrofit = getRetrofit();
-//
-//        SignInApi service = retrofit.create(SignInApi.class);
-
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("email", email);
         parameters.put("password", password);
@@ -50,19 +48,40 @@ public class SignInRequest extends ServerRequest {
         call.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                //jsonObject
-
                 final JsonObject jsonObject = response.body().getAsJsonObject();
 
-                if (JsonObjectHelper.hasValueFromKey("dt_access_token", jsonObject)) {
-                    accessToken = jsonObject.get("dt_access_token").getAsString();
-                }
+                if (!isSucceedResponse(jsonObject)) {
+                    isFailure = true;
 
-                if (JsonObjectHelper.hasValueFromKey("user_uid", jsonObject)) {
-                    driveID = jsonObject.get("user_uid").getAsString();
-                }
+                    if (!JsonObjectHelper.hasValueFromKey("fields_errors", jsonObject)) {
+                        JsonArray errors = jsonObject.getAsJsonArray("fields_errors");
 
-                completionHandler.completionHandler(getSignInRequest());
+                        if (errors.size() > 0) {
+                            JsonElement errorInfos = errors.get(0);
+
+                            if (errorInfos.isJsonArray()) {
+                                JsonArray errorInfo = errorInfos.getAsJsonArray();
+
+                                if (errorInfo.size() > 1) {
+                                    error = errorInfo.get(1).getAsString();
+                                }
+                            }
+                        }
+                    }
+
+                    completionHandler.completionHandlerWithError(error);
+
+                } else {
+                    if (JsonObjectHelper.hasValueFromKey("dt_access_token", jsonObject)) {
+                        accessToken = jsonObject.get("dt_access_token").getAsString();
+                    }
+
+                    if (JsonObjectHelper.hasValueFromKey("user_uid", jsonObject)) {
+                        driveID = jsonObject.get("user_uid").getAsString();
+                    }
+
+                    completionHandler.completionHandler(getSignInRequest());
+                }
             }
 
             @Override
@@ -77,9 +96,6 @@ public class SignInRequest extends ServerRequest {
         Retrofit retrofit = getRetrofit();
         service = retrofit.create(SignInApi.class);
     }
-
-    //overide method returns service
-        // init service
 
     private SignInRequest getSignInRequest() {
         return this;

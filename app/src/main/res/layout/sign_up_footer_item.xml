@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
+    android:layout_width="match_parent"
+    android:layout_height="125dp">
+
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_5"
+        android:text="Sign Up"
+        android:layout_marginTop="@dimen/inset_1"/>
+
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:text="By clicking Sign Up, you have read and agreed to all"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/terms_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text=">terms and policies"
+        android:layout_marginTop="@dimen/inset_1"/>
+
+</LinearLayout>

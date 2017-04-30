@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.balysv.materialripple.MaterialRippleLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/extended_edit_item_height"
+    android:background="@color/colorAccent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ghjgchjfghjgfh"
+            android:layout_gravity="start|top"
+            android:layout_marginLeft="@dimen/inset_1"
+            android:layout_marginStart="@dimen/inset_1"
+            android:layout_marginTop="@dimen/inset_1"
+            android:layout_marginEnd="@dimen/inset_1"
+            android:layout_marginRight="@dimen/inset_1"
+            android:background="@color/colorPrimary"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/suggestion_text_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="@dimen/inset_1"
+            android:layout_marginLeft="@dimen/inset_1"
+            android:layout_marginRight="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_below="@id/email_text_view">
+
+            <EditText
+                android:id="@+id/suggestion_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/action_bar_text_color"
+                android:textColorHint="@color/action_bar_text_color"
+                android:maxLines="1" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/inset_1"
+            android:src="@drawable/drive_enabled_icon"
+            android:layout_marginEnd="@dimen/inset_1"/>
+
+    </RelativeLayout>
+
+
+
+
+</com.balysv.materialripple.MaterialRippleLayout>

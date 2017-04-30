@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Driveceos</string>
+    <string name="facebook_app_id">1449444685312147</string>
+    <string name="twitter_customer_key">oLSyPYJvv2JyZ1GtlsM5fEULq</string>
+    <string name="twitter_customer_secret">69OyDQlunYfxJEGJ89ID6HiT5nyy9XlgYZVsK1A4ZiwaeIicTQ</string>
+
+    <string name="camera">Camera</string>
+    <string name="saved_photos">Saved photos</string>
+    <string name="delete_photo">Delete photo</string>
+
+    <string name="first_name">First Name</string>
+    <string name="mid_name">Mid Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="your_email">Your email</string>
+    <string name="password">password(combine 6 letters or numbers)</string>
+    <string name="first_mid_last_company">>FirstMidLast@company</string>
+    <string name="title">Title</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_feed">Feed</string>
+    <string name="title_teamups">Teamups</string>
+    <string name="title_notices">Notices</string>
+    <string name="title_mdt">MDT</string>
+    <string name="title_more">More</string>
 </resources>
