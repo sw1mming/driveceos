@@ -52,7 +52,7 @@ public class CommentsDataSource extends DataSource {
 
             @Override
             public void completionHandlerWithError(String error) {
-                completionHandlerWithError(error);
+                notifyListenersDidLoadItemsWithError(error);
             }
         });
     }
@@ -76,7 +76,7 @@ public class CommentsDataSource extends DataSource {
 
             @Override
             public void completionHandlerWithError(String error) {
-                completionHandlerWithError(error);
+                notifyListenersDidLoadItemsWithError(error);
             }
         });
     }
@@ -100,17 +100,13 @@ public class CommentsDataSource extends DataSource {
                     lastPage = true;
                     notifyListenersDidLoadItemsWithError(request.error);
                 } else {
-                    if (request.nextIndex == -1) {
-                        lastPage = true;
-                    } else {
-                        lastPage = false;
-                    }
+                    lastPage = request.nextIndex == -1;
 
                     startIndex = request.nextIndex;
 
                     List<Comment> section;
 
-                    if (sections.size() > 0) {
+                    if (!sections.isEmpty()) {
                         section = sections.get(0);
 
 

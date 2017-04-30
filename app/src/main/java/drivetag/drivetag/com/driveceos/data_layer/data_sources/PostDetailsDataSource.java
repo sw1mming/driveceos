@@ -10,7 +10,7 @@ import drivetag.drivetag.com.driveceos.data_layer.requests.post.LoadPostRequest;
 
 
 /**
- * Created by artem on 4/25/17.
+ * Created by artem.
  */
 
 public class PostDetailsDataSource extends DataSource {
@@ -52,7 +52,7 @@ public class PostDetailsDataSource extends DataSource {
 
             @Override
             public void completionHandlerWithError(String error) {
-                completionHandlerWithError(error);
+                notifyListenersDidLoadItemsWithError(error);
             }
         });
     }

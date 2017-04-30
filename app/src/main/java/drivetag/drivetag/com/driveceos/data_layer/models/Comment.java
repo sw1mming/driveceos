@@ -8,7 +8,7 @@ import java.util.List;
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 
 /**
- * Created by artem on 4/18/17.
+ * Created by artem.
  */
 
 public class Comment {
@@ -88,7 +88,7 @@ public class Comment {
         writerTag = Tag.tagById(currentWriterTagId, tags);
     }
 
-
+    // TODO: what?
     public void setVisible(boolean visible) {
         if (isHidden || isRemoved) {
             visible = true;

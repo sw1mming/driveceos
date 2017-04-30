@@ -54,11 +54,7 @@ public class DataSource {
     }
 
     public Boolean isInitialPage() {
-        if (page == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return page == 0;
     }
 
     public Boolean hasIdentifier(String identifier, IndexPath indexPath) {
@@ -70,11 +66,7 @@ public class DataSource {
             List<Object> section = sections.get(0);
             Integer index = section.indexOf(identifier);
 
-            if (index == indexPath.item) {
-                return true;
-            } else {
-                return false;
-            }
+            return index == indexPath.item;
         } else {
             return false;
         }
@@ -83,13 +75,13 @@ public class DataSource {
 
     /** - Listeners - */
 
-    public void addListener(Object listener) {
+    public void addListener(DataSourceListener listener) {
         if (!listeners.contains(listener)) {
-            listeners.add((DataSourceListener) listener);
+            listeners.add(listener);
         }
     }
 
-    public void removeListener(Object listener) {
+    public void removeListener(DataSourceListener listener) {
         if (listeners.contains(listener)) {
             listeners.remove(listener);
         }

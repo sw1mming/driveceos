@@ -52,7 +52,7 @@ public class SearchTagsDataSource extends DataSource {
 
                 @Override
                 public void completionHandlerWithError(String error) {
-                    completionHandlerWithError(error);
+                    notifyListenersDidLoadItemsWithError(error);
                 }
             });
         } else {
@@ -66,7 +66,7 @@ public class SearchTagsDataSource extends DataSource {
 
                 @Override
                 public void completionHandlerWithError(String error) {
-                    completionHandlerWithError(error);
+                    notifyListenersDidLoadItemsWithError(error);
                 }
             });
         }
@@ -82,7 +82,7 @@ public class SearchTagsDataSource extends DataSource {
 
             @Override
             public void completionHandlerWithError(String error) {
-                completionHandlerWithError(error);
+                notifyListenersDidLoadItemsWithError(error);
             }
         });
     }
@@ -92,11 +92,7 @@ public class SearchTagsDataSource extends DataSource {
             sections.add(tags);
         }
 
-        if (sections.size() > 0) {
-            hasObjects = true;
-        } else {
-            hasObjects = false;
-        }
+        hasObjects = sections.size() > 0;
 
         notifyListenersDidLoadItems();
     }

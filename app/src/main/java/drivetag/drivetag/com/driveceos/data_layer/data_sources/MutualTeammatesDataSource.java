@@ -1,7 +1,5 @@
 package drivetag.drivetag.com.driveceos.data_layer.data_sources;
 
-import com.google.gson.JsonArray;
-
 import java.util.ArrayList;
 
 import drivetag.drivetag.com.driveceos.data_layer.requests.MutualTeammatesRequest;
@@ -40,7 +38,7 @@ public class MutualTeammatesDataSource extends DataSource {
 
             @Override
             public void completionHandlerWithError(String error) {
-                completionHandlerWithError(error);
+                notifyListenersDidLoadItemsWithError(error);
             }
         });
     }

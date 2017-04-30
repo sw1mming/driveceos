@@ -1,19 +1,13 @@
 package drivetag.drivetag.com.driveceos.data_layer.data_sources;
 
-import android.renderscript.Element;
-
-import com.google.gson.JsonArray;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 import drivetag.drivetag.com.driveceos.data_layer.IndexPath;
 import drivetag.drivetag.com.driveceos.data_layer.UserStorage;
 import drivetag.drivetag.com.driveceos.data_layer.models.Tag;
 import drivetag.drivetag.com.driveceos.data_layer.requests.MdtRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.PublicPostToMeRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.helpers.Constants;
 import drivetag.drivetag.com.driveceos.utils.ListUtils;
@@ -107,11 +101,7 @@ public class MDTDataSource extends DataSource {
                     notifyListenersDidLoadItemsWithError(request.error);
                     return;
                 } else {
-                    if (request.nextIndex.equals(-1)) {
-                        lastPage = true;
-                    } else {
-                        lastPage = false;
-                    }
+                    lastPage = request.nextIndex.equals(-1);
                 }
 
                 startIndex = request.startIndex;

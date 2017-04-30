@@ -126,11 +126,7 @@ public class PeopleDrivingDataSource extends DataSource {
                     page--;
                     notifyListenersDidLoadItemsWithError(request.error);
                 } else {
-                    if (request.nextTime.equals(-1)) {
-                        lastPage = true;
-                    } else {
-                        lastPage = false;
-                    }
+                    lastPage = request.nextTime.equals(-1);
 
                     ListUtils.addObjects((List) request.serverResponse, sections);
 
@@ -146,10 +142,6 @@ public class PeopleDrivingDataSource extends DataSource {
 
     @Override
     public Boolean isInitialPage() {
-        if (page == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return page == 1;
     }
 }

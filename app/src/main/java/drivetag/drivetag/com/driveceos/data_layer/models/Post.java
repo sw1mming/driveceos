@@ -2,10 +2,9 @@ package drivetag.drivetag.com.driveceos.data_layer.models;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.internal.Streams;
 
-import drivetag.drivetag.com.driveceos.data_layer.models.Comment;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -154,7 +153,7 @@ public class Post {
         postPreferences = new PostPreferences(jsonObject);
 
         URL url = null; // TODO: method with current url (vimeo or youtube).
-
+// TODO: what?
         if (url != null) {
             videoURLs.add(url.toString());
         }
@@ -164,13 +163,14 @@ public class Post {
             commentDictionary = jsonObject.getAsJsonObject("comments");
         }
 
-        List<JsonArray> commentsValue = null;
+        // TODO: correct initialisation, check null pointer
+        List<JsonArray> commentsValue = new ArrayList<>();
         if (JsonObjectHelper.hasValueFromKey("comments", commentDictionary)) {
             JsonArray array = commentDictionary.get("comments").getAsJsonArray();
             commentsValue.set(0, array);// <- todo: check, is it right?
         }
 
-        if (commentsValue != null && commentsValue.size() > 0) {
+        if (commentsValue.size() > 0) {
             for (int index = commentsValue.size() - 1; index > -1; index--) {
                 JsonArray commentArray = commentsValue.get(index);
                 JsonObject commentInfo = commentArray.get(1).getAsJsonObject();
@@ -206,13 +206,11 @@ public class Post {
 
 
     public static Post postById (Number postId, List<Post> posts) {
-
         for (Post post : posts) {
-            if (post.identifier.equals(postId)) {
+            if (post.identifier.equals(postId.toString())) {
                 return post;
             }
         }
-
         return null;
     }
 
@@ -220,14 +218,6 @@ public class Post {
         JsonObject prefs = postInfo.get("prefs").getAsJsonObject();
         boolean hide = prefs.get("hide_flag").getAsBoolean();
         boolean remove = prefs.get("remove_flag").getAsBoolean();
-
-        boolean result;
-        if (hide || remove) {
-            result = true;
-        } else {
-            result = false;
-        }
-
-        return result;
+        return hide || remove;
     }
 }
