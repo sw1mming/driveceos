@@ -4,4 +4,10 @@
     android:layout_height="match_parent"
     android:background="#0099cc"
     tools:context="drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.ForgotPasswordActivity">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/more_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 </FrameLayout>

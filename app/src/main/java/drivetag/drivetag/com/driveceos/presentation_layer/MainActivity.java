@@ -7,7 +7,6 @@ import android.view.MenuItem;
 
 import drivetag.drivetag.com.driveceos.R;
 import drivetag.drivetag.com.driveceos.presentation_layer.feed.FeedFragment;
-import drivetag.drivetag.com.driveceos.presentation_layer.linked_in_login_fragment.LinkedInLoginFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.mdt.MDTFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.more.MoreFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.notices.NoticesFragment;
@@ -48,7 +47,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        replaceFragment(LinkedInLoginFragment.newInstance("Navigate to Linked screen"));
-//        replaceFragment(MoreFragment.newInstance("Navigate to Feed screen"));
+//        replaceFragment(LinkedInLoginFragment.newInstance("Navigate to Linked screen"));
+        replaceFragment(MoreFragment.newInstance("Navigate to Feed screen"));
     }
 }
