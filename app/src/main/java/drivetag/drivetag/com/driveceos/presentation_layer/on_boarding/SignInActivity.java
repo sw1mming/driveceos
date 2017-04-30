@@ -19,6 +19,8 @@ import drivetag.drivetag.com.driveceos.DTApplication;
 import drivetag.drivetag.com.driveceos.R;
 import drivetag.drivetag.com.driveceos.business_layer.FacebookSignInFlow;
 import drivetag.drivetag.com.driveceos.business_layer.SignInFlow;
+import drivetag.drivetag.com.driveceos.business_layer.TwitterSignInFlow;
+import drivetag.drivetag.com.driveceos.data_layer.models.User;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.presentation_layer.BaseActivity;
 import drivetag.drivetag.com.driveceos.presentation_layer.MainActivity;
@@ -37,8 +39,6 @@ public class SignInActivity extends BaseActivity {
     private Button signInButton;
 
     private Button signUpButton;
-
-    private ImageButton twitterButton;
 
     private ImageButton linkedInButton;
 
@@ -75,18 +75,38 @@ public class SignInActivity extends BaseActivity {
 //        });
     }
 
+    public void twitterClick(View view) {
+       new TwitterSignInFlow((DTApplication) getApplication(), new TwitterSignInFlow.FlowCompletionHandler() {
+           @Override
+           public void completionHandler(User user, String error) {
+               // TODO: 30.04.2017  move
+           }
+
+           @Override
+           public void completionHandlerWithError(String error) {
+
+           }
+
+           @Override
+           public void switchCompletionHandler(User user) {
+
+           }
+       }).resumeWithCompletionHandler(this);
+    }
+
     public void facebookClick(View view) {
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
     }
 
-    /** Private. */
+    /**
+     * Private.
+     */
 
     private void setupViews() {
         emailEditText = (EditText) findViewById(R.id.email_edit_text);
         passwordEditText = (EditText) findViewById(R.id.password_edit_text);
         signInButton = (Button) findViewById(R.id.sign_in_button);
         signUpButton = (Button) findViewById(R.id.sign_up_button);
-        twitterButton = (ImageButton) findViewById(R.id.twitter_image_button);
         linkedInButton = (ImageButton) findViewById(R.id.linked_in_image_button);
         forgotPasswordTextView = (TextView) findViewById(R.id.forgot_password_text_view);
     }
@@ -129,13 +149,6 @@ public class SignInActivity extends BaseActivity {
     }
 
     private void socialsActions() {
-        twitterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(SignInActivity.this, "twitter api", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         linkedInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,6 +160,6 @@ public class SignInActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        facebookSignInFlow.onActivityResult(requestCode,resultCode, data );
+        facebookSignInFlow.onActivityResult(requestCode, resultCode, data);
     }
 }

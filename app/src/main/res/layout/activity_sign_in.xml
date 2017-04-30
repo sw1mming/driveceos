@@ -144,6 +144,7 @@
                     android:layout_marginStart="10dp"
                     android:scaleType="fitCenter"
                     android:padding="0sp"
+                    android:onClick="twitterClick"
                     android:adjustViewBounds="true"
                     android:src="@drawable/twitter_enabled_icon"/>
 
