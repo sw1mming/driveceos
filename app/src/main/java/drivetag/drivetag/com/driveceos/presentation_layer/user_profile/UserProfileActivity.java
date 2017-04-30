@@ -22,7 +22,7 @@ import drivetag.drivetag.com.driveceos.presentation_layer.alert_dialog.AlertDial
 import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.suggestions.SuggestionsActivity;
 
 /**
- * Created by sergeymelnik on 2017-03-27.
+ * Created by sergeymelnik.
  */
 
 public class UserProfileActivity extends BaseActivity {
@@ -153,7 +153,7 @@ public class UserProfileActivity extends BaseActivity {
                 e.printStackTrace();
             }
         } else if (requestCode == REQUEST_SELECTED_SUGGESTION && resultCode == RESULT_OK) {
-            adapter.suggestionText = data.getStringExtra(SuggestionsActivity.SUGGESTION_SELECTED_KEY);;
+            adapter.suggestionText = data.getStringExtra(SuggestionsActivity.SUGGESTION_SELECTED_KEY);
             adapter.notifyDataSetChanged();
         }
     }
@@ -188,6 +188,7 @@ public class UserProfileActivity extends BaseActivity {
 
     private void setupActionBar() {
         TextView titleActionBarTextView = (TextView) findViewById(R.id.action_bar_title_text_view);
-        titleActionBarTextView.setText("User Profile");
+        final String titleText = "User Profile";
+        titleActionBarTextView.setText(titleText);
     }
 }

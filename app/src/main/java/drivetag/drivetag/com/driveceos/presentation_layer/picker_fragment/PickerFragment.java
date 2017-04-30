@@ -9,13 +9,12 @@ import android.view.ViewGroup;
 
 import com.webianks.library.scroll_choice.ScrollChoice;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import drivetag.drivetag.com.driveceos.R;
 
 /**
- * Created by sergeymelnik on 2017-04-04.
+ * Created by sergeymelnik.
  */
 
 public class PickerFragment extends Fragment {
@@ -23,8 +22,6 @@ public class PickerFragment extends Fragment {
     public PickerFragmentHandler handler;
 
     private ScrollChoice scrollChoice;
-
-    private List<String> dataArray;
 
     @Nullable
     @Override
@@ -53,7 +50,7 @@ public class PickerFragment extends Fragment {
     public void setContentArray(List<String> contentArray) {
         if (scrollChoice != null) {
             int initialSelectedItem = 1;
-            dataArray = contentArray;
+            List<String> dataArray = contentArray;
             scrollChoice.addItems(dataArray, initialSelectedItem);
         }
     }

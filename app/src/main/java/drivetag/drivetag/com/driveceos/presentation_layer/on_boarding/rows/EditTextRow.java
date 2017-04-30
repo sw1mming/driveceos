@@ -7,16 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
+
 import drivetag.drivetag.com.driveceos.R;
 
 /**
- * Created by sergeymelnik on 2017-03-30.
+ * Created by sergeymelnik.
  */
 
 public class EditTextRow extends TableRow {
 
-    public String enteredText;
+    String enteredText;
 
     public EditTextRowHandler didEnterTextHandler;
 
@@ -28,9 +28,7 @@ public class EditTextRow extends TableRow {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View editTextView = LayoutInflater.from(parent.getContext()).inflate(R.layout.edit_text_item, parent, false);
-        EditTextViewHolder editTextViewHolder = new EditTextViewHolder(editTextView);
-
-        return editTextViewHolder;
+        return new EditTextViewHolder(editTextView);
     }
 
     @Override

@@ -12,10 +12,10 @@ import drivetag.drivetag.com.driveceos.presentation_layer.BaseActivity;
 import drivetag.drivetag.com.driveceos.R;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.data_layer.requests.user_profile.suggestions.LoadSuggestionsListRequest;
-import drivetag.drivetag.com.driveceos.presentation_layer.adapters.SuggectionsAdapter;
+import drivetag.drivetag.com.driveceos.presentation_layer.adapters.SuggestionsAdapter;
 
 /**
- * Created by sergeymelnik on 2017-03-28.
+ * Created by sergeymelnik.
  */
 
 public class SuggestionsActivity extends BaseActivity {
@@ -24,7 +24,7 @@ public class SuggestionsActivity extends BaseActivity {
 
     private LoadSuggestionsListRequest suggestionsListRequest;
 
-    private SuggectionsAdapter adapter;
+    private SuggestionsAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,9 +45,9 @@ public class SuggestionsActivity extends BaseActivity {
     }
 
     private void setupAdapter() {
-        adapter = new SuggectionsAdapter();
+        adapter = new SuggestionsAdapter();
 
-        adapter.handler = new SuggectionsAdapter.SuggestionsAdapterHandler() {
+        adapter.handler = new SuggestionsAdapter.SuggestionsAdapterHandler() {
             @Override
             public void didSelectSuggestion(String suggestion) {
                 Intent intent = new Intent();

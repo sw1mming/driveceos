@@ -6,11 +6,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.EditTextRow;
 import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.TableRow;
 
 /**
- * Created by sergeymelnik on 2017-03-28.
+ * Created by sergeymelnik.
  */
 
 public class SignUpAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

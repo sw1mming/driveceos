@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 /**
- * Created by sergeymelnik on 2017-03-30.
+ * Created by sergeymelnik.
  */
 
 public class TableRow {

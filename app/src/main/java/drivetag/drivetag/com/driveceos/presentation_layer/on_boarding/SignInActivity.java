@@ -59,8 +59,10 @@ public class SignInActivity extends BaseActivity {
         fillViews();
         facebookSignInFlow = new FacebookSignInFlow((DTApplication) getApplicationContext());
 
-        emailEditText.setText("rayban@mailinator.com");
-        passwordEditText.setText("qwe123546");
+        final String login = "rayban@mailinator.com";
+        final String password = "qwe123546";
+        emailEditText.setText(login);
+        passwordEditText.setText(password);
 //        PublicPostToMeRequest request = new PublicPostToMeRequest(true);
 //        request.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
 //            @Override

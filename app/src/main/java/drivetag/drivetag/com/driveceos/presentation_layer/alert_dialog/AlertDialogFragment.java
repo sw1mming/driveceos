@@ -2,16 +2,14 @@ package drivetag.drivetag.com.driveceos.presentation_layer.alert_dialog;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 
 import drivetag.drivetag.com.driveceos.R;
 
 /**
- * Created by sergeymelnik on 2017-03-29.
+ * Created by sergeymelnik.
  */
 
 public class AlertDialogFragment extends android.app.DialogFragment {

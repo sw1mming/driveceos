@@ -12,7 +12,7 @@ import android.widget.EditText;
 import drivetag.drivetag.com.driveceos.R;
 
 /**
- * Created by sergeymelnik on 2017-04-05.
+ * Created by sergeymelnik.
  */
 
 public class VerificationRow extends EditTextRow {
@@ -22,9 +22,7 @@ public class VerificationRow extends EditTextRow {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View verificationView = LayoutInflater.from(parent.getContext()).inflate(R.layout.verification_item, parent, false);
-        VerificationViewHolder verificationViewHolder = new VerificationViewHolder(verificationView);
-
-        return verificationViewHolder;
+        return new VerificationViewHolder(verificationView);
     }
 
     @Override

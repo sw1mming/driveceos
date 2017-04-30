@@ -10,16 +10,14 @@ import android.widget.TextView;
 import drivetag.drivetag.com.driveceos.R;
 
 /**
- * Created by artem on 4/3/17.
+ * Created by artem.
  */
-
 public class UserRow extends TableRow {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View userView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item, parent, false);
-        UserViewHolder userViewHolder = new UserViewHolder(userView);
-        return userViewHolder;
+        return new UserViewHolder(userView);
     }
 
     @Override

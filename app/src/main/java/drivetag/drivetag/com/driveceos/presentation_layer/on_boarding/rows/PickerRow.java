@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * Created by sergeymelnik on 2017-04-05.
+ * Created by sergeymelnik.
  */
 
 public class PickerRow extends EditTextRow {

@@ -12,10 +12,9 @@ import java.util.List;
 import drivetag.drivetag.com.driveceos.R;
 
 /**
- * Created by sergeymelnik on 2017-03-28.
+ * Created by sergeymelnik.
  */
-
-public class SuggectionsAdapter extends RecyclerView.Adapter<SuggectionsAdapter.ViewHolder> {
+public class SuggestionsAdapter extends RecyclerView.Adapter<SuggestionsAdapter.ViewHolder> {
 
     public List<String> suggestionsArray;
 
@@ -24,9 +23,8 @@ public class SuggectionsAdapter extends RecyclerView.Adapter<SuggectionsAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.suggestion_item, parent, false);
-        SuggectionsAdapter.ViewHolder viewHolder = new SuggectionsAdapter.ViewHolder(view);
 
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override

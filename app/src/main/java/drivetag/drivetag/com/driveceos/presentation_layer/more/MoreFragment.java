@@ -88,7 +88,7 @@ public class MoreFragment extends Fragment {
         userRow = new UserRow();
 //        userRow.selectionHandler = new TableRow.SelectionHandler() {
 //            @Override
-//            public void didSelectRow() {
+//            public void di1dSelectRow() {
 //                // TODO: handle selection on user row.
 //            }
 //        };

@@ -39,7 +39,7 @@ import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.Verif
 import drivetag.drivetag.com.driveceos.presentation_layer.picker_fragment.PickerFragment;
 
 /**
- * Created by artem on 3/24/17.
+ * Created by artem.
  */
 
 public class SignUpActivity extends BaseActivity {
@@ -74,9 +74,7 @@ public class SignUpActivity extends BaseActivity {
 
     private LinearLayout pickerContainer;
 
-    private PickerFragment pickerFragment;
-
-//    private List<String> freeDriveTags;
+    //    private List<String> freeDriveTags;
 
 //    private List<String> titles;
 
@@ -407,7 +405,7 @@ public class SignUpActivity extends BaseActivity {
     }
 
     private void showPickerWithContentArray(final List<String> contentArray) {
-        pickerFragment = (PickerFragment) getFragmentManager().findFragmentById(R.id.picker_fragment);
+        PickerFragment pickerFragment = (PickerFragment) getFragmentManager().findFragmentById(R.id.picker_fragment);
         pickerFragment.handler = new PickerFragment.PickerFragmentHandler() {
             @Override
             public void didSelectItemString(String itemString) {

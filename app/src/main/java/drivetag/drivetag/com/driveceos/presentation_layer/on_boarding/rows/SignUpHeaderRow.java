@@ -11,7 +11,7 @@ import android.widget.TextView;
 import drivetag.drivetag.com.driveceos.R;
 
 /**
- * Created by sergeymelnik on 2017-03-30.
+ * Created by sergeymelnik.
  */
 
 public class SignUpHeaderRow extends TableRow {
@@ -21,9 +21,7 @@ public class SignUpHeaderRow extends TableRow {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View editTextView = LayoutInflater.from(parent.getContext()).inflate(R.layout.sign_up_header_item, parent, false);
-        SignUpHeaderViewHolder editTextViewHolder = new SignUpHeaderViewHolder(editTextView);
-
-        return editTextViewHolder;
+        return new SignUpHeaderViewHolder(editTextView);
     }
 
     @Override

@@ -1,25 +1,17 @@
 package drivetag.drivetag.com.driveceos.presentation_layer;
 
 import android.app.Activity;
-import android.graphics.Typeface;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.widget.TextView;
 
 import drivetag.drivetag.com.driveceos.R;
 
 /**
- * Created by artem on 3/24/17.
+ * Created by artem.
  */
 
 public class BaseActivity extends Activity {
-    public void configureActionBar() {
-        TextView actionBar = (TextView) findViewById(R.id.actionBar);
-        Typeface actionBarFont = Typeface.createFromAsset(getAssets(), "fonts/Courgette_Regular.otf");
-        actionBar.setTypeface(actionBarFont);
-    }
-
     /**
      * Put fragment into container. R.id.content
      * By default: without fragment name and putting into back stack
@@ -28,17 +20,6 @@ public class BaseActivity extends Activity {
      */
     protected void replaceFragment(Fragment fragment) {
         replaceFragment(fragment, R.id.content, false, null);
-    }
-
-    /**
-     * Put fragment into container.
-     * By default: without fragment name and putting into back stack
-     *
-     * @param fragment    Fragment support v4
-     * @param containerId int id container for fragment
-     */
-    protected void replaceFragment(Fragment fragment, int containerId) {
-        replaceFragment(fragment, containerId, false, null);
     }
 
     /**
