@@ -41,8 +41,8 @@ class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTextView;
-        ImageView colorImageView;
+        private TextView titleTextView;
+        private ImageView colorImageView;
 
         ViewHolder(View v) {
             super(v);
