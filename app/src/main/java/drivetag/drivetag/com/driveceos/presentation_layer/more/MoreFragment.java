@@ -198,13 +198,23 @@ public class MoreFragment extends Fragment {
         colorRow.selectionHandler = new TableRow.TableRowHandler() {
             @Override
             public void didSelectRow() {
+                // TODO: figure out
                 ArrayList<String> colors = new ArrayList<>();
                 colors.add("#B0171F");
                 colors.add("#FF34B3");
                 colors.add("#9400D3");
                 colors.add("#0000FF");
                 colors.add("#00CDCD");
-                ColorDialogFragment.getInstance(colors).show(getFragmentManager(),"colors");
+                final ColorDialogFragment colorDialog = ColorDialogFragment.getInstance(colors);
+                colorDialog.setListener(new ColorDialogFragment.ColorClickListener() {
+                    @Override
+                    public void onColorClick(String color) {
+                        colorDialog.dismiss();
+                        Toast.makeText(getActivity(), "Selected = " + color, Toast.LENGTH_SHORT).show();
+                        colorRow.title = color;
+                    }
+                });
+                colorDialog.show(getFragmentManager(),"colors");
             }
         };
 

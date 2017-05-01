@@ -15,9 +15,11 @@ import drivetag.drivetag.com.driveceos.R;
 class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> {
 
     private ArrayList<String> colors;
+    private ColorDialogFragment.ColorClickListener colorClickListener;
 
-    ColorAdapter(ArrayList<String> inputStringList) {
+    ColorAdapter(ArrayList<String> inputStringList, ColorDialogFragment.ColorClickListener pColorClickListener) {
         colors= new ArrayList<>(inputStringList);
+        this.colorClickListener = pColorClickListener;
     }
 
     @Override
@@ -30,8 +32,7 @@ class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String color = colors.get(position);
-        holder.titleTextView.setText(color);
-        holder.colorImageView.setBackgroundColor(Color.parseColor(color));
+        holder.bind(color);
     }
 
     @Override
@@ -47,6 +48,21 @@ class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> {
             super(v);
             titleTextView = (TextView) v.findViewById(R.id.title_text_view);
             colorImageView = (ImageView) v.findViewById(R.id.color_image_view);
+        }
+
+        void bind(String color) {
+            titleTextView.setText(color);
+            colorImageView.setBackgroundColor(Color.parseColor(color));
+            itemView.setTag(color);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Object tag = v.getTag();
+                    if(tag != null) {
+                        colorClickListener.onColorClick(tag.toString());
+                    }
+                }
+            });
         }
     }
 }

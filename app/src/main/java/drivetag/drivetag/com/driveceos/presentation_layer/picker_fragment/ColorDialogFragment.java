@@ -22,6 +22,7 @@ import drivetag.drivetag.com.driveceos.R;
 public class ColorDialogFragment extends DialogFragment {
 
     private static String ARG = "COLOR_LIST";
+    private ColorClickListener colorClickListener;
 
     public static ColorDialogFragment getInstance(ArrayList<String> colors) {
         Bundle bundle = new Bundle();
@@ -29,6 +30,10 @@ public class ColorDialogFragment extends DialogFragment {
         ColorDialogFragment colorDialogFragment = new ColorDialogFragment();
         colorDialogFragment.setArguments(bundle);
         return colorDialogFragment;
+    }
+
+    public void setListener(ColorClickListener pColorClickListener) {
+        colorClickListener = pColorClickListener;
     }
 
     @Nullable
@@ -44,7 +49,7 @@ public class ColorDialogFragment extends DialogFragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.info_recycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        ColorAdapter infoAdapter = new ColorAdapter(colors);
+        ColorAdapter infoAdapter = new ColorAdapter(colors, colorClickListener);
         recyclerView.setAdapter(infoAdapter);
     }
 
@@ -62,5 +67,9 @@ public class ColorDialogFragment extends DialogFragment {
                 new ColorDrawable(Color.TRANSPARENT));
         window.setGravity(Gravity.CENTER);
         return dialog;
+    }
+
+    public interface ColorClickListener {
+        void onColorClick(String color);
     }
 }
