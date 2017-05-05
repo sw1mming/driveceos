@@ -21,7 +21,7 @@ public class VerificationRow extends EditTextRow {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View verificationView = LayoutInflater.from(parent.getContext()).inflate(R.layout.verification_item, parent, false);
+        View verificationView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_verification, parent, false);
         return new VerificationViewHolder(verificationView);
     }
 

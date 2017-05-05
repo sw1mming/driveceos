@@ -18,7 +18,7 @@ public class DriveOnHeaderRow extends TableRow {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View driveOnView = LayoutInflater.from(parent.getContext()).inflate(R.layout.drive_on_header_item, parent, false);
+        View driveOnView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_drive_on_header, parent, false);
         return new DriveOnHeaderHolder(driveOnView);
     }
 

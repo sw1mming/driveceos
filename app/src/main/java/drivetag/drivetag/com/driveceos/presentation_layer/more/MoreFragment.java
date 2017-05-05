@@ -1,8 +1,9 @@
 package drivetag.drivetag.com.driveceos.presentation_layer.more;
 
+import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,9 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import drivetag.drivetag.com.driveceos.DTApplication;
 import drivetag.drivetag.com.driveceos.R;
 import drivetag.drivetag.com.driveceos.business_layer.FacebookSignInFlow;
 import drivetag.drivetag.com.driveceos.presentation_layer.adapters.SignUpAdapter;
@@ -239,34 +244,25 @@ public class MoreFragment extends Fragment {
         socialSwitchRow = new SocialSwitchRow();
         socialSwitchRow.title = "Facebook";
 
-//        socialSwitchRow.selectionHandler = new TableRow.SelectionHandler() {
-//            @Override
-//            public void didSelectRow() {
-//                DTApplication DTApplication = (DTApplication)getApplicationContext();
-//
-//                UserStorage userStorage = DTApplication.userStorage;
-//
-//                facebookSignInFlow = new FacebookSignInFlow(getApplicationContext(), userStorage);
-//                facebookSignInFlow.resumeWithCompletionHandler(new FacebookSignInFlow.FlowCompletionHandler() {
-//                    @Override
-//                    public void completionHandler(FacebookSignInFlow flow, User user, String error) {
-//                        System.out.println();
-//                    }
-//
-//                    @Override
-//                    public void completionHandlerWithError(String error) {
-//                        System.out.println();
-//                    }
-//
-//                    @Override
-//                    public void switchCompletionHandler(FacebookSignInFlow flow, User user) {
-//                        System.out.println();
-//                    }
-//                });
-//            }
-//        };
+        socialSwitchRow.selectionHandler = new TableRow.TableRowHandler() {
+            @Override
+            public void didSelectRow() {
+                DTApplication DTApplication = (DTApplication)getActivity().getApplicationContext();
+                facebookSignInFlow = new FacebookSignInFlow(DTApplication);
+                facebookSignInFlow.registerFacebookCallback();
+                LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList("public_profile"));
+            }
+        };
 
         return socialSwitchRow;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(facebookSignInFlow != null) {
+            facebookSignInFlow.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private SocialSwitchRow setupLinkedInSwitchRow() {

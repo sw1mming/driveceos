@@ -50,4 +50,7 @@ public class MainActivity extends BaseActivity {
 //        replaceFragment(LinkedInLoginFragment.newInstance("Navigate to Linked screen"));
         replaceFragment(MoreFragment.newInstance("Navigate to Feed screen"));
     }
+    public void loginFacebook() {
+
+    }
 }

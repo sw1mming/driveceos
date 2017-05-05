@@ -46,19 +46,19 @@ public class UserProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case 0:
-                View coverPhotoView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cover_photo_item, parent, false);
+                View coverPhotoView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cover_photo, parent, false);
                 return new CoverPhotoViewHolder(coverPhotoView);
 
             case 1:
-                View userProfileView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_profile_item, parent, false);
+                View userProfileView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user_profile, parent, false);
                 return new UserProfileViewHolder(userProfileView);
 
             case 2:
-                View extendedView = LayoutInflater.from(parent.getContext()).inflate(R.layout.extended_edit_item, parent, false);
+                View extendedView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_extended_edit, parent, false);
                 return new ExtendedEditViewHolder(extendedView);
 
             case 3:
-                View myPagePhotoView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cover_photo_item, parent, false);
+                View myPagePhotoView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cover_photo, parent, false);
                 return new CoverPhotoViewHolder(myPagePhotoView);
         }
 

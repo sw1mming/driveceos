@@ -8,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import drivetag.drivetag.com.driveceos.R;
-import drivetag.drivetag.com.driveceos.data_layer.requests.PublicPostToMeRequest;
-import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.TableRow;
 
 /**
@@ -22,7 +20,7 @@ public class CheckMarkRow extends TableRow {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View checkMarkView = LayoutInflater.from(parent.getContext()).inflate(R.layout.check_mark_item, parent, false);
+        View checkMarkView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_check_mark, parent, false);
         CheckMarkHolder checkMarkHolder = new CheckMarkHolder(checkMarkView);
         return checkMarkHolder;
     }

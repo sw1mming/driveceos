@@ -18,7 +18,7 @@ public class ColorRow extends TableRow {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View colorView = LayoutInflater.from(parent.getContext()).inflate(R.layout.color_item, parent, false);
+        View colorView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_color, parent, false);
         return new ColorHolder(colorView);
     }
 

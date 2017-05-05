@@ -27,7 +27,7 @@ public class EditTextRow extends TableRow {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View editTextView = LayoutInflater.from(parent.getContext()).inflate(R.layout.edit_text_item, parent, false);
+        View editTextView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_edit_text, parent, false);
         return new EditTextViewHolder(editTextView);
     }
 

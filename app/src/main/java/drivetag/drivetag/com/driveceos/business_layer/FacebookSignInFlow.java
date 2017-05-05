@@ -38,7 +38,10 @@ public class FacebookSignInFlow extends LoginFlow {
     public FacebookSignInFlow(final DTApplication context) {
         super(context);
         callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+    }
+
+    public void registerFacebookCallback() {
+        registerFacebookCallback(new FacebookCallback<LoginResult>() {
 
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -68,6 +71,10 @@ public class FacebookSignInFlow extends LoginFlow {
                 Toast.makeText(context, "error to Login Facebook", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void registerFacebookCallback(FacebookCallback<LoginResult> callback) {
+        LoginManager.getInstance().registerCallback(callbackManager, callback);
     }
 
     public void resumeWithCompletionHandler(LoginResult loginResult, final FacebookSignInFlow.FlowCompletionHandler handler) {

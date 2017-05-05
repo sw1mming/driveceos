@@ -17,7 +17,7 @@ public class MyAccountHeaderRow extends TableRow {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View myAccountView = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_account_header_item, parent, false);
+        View myAccountView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_my_account_header, parent, false);
         MyAccountHeaderHolder myAccountHeaderHolder = new MyAccountHeaderHolder(myAccountView);
         return myAccountHeaderHolder;
     }

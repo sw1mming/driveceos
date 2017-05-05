@@ -58,7 +58,7 @@ public class SignInActivity extends BaseActivity {
         setupViews();
         fillViews();
         facebookSignInFlow = new FacebookSignInFlow((DTApplication) getApplicationContext());
-
+        facebookSignInFlow.registerFacebookCallback();
         final String login = "rayban@mailinator.com";
         final String password = "qwe123546";
         emailEditText.setText(login);

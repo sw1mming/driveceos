@@ -18,7 +18,7 @@ public class SignUpFooterRow extends TableRow {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View editTextView = LayoutInflater.from(parent.getContext()).inflate(R.layout.sign_up_footer_item, parent, false);
+        View editTextView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sign_up_footer, parent, false);
         return new SignUpFooterViewHolder(editTextView);
     }
 

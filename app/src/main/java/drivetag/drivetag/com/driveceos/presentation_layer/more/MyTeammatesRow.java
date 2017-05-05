@@ -18,7 +18,7 @@ public class MyTeammatesRow extends TableRow {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View teammatesView = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_teammates_item, parent, false);
+        View teammatesView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_my_teammates, parent, false);
         MyTeammatesHolder myTeammatesHolder = new MyTeammatesHolder(teammatesView);
         return myTeammatesHolder;
     }

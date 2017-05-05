@@ -1,7 +1,5 @@
 package drivetag.drivetag.com.driveceos.presentation_layer.more;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +19,7 @@ public class SocialSwitchRow extends TableRow {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View socialSwitchView = LayoutInflater.from(parent.getContext()).inflate(R.layout.social_switch_item, parent, false);
+        View socialSwitchView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_social_switch, parent, false);
         return new SocialSwitchHolder(socialSwitchView);
     }
 
