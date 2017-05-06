@@ -24,4 +24,6 @@
     <!--login-->
     <dimen name="social_image_size">36dp</dimen>
     <dimen name="social_image_margin">6dp</dimen>
+    <dimen name="title_input_fields_size">12sp</dimen>
+
 </resources>
