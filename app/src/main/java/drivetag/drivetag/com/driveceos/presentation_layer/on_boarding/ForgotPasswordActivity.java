@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import drivetag.drivetag.com.driveceos.R;
+import drivetag.drivetag.com.driveceos.data_layer.requests.ForgotPasswordRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
@@ -23,7 +25,18 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     public void sendClick(View view) {
         final String email = ((EditText) findViewById(R.id.email_edit_text)).getText().toString();
-        Toast.makeText(this, "Isn't ready yet", Toast.LENGTH_SHORT).show();
+        new ForgotPasswordRequest(email).resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+            @Override
+            public void completionHandler(ServerRequest request) {
+                Toast.makeText(ForgotPasswordActivity.this, "Email has been sent!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            @Override
+            public void completionHandlerWithError(String error) {
+                Toast.makeText(ForgotPasswordActivity.this, error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void cancelClick(View view) {
