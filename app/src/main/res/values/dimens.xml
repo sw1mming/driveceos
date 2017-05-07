@@ -26,4 +26,7 @@
     <dimen name="social_image_margin">6dp</dimen>
     <dimen name="title_input_fields_size">12sp</dimen>
 
+    <!--profile-->
+    <dimen name="add_frame_height">96dp</dimen>
+    <dimen name="profileImageSize">56dp</dimen>
 </resources>

@@ -25,6 +25,7 @@ import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.suggestio
  * Created by sergeymelnik.
  */
 
+@Deprecated
 public class UserProfileActivity extends BaseActivity {
 
     private final static int COVER_PHOTO_INDEX = 0;

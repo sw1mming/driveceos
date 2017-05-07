@@ -7,13 +7,16 @@
     android:orientation="vertical"
     tools:context="drivetag.drivetag.com.driveceos.presentation_layer.MainActivity">
 
+    <include
+        layout="@layout/action_bar_full"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"/>
+
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
-    </FrameLayout>
+        android:layout_weight="1"/>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

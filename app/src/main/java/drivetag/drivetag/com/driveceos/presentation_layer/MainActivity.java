@@ -11,6 +11,7 @@ import drivetag.drivetag.com.driveceos.presentation_layer.mdt.MDTFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.more.MoreFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.notices.NoticesFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.teamups.TeamUpsFragment;
+import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.ProfileFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -48,7 +49,8 @@ public class MainActivity extends BaseActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 //        replaceFragment(LinkedInLoginFragment.newInstance("Navigate to Linked screen"));
-        replaceFragment(MoreFragment.newInstance("Navigate to Feed screen"));
+//        replaceFragment(MoreFragment.newInstance("Navigate to Feed screen"));
+        replaceFragment(ProfileFragment.newInstance());
     }
     public void loginFacebook() {
 

@@ -23,11 +23,6 @@ import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
 import drivetag.drivetag.com.driveceos.presentation_layer.BaseActivity;
 import drivetag.drivetag.com.driveceos.presentation_layer.MainActivity;
 
-
-/**
- * Created by artem.
- */
-
 public class SignInActivity extends BaseActivity {
 
     private FacebookSignInFlow facebookSignInFlow;
