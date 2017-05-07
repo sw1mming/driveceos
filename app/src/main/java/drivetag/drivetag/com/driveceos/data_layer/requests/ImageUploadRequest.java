@@ -2,6 +2,9 @@ package drivetag.drivetag.com.driveceos.data_layer.requests;
 
 import android.graphics.drawable.Drawable;
 import com.google.gson.JsonElement;
+
+import java.util.Locale;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,7 +57,7 @@ public class ImageUploadRequest extends ServerRequest {
     private void registerFileOnServerWithCompletionHandler(ServerCompletionHandler handler) {
 
         uploading = true;
-        fileName = String.format("image_%d.jpg", image.hashCode());
+        fileName = String.format(Locale.getDefault(), "image_%d.jpg", image.hashCode());
 
         Call<JsonElement> call = registerFileService.registerFile(fileName);
 

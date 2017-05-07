@@ -3,11 +3,9 @@ package drivetag.drivetag.com.driveceos.presentation_layer.on_boarding;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
@@ -32,18 +30,6 @@ import drivetag.drivetag.com.driveceos.presentation_layer.MainActivity;
 
 public class SignInActivity extends BaseActivity {
 
-    private EditText emailEditText;
-
-    private EditText passwordEditText;
-
-    private Button signInButton;
-
-    private Button signUpButton;
-
-    private ImageButton linkedInButton;
-
-    private TextView forgotPasswordTextView;
-
     private FacebookSignInFlow facebookSignInFlow;
 
     /**
@@ -55,106 +41,67 @@ public class SignInActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_sign_in);
-        setupViews();
-        fillViews();
         facebookSignInFlow = new FacebookSignInFlow((DTApplication) getApplicationContext());
         facebookSignInFlow.registerFacebookCallback();
-        final String login = "rayban@mailinator.com";
-        final String password = "qwe123546";
-        emailEditText.setText(login);
-        passwordEditText.setText(password);
-//        PublicPostToMeRequest request = new PublicPostToMeRequest(true);
-//        request.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
-//            @Override
-//            public void completionHandler(ServerRequest request) {
-//
-//            }
-//
-//            @Override
-//            public void completionHandlerWithError(String error) {
-//
-//            }
-//        });
     }
 
     public void twitterClick(View view) {
-       new TwitterSignInFlow((DTApplication) getApplication(), new TwitterSignInFlow.FlowCompletionHandler() {
-           @Override
-           public void completionHandler(User user, String error) {
-               // TODO: 30.04.2017  move
-           }
+        new TwitterSignInFlow((DTApplication) getApplication(), new TwitterSignInFlow.FlowCompletionHandler() {
+            @Override
+            public void completionHandler(User user, String error) {
+                // TODO: 30.04.2017  move
+            }
 
-           @Override
-           public void completionHandlerWithError(String error) {
+            @Override
+            public void completionHandlerWithError(String error) {
 
-           }
+            }
 
-           @Override
-           public void switchCompletionHandler(User user) {
+            @Override
+            public void switchCompletionHandler(User user) {
 
-           }
-       }).resumeWithCompletionHandler(this);
+            }
+        }).resumeWithCompletionHandler(this);
+    }
+
+    public void linkedInClick(View view) {
+        Toast.makeText(SignInActivity.this, "linkedIn api", Toast.LENGTH_SHORT).show();
     }
 
     public void facebookClick(View view) {
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
     }
 
-    /**
-     * Private.
-     */
-
-    private void setupViews() {
-        emailEditText = (EditText) findViewById(R.id.email_edit_text);
-        passwordEditText = (EditText) findViewById(R.id.password_edit_text);
-        signInButton = (Button) findViewById(R.id.sign_in_button);
-        signUpButton = (Button) findViewById(R.id.sign_up_button);
-        linkedInButton = (ImageButton) findViewById(R.id.linked_in_image_button);
-        forgotPasswordTextView = (TextView) findViewById(R.id.forgot_password_text_view);
+    public void signUpClick(View view) {
+        startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
     }
 
-    private void fillViews() {
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                SignInFlow signInFlow = new SignInFlow(emailEditText.getText().toString(), passwordEditText.getText().toString());
-                SignInFlow signInFlow = new SignInFlow("rayban@mailinator.com", "qwe123456", (DTApplication) getApplication());
-                signInFlow.resumeWithComletionBlock(new SignInFlow.CompletionHandler() {
-                    @Override
-                    public void completionHandler(ServerRequest request) {
-                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
-                    }
-
-                    @Override
-                    public void completionHandlerWithError(String error) {
-                        Toast.makeText(SignInActivity.this, error, Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
-            }
-        });
-
-        socialsActions();
-
-        forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SignInActivity.this, ForgotPasswordActivity.class));
-            }
-        });
+    public void forgotClick(View view) {
+        startActivity(new Intent(SignInActivity.this, ForgotPasswordActivity.class));
     }
 
-    private void socialsActions() {
-        linkedInButton.setOnClickListener(new View.OnClickListener() {
+    public void signInClick(View view) {
+        final EditText emailEditText = (EditText) findViewById(R.id.email_edit_text);
+        final EditText passwordEditText = (EditText) findViewById(R.id.password_edit_text);
+        String login = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+        // TODO: remove in production
+        if (TextUtils.isEmpty(login)) {
+            login = "rayban@mailinator.com";
+        }
+        if (TextUtils.isEmpty(password)) {
+            password = "qwe123456";
+        }
+        final SignInFlow signInFlow = new SignInFlow(login, password, (DTApplication) getApplication());
+        signInFlow.resumeWithComletionBlock(new SignInFlow.CompletionHandler() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(SignInActivity.this, "linkedin api", Toast.LENGTH_SHORT).show();
+            public void completionHandler(ServerRequest request) {
+                startActivity(new Intent(SignInActivity.this, MainActivity.class));
+            }
+
+            @Override
+            public void completionHandlerWithError(String error) {
+                Toast.makeText(SignInActivity.this, error, Toast.LENGTH_SHORT).show();
             }
         });
     }
