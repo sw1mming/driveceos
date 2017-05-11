@@ -21,7 +21,7 @@ public class User {
 
     public String tagId;
 
-    public Number driveID;
+    public Integer driveID;
 
     public String driveTag;
 
@@ -186,7 +186,7 @@ public class User {
         }
 
         if (JsonObjectHelper.hasValueFromKey("uid", userDictionary)) {
-            driveID = userDictionary.get("uid").getAsNumber();
+            driveID = userDictionary.get("uid").getAsInt();
         }
 
         if (JsonObjectHelper.hasValueFromKey("drive_email", jsonObject)) {

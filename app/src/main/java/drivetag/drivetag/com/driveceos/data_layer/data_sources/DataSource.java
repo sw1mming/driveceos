@@ -34,6 +34,11 @@ public class DataSource {
         return sections.get(indexPath.section).get(indexPath.item);
     }
 
+    public void removeItemAtIndexPath(IndexPath indexPath) {
+        List<Object> section = sections.get(indexPath.section);
+        section.remove(indexPath.item);
+    }
+
     public IndexPath indexPathForItem(Object item) {
         int sectionIndex = 0;
 

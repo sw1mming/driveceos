@@ -5,7 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 
+import drivetag.drivetag.com.driveceos.DTApplication;
 import drivetag.drivetag.com.driveceos.R;
+import drivetag.drivetag.com.driveceos.data_layer.UserStorage;
+import drivetag.drivetag.com.driveceos.data_layer.requests.notice.NoticesRequest;
 import drivetag.drivetag.com.driveceos.presentation_layer.feed.FeedFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.mdt.MDTFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.more.MoreFragment;
@@ -29,6 +32,27 @@ public class MainActivity extends BaseActivity {
                     return true;
                 case R.id.navigation_notices:
                     replaceFragment(NoticesFragment.newInstance("Navigate to Notice screen"));
+
+//                    UserStorage userStorage = ((DTApplication)getApplicationContext()).getUserStorage();
+//                    String token = userStorage.getAccessToken();
+//
+//                    NoticesRequest request = new NoticesRequest("people", token);
+//
+//                    request.resumeWithCompletionHandler(new NoticesRequest.NoticesCompletionHandler() {
+//                        @Override
+//                        public void completionHandler(NoticesRequest request, int noticesCount, int noticesTeamCount, int noticesPeopleCount) {
+//                            System.out.println();
+//                        }
+//
+//                        @Override
+//                        public void completionHandlerWithError(String error) {
+//                            System.out.println();
+//                        }
+//                    });
+
+//                    NoticesDataSource dataSource = new NoticesDataSource();
+//                    dataSource.reloadData();
+
                     return true;
                 case R.id.navigation_mdt:
                     replaceFragment(MDTFragment.newInstance("Navigate to MDT screen"));
@@ -48,11 +72,11 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-//        replaceFragment(LinkedInLoginFragment.newInstance("Navigate to Linked screen"));
+
 //        replaceFragment(MoreFragment.newInstance("Navigate to Feed screen"));
         replaceFragment(ProfileFragment.newInstance());
     }
     public void loginFacebook() {
-
+        replaceFragment(FeedFragment.newInstance("Navigate to Feed screen"));
     }
 }

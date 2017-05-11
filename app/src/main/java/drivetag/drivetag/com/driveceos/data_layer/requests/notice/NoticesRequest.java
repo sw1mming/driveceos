@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 import drivetag.drivetag.com.driveceos.data_layer.data_sources.CommentsDataSource;
+import drivetag.drivetag.com.driveceos.data_layer.data_sources.MDTDataSource;
+import drivetag.drivetag.com.driveceos.data_layer.data_sources.PeopleDrivingDataSource;
 import drivetag.drivetag.com.driveceos.data_layer.data_sources.PostDetailsDataSource;
 import drivetag.drivetag.com.driveceos.data_layer.models.Notice;
 import drivetag.drivetag.com.driveceos.data_layer.models.Post;
 import drivetag.drivetag.com.driveceos.data_layer.models.Tag;
 import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
+import drivetag.drivetag.com.driveceos.helpers.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -111,8 +114,25 @@ public class NoticesRequest extends ServerRequest {
 //            CommentsDataSource dataSource = new CommentsDataSource(post);
 //            dataSource.reloadData();
 
-            PostDetailsDataSource dataSource = new PostDetailsDataSource(post);
-            dataSource.refreshData();
+//            PostDetailsDataSource dataSource = new PostDetailsDataSource(post);
+//            dataSource.refreshData();
+
+//            PeopleDrivingDataSource dataSource = new PeopleDrivingDataSource(post);
+//            dataSource.peopleDrivingType = Constants.PeopleDrivingType.PEOPLE_DRIVING_TYPE_POST;
+//            dataSource.reloadData();
+
+//            self.dataSource = [[MDTDataSource alloc] init];
+//            self.dataSource.selectedFilterIndex = 0;
+//            self.dataSource.thoughtsType = ThoughtTypeAll;
+//            self.dataSource.filterCategory = FilterCategoryAll;
+//            self.dataSource.dataTypeString = FilterDrivenLeaders;
+
+//            MDTDataSource dataSource = new MDTDataSource();
+//            dataSource.selectedFilterIndex = 0;
+//            dataSource.thoughtsType = Constants.KEY.THOUGHT_TYPE_NONE;
+//            dataSource.filterCategory = Constants.KEY.FILTER_CATEGORY_ALL;
+//            dataSource.dataTypeString = MDTDataSource.FILTER_DRIVEN_LEADERS;
+//            dataSource.reloadData();
         }
 
         for (JsonArray noticeInfoArray: noticesInfo) {

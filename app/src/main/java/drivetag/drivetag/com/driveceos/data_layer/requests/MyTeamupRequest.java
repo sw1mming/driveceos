@@ -106,7 +106,7 @@ public class MyTeamupRequest extends ServerRequest {
                 }
 
                 if (JsonObjectHelper.hasValueFromKey("uid", userObject)) {
-                    user.driveID = userObject.get("").getAsNumber();
+                    user.driveID = userObject.get("").getAsInt();
                 }
             }
 
