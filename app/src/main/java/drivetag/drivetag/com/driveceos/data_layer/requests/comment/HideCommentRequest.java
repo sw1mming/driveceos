@@ -26,7 +26,6 @@ public class HideCommentRequest extends ServerRequest {
     }
 
     public void resumeWithCompletionHandler(final ServerCompletionHandler handler) {
-        final ServerCompletionHandler completionHandler = handler;
 
         Call<JsonElement> call = service.hideComment(comment.identifier);
         call.enqueue(new Callback<JsonElement>() {
@@ -34,12 +33,12 @@ public class HideCommentRequest extends ServerRequest {
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                 handleSuccessResponse(response);
 
-                completionHandler.completionHandler(getHideCommentRequest());
+                handler.completionHandler(getHideCommentRequest());
             }
 
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
-                completionHandler.completionHandlerWithError(t.toString());
+                handler.completionHandlerWithError(t.toString());
             }
         });
     }
