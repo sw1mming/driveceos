@@ -5,14 +5,15 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 
-import drivetag.drivetag.com.driveceos.DTApplication;
 import drivetag.drivetag.com.driveceos.R;
-import drivetag.drivetag.com.driveceos.data_layer.UserStorage;
-import drivetag.drivetag.com.driveceos.data_layer.requests.notice.NoticesRequest;
+import drivetag.drivetag.com.driveceos.data_layer.models.User;
+import drivetag.drivetag.com.driveceos.data_layer.requests.ServerRequest;
+import drivetag.drivetag.com.driveceos.data_layer.requests.users.ClaimAccountRequest;
 import drivetag.drivetag.com.driveceos.presentation_layer.feed.FeedFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.mdt.MDTFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.more.MoreFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.notices.NoticesFragment;
+import drivetag.drivetag.com.driveceos.presentation_layer.on_boarding.rows.UserRow;
 import drivetag.drivetag.com.driveceos.presentation_layer.teamups.TeamUpsFragment;
 import drivetag.drivetag.com.driveceos.presentation_layer.user_profile.ProfileFragment;
 
@@ -32,6 +33,26 @@ public class MainActivity extends BaseActivity {
                     return true;
                 case R.id.navigation_notices:
                     replaceFragment(NoticesFragment.newInstance("Navigate to Notice screen"));
+
+//                    User user = new User(null);
+//                    user.email = "adfafad@naurugov.nr";
+//                    user.password = "dimidrol4ik";
+//                    user.driveTag = "BaronWaqa@naurugov.nr";
+//                    user.verification = "1234567890";
+//
+//                    ClaimAccountRequest request = new ClaimAccountRequest(user);
+//                    request.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler() {
+//                        @Override
+//                        public void completionHandler(ServerRequest request) {
+//                            System.out.println();
+//                        }
+//
+//                        @Override
+//                        public void completionHandlerWithError(String error) {
+//                            System.out.println();
+//                        }
+//                    });
+
 
 //                    UserStorage userStorage = ((DTApplication)getApplicationContext()).getUserStorage();
 //                    String token = userStorage.getAccessToken();
