@@ -33,10 +33,10 @@ public class FollowRequest extends ServerRequest {
 
     public void resumeWithCompletionHandler(final ServerCompletionHandler handler) {
         Call<JsonElement> call = null;
-        if (tag.isFollowing == 0) {
-            call = service.follow(tag.identifier);
-        } else {
+        if (tag.isFollowing) {
             call = service.followDelete(tag.identifier);
+        } else {
+            call = service.follow(tag.identifier);
         }
 
         call.enqueue(new Callback<JsonElement>() {
@@ -52,10 +52,10 @@ public class FollowRequest extends ServerRequest {
             }
         });
 
-        if (tag.isFollowing == 1) {
-            tag.isFollowing = 0;
+        if (tag.isFollowing) {
+            tag.isFollowing = false;
         } else {
-            tag.isFollowing = 1;
+            tag.isFollowing = true;
         }
     }
 
