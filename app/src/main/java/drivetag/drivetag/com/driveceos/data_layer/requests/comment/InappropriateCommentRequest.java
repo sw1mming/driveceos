@@ -21,6 +21,11 @@ public class InappropriateCommentRequest extends ServerRequest {
 
     private InappropriateCommentApi service;
 
+
+    /**
+     * Interface.
+     */
+
     public InappropriateCommentRequest(Comment comment) {
         this.comment = comment;
     }
