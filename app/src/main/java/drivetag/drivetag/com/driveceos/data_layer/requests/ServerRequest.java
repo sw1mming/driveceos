@@ -1,21 +1,19 @@
 package drivetag.drivetag.com.driveceos.data_layer.requests;
 
-import android.util.Base64;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.io.IOException;
+import java.net.CookieHandler;
+import java.util.concurrent.TimeUnit;
+
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
-import okhttp3.Interceptor;
+import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * Created by yuriy on 3/22/17.
@@ -46,38 +44,38 @@ public abstract class ServerRequest<T> {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+        JavaNetCookieJar jncj = new JavaNetCookieJar(CookieHandler.getDefault());
         OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(jncj)
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public okhttp3.Response intercept(Chain chain) throws IOException {
-                        Request original = chain.request();
-
-                        // Request customization: add request headers
-                        Request.Builder requestBuilder = original.newBuilder();
-
-                        if (token != null) {
-                            token = token + ":";
-                            final String encodedToken = "Basic " + Base64.encodeToString(token.getBytes(), Base64.NO_WRAP);
-                            requestBuilder.addHeader("Authorization", encodedToken);
-                        }
-
-                        Request request = requestBuilder.build();
-                        return chain.proceed(request);
-                    }})
+//                .addInterceptor(new Interceptor() {
+//                    @Override
+//                    public okhttp3.Response intercept(Chain chain) throws IOException {
+//                        Request original = chain.request();
+//
+//                        // Request customization: add request headers
+//                        Request.Builder requestBuilder = original.newBuilder();
+//
+//                        if (token != null) {
+//                            token = token + ":";
+//                            final String encodedToken = "Basic " + Base64.encodeToString(token.getBytes(), Base64.NO_WRAP);
+//                            requestBuilder.addHeader("Authorization", encodedToken);
+//                        }
+//
+//                        Request request = requestBuilder.build();
+//                        return chain.proceed(request);
+//                    }})
 
                 .build();
 
-        Retrofit retrofit = new Retrofit.Builder()
+        return new Retrofit.Builder()
                 .baseUrl(HOST)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-        return retrofit;
     }
 
     public void setupService() {
@@ -86,11 +84,7 @@ public abstract class ServerRequest<T> {
     public boolean isSucceedResponse(JsonObject responseObject) {
 
         if (JsonObjectHelper.hasValueFromKey("success", responseObject)) {
-            if (responseObject.get("success").getAsBoolean()) {
-                return true;
-            } else {
-                return false;
-            }
+            return responseObject.get("success").getAsBoolean();
         }
 
         if (JsonObjectHelper.hasValueFromKey("message", responseObject)) {
@@ -133,8 +127,7 @@ public abstract class ServerRequest<T> {
 
                 return jsonObject;
             } else {
-                JsonArray jsonArray = jsonElement.getAsJsonArray();
-                return jsonArray;
+                return jsonElement.getAsJsonArray();
             }
         } else {
             isFailure = true;
