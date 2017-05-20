@@ -4,7 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
-import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.util.concurrent.TimeUnit;
 
 import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
@@ -44,7 +45,10 @@ public abstract class ServerRequest<T> {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        JavaNetCookieJar jncj = new JavaNetCookieJar(CookieHandler.getDefault());
+        CookieManager cookieManager = new CookieManager();
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+//        CookieHandler.getDefault()
+        JavaNetCookieJar jncj = new JavaNetCookieJar(cookieManager);
         OkHttpClient client = new OkHttpClient.Builder()
                 .cookieJar(jncj)
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
