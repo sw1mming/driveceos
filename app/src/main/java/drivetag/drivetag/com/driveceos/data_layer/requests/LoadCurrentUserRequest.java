@@ -18,10 +18,10 @@ import retrofit2.http.Headers;
 
 public class LoadCurrentUserRequest extends ServerRequest {
 
-    private Number updatedPostsCount;
-    private Number myPostsCount;
-    private Number myTeamPostsCount;
-    private Number publicPostsCount;
+    public Integer updatedPostsCount;
+    public Integer myPostsCount;
+    public Integer myTeamPostsCount;
+    public Integer publicPostsCount;
     private LoadCurrentUserApi service;
 
     public LoadCurrentUserRequest() {
@@ -44,19 +44,19 @@ public class LoadCurrentUserRequest extends ServerRequest {
                 }
 
                 if (JsonObjectHelper.hasValueFromKey("updated_posts_count", jsonObject)) {
-                    updatedPostsCount = jsonObject.get("updated_posts_count").getAsNumber();
+                    updatedPostsCount = jsonObject.get("updated_posts_count").getAsInt();
                 }
 
                 if (JsonObjectHelper.hasValueFromKey("unread_myposts_count", jsonObject)) {
-                    myPostsCount = jsonObject.get("unread_myposts_count").getAsNumber();
+                    myPostsCount = jsonObject.get("unread_myposts_count").getAsInt();
                 }
 
                 if (JsonObjectHelper.hasValueFromKey("unread_teamposts_count", jsonObject)) {
-                    myTeamPostsCount = jsonObject.get("unread_teamposts_count").getAsNumber();
+                    myTeamPostsCount = jsonObject.get("unread_teamposts_count").getAsInt();
                 }
 
                 if (JsonObjectHelper.hasValueFromKey("unread_publicposts_count", jsonObject)) {
-                    publicPostsCount = jsonObject.get("unread_publicposts_count").getAsNumber();
+                    publicPostsCount = jsonObject.get("unread_publicposts_count").getAsInt();
                 }
 
                 completionHandler.completionHandler(getLoadCurrentUserRequest());

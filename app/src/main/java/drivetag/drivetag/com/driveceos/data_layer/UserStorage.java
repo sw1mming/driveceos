@@ -165,7 +165,7 @@ public class UserStorage  {
         SharedPreferences sharedPreferences = sharedPreferences();
 
         if (sharedPreferences != null) {
-            Number driveID = sharedPreferences.getLong(DRIVE_ID, 0);
+            Integer driveID = sharedPreferences.getInt(DRIVE_ID, 0);
 
             if(user == null && !driveID.equals(0)) {
                 user = new User();

@@ -86,7 +86,7 @@ public class MDTDataSource extends DataSource {
 
         notifyListenersWillLoadItems();
 
-        mdtRequest = new MdtRequest(thoughtsType, dataTypeString, startIndex);
+        mdtRequest = new <List<Tag>>MdtRequest(thoughtsType, dataTypeString, startIndex);
         mdtRequest.resumeWithCompletionHandler(new ServerRequest.ServerCompletionHandler<List<Tag>>() {
             @Override
             public void completionHandler(ServerRequest serverRequest) {

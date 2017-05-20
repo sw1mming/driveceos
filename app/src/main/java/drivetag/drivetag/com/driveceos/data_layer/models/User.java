@@ -14,14 +14,14 @@ import drivetag.drivetag.com.driveceos.helpers.JsonObjectHelper;
 
 public class User {
     public static final String EmailTypePersonal = "personal";
-
     public static final String EmailTypeWork = "work";
-
+    public static final String TEAMMATE_STATUS_NONE = "none";
+    public static final String TEAMMATE_STATUS_REQUEST = "request";
     public static final String USER_TYPE = "user_profile";
 
     public String tagId;
 
-    public Number driveID;
+    public Integer driveID;
 
     public String driveTag;
 
@@ -186,7 +186,7 @@ public class User {
         }
 
         if (JsonObjectHelper.hasValueFromKey("uid", userDictionary)) {
-            driveID = userDictionary.get("uid").getAsNumber();
+            driveID = userDictionary.get("uid").getAsInt();
         }
 
         if (JsonObjectHelper.hasValueFromKey("drive_email", jsonObject)) {

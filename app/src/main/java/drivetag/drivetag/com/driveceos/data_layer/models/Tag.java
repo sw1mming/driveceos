@@ -170,4 +170,17 @@ public class Tag {
             return null;
         }
     }
+
+    public String fullTagName() {
+        String fullText;
+
+        if (parentTag != null) {
+            fullText = parentTag.name + ">" + name;
+        } else {
+            fullText = name;
+        }
+
+        return fullText;
+    }
+
 }
